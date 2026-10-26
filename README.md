@@ -1,72 +1,166 @@
 # FREE HIGGS — HIGGSFIELD EDITION
 
-> Noir obsidienne · Lime électrique · Studio brut — digne de Higgsfield Soul Cinema
+> **Noir obsidienne · Lime électrique · Studio brut** — digne de [Higgsfield Soul Cinema](https://higgsfield.ai).
+> Studio créatif IA monopage pour générer des films complets : scénario → personnages → scènes → plans → vidéos.
 
-> Studio créatif alimenté par l'IA pour générer des films, des images et des vidéos.
+[![Live](https://img.shields.io/badge/Live-free--higgs.vercel.app-E8FF42?style=for-the-badge)](https://free-higgs.vercel.app)
+[![Version](https://img.shields.io/badge/version-v9_HIGGSFIELD-111113?style=flat-square)](CHANGELOG.md)
+[![License](https://img.shields.io/badge/License-MIT-8E8E93?style=flat-square)](LICENSE)
+[![Stack](https://img.shields.io/badge/stack-HTML_·_CSS_·_Vanilla_JS-0A0A0C?style=flat-square)](#stack-technique)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+<p align="center">
+  <img src="https://img.shields.io/badge/UI-Higgsfield_Studio-060608?style=for-the-badge" alt="Higgsfield Studio">
+  <img src="https://img.shields.io/badge/Responsive-iPhone_first-22C55E?style=for-the-badge" alt="iPhone">
+  <img src="https://img.shields.io/badge/Livrables-dès_étape_4-E8FF42?style=for-the-badge" alt="Livrables">
+</p>
 
-## Description
+---
 
-FREE HIGGS est une application web monopage (single-file HTML) qui utilise l'API Agnes AI pour générer :
-- **Scénarios** et synopsis de films
-- **Personnages** avec descriptions détaillées
-- **Plans/scènes** avec prompts visuels
-- **Images** générées par IA
-- **Vidéos** à partir des images générées
+## ✨ Démo
 
-## Fonctionnalités
+**→ https://free-higgs.vercel.app** — ouvre `index.html` et c'est parti. 100% navigateur, aucune build.
 
-- 🎬 Génération de scénarios complets (genre, synopsis, personnages, scènes)
-- 🖼️ Génération d'images par IA (modèle Agnes Image 2.5 Flash)
-- 🎥 Génération de vidéos (modèles Agnes Video v2.0 / v2.5 Flash)
-- 📊 Suivi de progression en temps réel
-- 💾 Sauvegarde locale (IndexedDB)
-- 🎨 20+ genres cinématographiques (fiction, animation, expérimental, etc.)
-- 📱 Interface responsive
-- 🌙 Thème sombre / clair
-- ⌨️ Raccourcis clavier (Espace, Ctrl+S, Échap)
-- 📋 Export Markdown et copie du synopsis
-- 🔄 Duplication de personnages, scènes et plans
-- 🔁 Lecture en boucle et recherche dans le projet
-- ⚡ Higgsfield-grade UI : obsidienne, lime, grain cinéma, pilules, verre
+---
 
-## Versions
+## 🎬 Ce que fait FREE HIGGS
+
+Pipeline **7 étapes** verrouillées, 100% autonome :
+
+| Étape | Module | IA fait quoi ? | Livrable |
+|-------|--------|----------------|----------|
+| **1** | Clés API | Multi-fournisseurs, multi-clés (Agnès, OpenAI, Higgsfield…) | — |
+| **2** | Genre & Ratio | Choix editorial (`16:9`, `9:16`, `1:1`, `4:3`) | `P.genre`, `P.ratio` |
+| **3** | Synopsis | Réécriture + 10 alternatives + fusion | `P.final` |
+| **4** | Personnages | Casting + costumes + portraits (référence) | Portraits |
+| **5** | Scènes | `n` scènes (3/5/8/12) + dialogues + images de scène | **Traitement exportable** |
+| **6** | Plans | Découpage 3-5 plans/scène + images de plan | **Découpage exportable** |
+| **7** | Vidéos | File vidéo (Agnès, Kling, Veo, Runware, KIE…) + animatic | Vidéos + SRT |
+
+> **Livrables extractibles dès l'étape 4** — pas besoin d'attendre les vidéos.
+
+---
+
+## ⚡ Fonctionnalités v9
+
+### Studio
+- **Pipeline verrouillé** : tu valides chaque étape, l'IA n'avance pas sans toi
+- **Planificateur multi-clés** : rotation, backoff `60000/RPM*1.15`, `429` → cooldown + `bad>=2` → désactivation
+- **Sauvegarde locale** : IndexedDB `free_higgs_v1` + fallback `localStorage` + mémoire, autosave debounced 350ms
+- **Reprise** : `poll`/`pollExternalVideo` reprennent seuls au reload
+
+### Génération
+- **Texte** : `agnes-3.0-flash`/`2.5-flash` (fallback), `chat_template_kwargs: {enable_thinking:false}`
+- **Images** : `agnes-image-2.5-flash`, `size:1K`, `ratio`, `response_format:url`, refs `dataURI` via `ensureRef` + `toData` canvas 1024px
+- **Vidéos** : Agnès natif (`num_frames:97`, `720P`) + **7 adaptateurs directs** : Pollinations, Runware, KIE AI, WaveSpeed, Magic Hour, Higgsfield, Glif — + proxy générique
+
+### Higgsfield-grade UI (v9)
+- **Thème obsidienne** `#060608` / `#111113`, hairlines `7%`, grain cinéma, halos lime/violet
+- **Accent lime** `#E8FF42` (glow), typos `Space Grotesk` (display) + `Inter` + `JetBrains Mono`
+- **Header studio** : marque `FH`, badge `v9` pulsant, steps en pilules `999px`, verre dépoli `blur(16px)`
+- **Héros éditorial** : kicker trait lime, titres `clamp(28px,6vw,42px)`, callouts barre latérale
+- **Cartes premium** : `18px` radius, `hover lift + scale 1.02`, ombres studio
+- **Light mode** conservé (`.light` → `#F6F5EF`)
+
+### Mobile iPhone-first (v9.1)
+- Viewport `viewport-fit=cover` + `safe-area-inset` (notch/Dynamic Island)
+- Grilles `280px → 1fr` (<700px), `choice`/`grid` en 1 colonne, `mg` en 2
+- Inputs `16px` sur mobile (anti-zoom iOS), boutons `44px` touch, `scale 0.98` actif
+- Modal bottom-sheet `92vh`, console `52vh`, `scroll-snap` sur steps
+
+### Productivité
+- Genres : Fiction (18) + Réel (6) + Animation (5) + Expérimental (5) + Formats courts (4) + Productivité (4) + Voyage (3)
+- Duplication personnages/scènes/plans, renommage/duplication sessions, notes réalisateur, recherche projet, lecture en boucle + SRT
+- Raccourcis : `Espace` lecture, `Ctrl/Cmd+S` save, `Échap` quitte
+
+### Livrables — dès l'étape 4
+> Dock `⬢ LIVRABLES — prêts dès l'étape 4` présent sur **Scènes (4)**, **Plans (5)**, **Vidéos (6)** + bouton `⬇` dans le header dès `scenes.length>0`.
+
+| Format | Contenu | Action |
+|--------|---------|--------|
+| **JSON** | Dossier complet `P` (genre, synopsis, chars, scènes, shots, notes) | `⬇ JSON` |
+| **Markdown** | Traitement lisible `# Titre → Synopsis → Personnages → Scènes → Plans` | `⬇ Markdown` |
+| **CSV** | 2 tables : `Scènes` + `PLAN,Scène,Type,Action,Camera,Chars,Who,Line` | `⬇ CSV` |
+| **HTML** | Dossier livrable autonome (grilles + images `data:`) | `⬇ HTML` |
+| **SRT** | Sous-titres `00:00:00,000 --> 00:00:09,000` par réplique (9s/plan) | `⬇ SRT` |
+| **Copy** | Dialogues / Prompts / Synopsis dans le presse-papiers | `📋` |
+
+---
+
+## 🗂️ Versions
 
 | Version | Fichier | Description |
 |---------|---------|-------------|
 | v3 | `versions/v3.html` | Itération 3 |
 | v4 | `versions/v4.html` | Itération 4 |
 | v5 | `versions/v5.html` | Itération 5 |
-| v6 | `versions/v6.html` | Itération 6 |
-| v8 | `versions/v8.html` | Refonte sombre indigo/violet |
-| v9 | `index.html` | **HIGGSFIELD EDITION** — Noir obsidienne · Lime (actuelle) |
+| v6 | `versions/v6.html` | Itération 6 — restructure repo |
+| v8 | `versions/v8.html` | Refonte indigo/violet |
+| **v9** | **`index.html`** | **HIGGSFIELD EDITION — Noir obsidienne · Lime (actuelle)** |
 
-## Utilisation
+Détails : voir [CHANGELOG.md](CHANGELOG.md).
 
-1. Ouvrir `index.html` dans un navigateur moderne
-2. Entrer ta clé API Agnes (https://apihub.agnes-ai.com)
-3. Choisir un genre et un synopsis
-4. Laisser l'IA générer le film
+---
 
-## Stack technique
+## 🚀 Utilisation
 
-- HTML5 / CSS3 / Vanilla JavaScript
-- IndexedDB (stockage local)
-- API Agnes AI (texte, image, vidéo)
-- Google Fonts (Inter · Space Grotesk · JetBrains Mono)
+1. Ouvre `index.html` ou va sur **https://free-higgs.vercel.app**
+2. **Étape 1** — choisis ton fournisseur, colle ta clé (ex: `https://apihub.agnes-ai.com` + `agnes-3.0-flash`), `Enregistrer`
+3. **Étape 2** — choisis genre + ratio
+4. **Étape 3** — écris ton idée (2 lignes suffisent) → `✦ Analyser avec l'IA` → coche les alternatives → `Valider`
+5. **Étapes 4-6** — laisse l'IA générer, retouche si besoin, **exporte dès l'étape 4** via le dock livrables
+6. **Étape 7** — `▶ Lancer la production` → vidéos arrivent seules (file Agnès gérée : `3,6,12,24…min`), `🎬 Voir le film`
 
-## Déploiement
+Tout est stocké dans **ce navigateur** (`Mes films` → ouvrir / dupliquer / renommer / supprimer).
 
-Le projet est un fichier HTML statique. Il peut être déployé sur :
-- **Vercel** : `vercel --prod` (après configuration)
-- **Netlify** : `netlify deploy --prod`
-- **GitHub Pages** : activer dans les settings du repo
+---
 
-## Licence
+## 🧩 Stack technique
 
-MIT
+- **Single-file HTML** — `index.html` ≈ `115KB`, zéro build, zéro dépendance
+- **CSS** — Higgsfield design tokens (`--bg`, `--panel`, `--accent`), `Space Grotesk` + `Inter` + `JetBrains Mono`
+- **JS** — Vanilla, `IndexedDB` (`free_higgs_v1`), `fetch` multi-provider, polling `30-60s` + backoff
+- **APIs** — [Agnes AI](https://apihub.agnes-ai.com) + OpenAI-compat (Together, Groq, DeepSeek, Mistral…), vidéo : Pollinations / Runware / KIE / WaveSpeed / Magic Hour / Higgsfield / Glif
+- **Fonts** — Google Fonts
+- **PWA-ready** — `WakeLock`, `localStorage` fallback, `viewport-fit=cover`
 
-## Auteur
+---
 
-[@kisuke667](https://github.com/kisuke667)
+## 📦 Déploiement
+
+Fichier statique — déploie où tu veux :
+
+```bash
+vercel --prod
+# ou
+netlify deploy --prod
+# ou GitHub Pages : Settings → Pages → Source: main / root
+```
+
+Vercel actuel : `free-higgs.vercel.app` (`--prod` → `READY`).
+
+---
+
+## 🔑 Fournisseurs vidéo supportés
+
+| Fournisseur | Base | Vidéo model exemple | Auth |
+|-------------|------|---------------------|------|
+| Agnès AI | `https://apihub.agnes-ai.com/v1` | `agnes-video-v2.0` | `Bearer` |
+| Higgsfield | `https://api.higgsfield.ai` | `kling-video/v2.6/pro/text-to-video` | `Key ID:SECRET` |
+| KIE AI | `https://api.kie.ai` | `kling-2.6/text-to-video` | `Bearer` |
+| WaveSpeed | `https://api.wavespeed.ai/api/v3` | `bytedance/seedance-v1.5-pro/text-to-video` | `Bearer` |
+| Runware | `https://api.runware.ai/v1` | `bytedance:2@2` | `Bearer` |
+| Pollinations | `https://gen.pollinations.ai` | `google/veo-3.1-fast` | `?key=` |
+| Magic Hour | `https://api.magichour.ai` | `default` | `Bearer` |
+| Glif | `https://simple-api.glif.app` | `workflow_id` | `Bearer` |
+
+> Ne colle jamais une clé secrète sur un site public partagé.
+
+---
+
+## 📄 Licence
+
+MIT — voir [LICENSE](LICENSE).
+
+## 👤 Auteur
+
+[@kisuke667](https://github.com/kisuke667) — FREE HIGGS Studio.
