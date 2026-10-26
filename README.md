@@ -2,6 +2,7 @@
 
 > **Noir obsidienne · Lime électrique · Studio brut** — digne de [Higgsfield Soul Cinema](https://higgsfield.ai).
 > Studio créatif IA monopage pour générer des films complets : scénario → personnages → scènes → plans → vidéos.
+> **Fork enrichi** de [CINÉ-GENESIS d'Agnes AI Film Maker](https://github.com/laurentvoanhofficiel-jpg/Agnes-ai-film-maker-Universal-one-page-HTML-4-all) par Laurent Voan Ho — réinventé en **HIGGSFIELD EDITION**.
 
 [![Live](https://img.shields.io/badge/Live-free--higgs.vercel.app-E8FF42?style=for-the-badge)](https://free-higgs.vercel.app)
 [![Version](https://img.shields.io/badge/version-v9_HIGGSFIELD-111113?style=flat-square)](CHANGELOG.md)
@@ -19,6 +20,16 @@
 ## ✨ Démo
 
 **→ https://free-higgs.vercel.app** — ouvre `index.html` et c'est parti. 100% navigateur, aucune build.
+
+---
+
+## 🙏 Crédits & Inspiration
+
+**FREE HIGGS** est un **fork enrichi** de [**Agnes AI Film Maker — Universal One-Page HTML 4 All**](https://github.com/laurentvoanhofficiel-jpg/Agnes-ai-film-maker-Universal-one-page-HTML-4-all) par [**Laurent Voan Ho**](https://github.com/laurentvoanhofficiel-jpg) — projet original **CINÉ-GENESIS** (31★, 18 forks).
+
+La base open-source (pipeline 7 étapes *Clés → Genre → Synopsis → Personnages → Scènes → Plans → Vidéos*, `IndexedDB free_higgs_v1`, polling Agnès `agnes-3.0-flash`/`agnes-image-2.5-flash`/`agnes-video-v2.0`, `RPM`, `BACK [3,6,12,24,48,96]`) est conservée et **poussée en HIGGSFIELD EDITION** : obsidienne `#060608`, lime `#E8FF42`, iPhone-first `viewport-fit=cover`, livrables dès l'étape 4 (JSON/MD/CSV/HTML/SRT), 7 adaptateurs vidéo (Higgsfield/Kling, KIE, WaveSpeed, Runware...), typographies `Space Grotesk`/`Inter`/`JetBrains Mono`.
+
+Merci à Laurent pour l'impulsion initiale, à la communauté Agnes AI et à Higgsfield pour l'exigence visuelle.
 
 ---
 
@@ -160,7 +171,7 @@ Vercel actuel : `free-higgs.vercel.app` (`--prod` → `READY`).
 
 ## 📄 Licence
 
-MIT — voir [LICENSE](LICENSE).
+MIT — voir [LICENSE](LICENSE). Code original © Laurent Voan Ho (CINÉ-GENESIS), modifications FREE HIGGS © kisuke667.
 
 ## 👤 Auteur
 
