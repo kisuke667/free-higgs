@@ -1,5 +1,15 @@
 # Changelog
 
+## v9 — HIGGSFIELD EDITION (2026-10-26)
+- Studio noir obsidienne digne de Higgsfield : fond #060608, surfaces #111113, hairlines 7%, grain cinématographique
+- Lime électrique #E8FF42 en accent principal (glow), typographies Space Grotesk + Inter + JetBrains Mono
+- Header Higgsfield Studio : marque FH, badge v9 pulsant, steps en pilules, verre dépoli
+- Héros éditorial : kicker avec trait lime, titres 42px display, callouts à bande latérale
+- Cartes premium 18px radius, hover lift, image scale, ombres studio
+- Boutons pilule Higgsfield : primaire lime sur noir, secondaire verre, interactions tactiles
+- Barre de progression lime, chips pilule, console verre
+- Rétrocompatibilité thème clair maintenue (.light)
+
 ## v8 (2026-10-26)
 - Refonte UI complète : thème sombre par défaut, palette indigo/violet, glassmorphism, animations
 - Cartes, boutons, barres de progression modernisés

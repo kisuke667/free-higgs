@@ -1,4 +1,6 @@
-# FREE HIGGS — Studio Créatif IA
+# FREE HIGGS — HIGGSFIELD EDITION
+
+> Noir obsidienne · Lime électrique · Studio brut — digne de Higgsfield Soul Cinema
 
 > Studio créatif alimenté par l'IA pour générer des films, des images et des vidéos.
 
@@ -27,6 +29,7 @@ FREE HIGGS est une application web monopage (single-file HTML) qui utilise l'API
 - 📋 Export Markdown et copie du synopsis
 - 🔄 Duplication de personnages, scènes et plans
 - 🔁 Lecture en boucle et recherche dans le projet
+- ⚡ Higgsfield-grade UI : obsidienne, lime, grain cinéma, pilules, verre
 
 ## Versions
 
@@ -36,7 +39,8 @@ FREE HIGGS est une application web monopage (single-file HTML) qui utilise l'API
 | v4 | `versions/v4.html` | Itération 4 |
 | v5 | `versions/v5.html` | Itération 5 |
 | v6 | `versions/v6.html` | Itération 6 |
-| v7 | `index.html` | Dernière version (actuelle) |
+| v8 | `versions/v8.html` | Refonte sombre indigo/violet |
+| v9 | `index.html` | **HIGGSFIELD EDITION** — Noir obsidienne · Lime (actuelle) |
 
 ## Utilisation
 
@@ -50,7 +54,7 @@ FREE HIGGS est une application web monopage (single-file HTML) qui utilise l'API
 - HTML5 / CSS3 / Vanilla JavaScript
 - IndexedDB (stockage local)
 - API Agnes AI (texte, image, vidéo)
-- Google Fonts (Inter)
+- Google Fonts (Inter · Space Grotesk · JetBrains Mono)
 
 ## Déploiement
 
