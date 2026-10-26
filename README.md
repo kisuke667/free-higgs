@@ -94,8 +94,9 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 | v4 | `versions/v4.html` | Itération 4 |
 | v5 | `versions/v5.html` | Itération 5 |
 | v6 | `versions/v6.html` | Itération 6 — restructure repo |
-| v8 | `versions/v8.html` | Refonte indigo/violet |
-| **v9** | **`index.html`** | **HIGGSFIELD EDITION — Noir obsidienne · Lime (actuelle)** |
+| v7 | `versions/v7.html` | Enrich studio — dark mode, shortcuts, export MD, genres |
+| v8 | `versions/v8.html` | Refonte indigo/violet + exports SRT |
+| **v9** | **`index.html`** | **HIGGSFIELD EDITION — Noir obsidienne · Lime · iPhone · livrables dès étape 4 (actuelle)** |
 
 Détails : voir [CHANGELOG.md](CHANGELOG.md).
 
