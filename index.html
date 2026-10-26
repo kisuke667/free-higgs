@@ -360,6 +360,18 @@ button:disabled{opacity:.34;cursor:not-allowed;transform:none}
 }
 #pl button{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.18);color:#fff;backdrop-filter:blur(8px)}
 #pl button:hover{background:#fff;color:#000}
+
+.export-dock{
+  margin-top:18px;padding:16px 18px;border-radius:16px;
+  background:linear-gradient(135deg, rgba(232,255,66,0.08), rgba(139,92,246,0.06));
+  border:1px solid rgba(232,255,66,0.16);position:relative;overflow:hidden;
+}
+.export-dock::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg, transparent, rgba(232,255,66,0.55), transparent);
+}
+.export-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+
 /* footer Higgsfield */
 .site-foot{
   text-align:center;padding:28px 16px;margin-top:24px;
@@ -465,7 +477,7 @@ body.light .im{background:#EDE9E2}
     <span class="ver">v9</span>
   </div>
   <nav id="steps"></nav>
-  <div class="hb"><span class="chip" id="qchip"></span><button class="sm" data-a="help" title="Aide">?</button><button class="sm" data-a="theme" title="Thème">◐</button><button class="sm" data-a="sess">Mes films</button><button class="sm" data-a="con">Journal</button></div>
+  <div class="hb"><span class="chip" id="qchip"></span><button class="sm" data-a="export" title="Exporter JSON" style="display:none" id="hdrExport">⬇</button><button class="sm" data-a="help" title="Aide">?</button><button class="sm" data-a="theme" title="Thème">◐</button><button class="sm" data-a="sess">Mes films</button><button class="sm" data-a="con">Journal</button></div>
 </header>
 <main id="main"></main>
 <div id="con"><div style="display:flex;justify-content:space-between;padding:6px 12px;border-bottom:1px solid #26405c;font:12px var(--m)"><span>JOURNAL TECHNIQUE</span><button class="sm" data-a="con" style="color:#bfe3ff;border-color:#4a6a8a">✕</button></div><div id="lb"></div></div>
@@ -930,6 +942,23 @@ async function imgPass(list,label){
 const guide=(h,c)=>'<div class="guide '+(c||'')+'"><div style="font-size:13px;line-height:1.6">'+h+'</div></div>';
 const hd=(n,t)=>'<div class="hero-kicker">ÉTAPE '+String(n).padStart(2,'0')+' / 07 — STUDIO</div><h2>'+t+'</h2>';
 const btn=(a,l,c,x)=>'<button class="'+(c||'')+'" data-a="'+a+'" '+(x||'')+'>'+l+'</button>';
+
+const exportBar=(lvl)=>{
+  const hs=P.scenes&&P.scenes.length>0, sh=shots().length;
+  if(!hs) return '';
+  lvl=lvl||4;
+  return '<div class="export-dock"><div class="export-head"><span class="lab" style="color:var(--ink)">⬢ LIVRABLES — prêts dès l\'étape 4</span><span class="lab" style="opacity:.6">'+P.scenes.length+' scènes'+(sh?' · '+sh+' plans':'')+'</span></div>'
+  +'<div class="rw" style="margin-top:12px">'
+  +btn('export','⬇ JSON','sm')
+  +btn('exportmd','⬇ Markdown','sm')
+  +btn('exportcsv','⬇ CSV','sm')
+  +btn('exporthtml','⬇ HTML','sm')
+  +btn('copydlg','📋 Dialogues','sm')
+  +(lvl>=5?btn('copyprompts','📋 Prompts','sm')+btn('exportsrt','⬇ SRT','sm'):'')
+  +'</div>'
+  +'<div class="lab" style="margin-top:8px;opacity:.45;font-size:9.5px">JSON = dossier complet · Markdown = traitement · CSV = tableur · HTML = dossier livrable · SRT = sous-titres</div></div>';
+};
+
 const foot=(prev,next)=>'<div class="ft">'+(prev||'<span></span>')+(next||'')+'</div>';
 const nextBtn=(a,l,x)=>'<button class="big" id="nx" data-a="'+a+'" data-lbl="'+esc(l)+'" '+(x||'')+'>'+l+' →</button>';
 function syncNext(){const b=$('#nx');if(!b)return;const bz=anyBusy();b.disabled=bz||b.dataset.off=='1';b.textContent=bz?'Images en cours…':b.dataset.lbl+' →'}
@@ -1209,23 +1238,25 @@ V[4].cfg=()=>'<div class="hero">'+hd(5,'Les <b>scènes</b>')+guide('👉 À vous
   '<div class="gc">'+[[3,'Court · 3 scènes'],[5,'Moyen · 5 scènes'],[8,'Long · 8 scènes'],[12,'Très long · 12 scènes']].map(n=>'<button class="'+((P.nsc||5)==n[0]?'sel':'')+'" data-a="nsc" data-n="'+n[0]+'">'+n[1]+'</button>').join('')+'</div>'+
   foot(btn('go','← Précédent','','data-n="3"'),nextBtn('scgo','✦ Écrire le scénario'))+'</div>';
 
-V[4].rev=()=>'<div class="hero">'+hd(5,'Vos <b>scènes</b>')+guide('✓ Scénario et images prêts. 👉 Relisez les dialogues, modifiez ce que vous voulez, puis cliquez sur Continuer.','go')+
+V[4].rev=()=>'<div class="hero">'+hd(5,'Vos <b>scènes</b>')+guide('✓ Scénario et images prêts. 👉 Relisez les dialogues, modifiez ce que vous voulez. <b>Vos livrables sont déjà exportables ci-dessous</b>, même sans vidéos.','go')+
   '<div class="grid">'+P.scenes.map(sceneCard).join('')+'</div>'+
-  '<div class="rw" style="margin-top:12px">'+btn('addscene','+ Ajouter une scène')+btn('dupscene','⧉ Dupliquer la dernière','sm')+btn('copydlg','📋 Copier les dialogues','sm')+btn('redo','↺ Refaire avec l\'IA','','data-n="4"')+'</div>'+
+  '<div class="rw" style="margin-top:12px">'+btn('addscene','+ Ajouter une scène')+btn('dupscene','⧉ Dupliquer la dernière','sm')+btn('redo','↺ Refaire avec l\'IA','','data-n="4"')+'</div>'+
+  exportBar(4)+
   foot(btn('go','← Précédent','','data-n="3"'),nextBtn('go','Continuer vers les plans','data-n="5"'))+'</div>';
 
 V[5].cfg=()=>'<div class="hero">'+hd(6,'Les <b>plans</b>')+guide('👉 L\'IA va découper chaque scène en plans, puis créer l\'image de départ de chaque plan.')+
   foot(btn('go','← Précédent','','data-n="4"'),nextBtn('plgo','✦ Découper et créer les images'))+'</div>';
 
-V[5].rev=()=>'<div class="hero">'+hd(6,'Vos <b>plans</b>')+guide('✓ Plans et images prêts. 👉 Chaque image deviendra une vidéo. Modifiez les images ou les répliques si besoin, puis cliquez sur Continuer.','go')+
+V[5].rev=()=>'<div class="hero">'+hd(6,'Vos <b>plans</b>')+guide('✓ Plans et images prêts. 👉 Chaque image deviendra une vidéo. <b>Livrables déjà disponibles</b> : exportez JSON/Markdown/CSV/SRT dès maintenant.','go')+
   P.scenes.map((s,i)=>'<h3>Scène '+(i+1)+' — '+esc(s.title)+'</h3><div class="grid">'+((s.shots||[]).map(shotCard).join('')||'<span class="lab">Pas de plan.</span>')+'</div><div class="rw" style="margin-top:6px">'+btn('addshot','+ Ajouter un plan','sm','data-id="'+s.id+'"')+'</div>').join('')+
-  '<div class="rw" style="margin-top:12px">'+btn('copyprompts','📋 Copier les prompts','sm')+btn('redo','↺ Refaire avec l\'IA','','data-n="5"')+'</div>'+
+  '<div class="rw" style="margin-top:12px">'+btn('redo','↺ Refaire avec l\'IA','','data-n="5"')+'</div>'+
+  exportBar(5)+
   foot(btn('go','← Précédent','','data-n="4"'),nextBtn('go','Continuer vers les vidéos','data-n="6"'))+'</div>';
 
 V[6].cfg=()=>'<div class="hero">'+hd(7,'Les <b>vidéos</b>')+
   '<p class="sub">Chaque image de plan est transformée en vidéo par Agnès. La file d\'attente vidéo est souvent saturée : l\'app envoie les plans un par un, et si c\'est plein elle attend toute seule (3, 6, 12, 24… minutes) avant de réessayer. <b>Gardez cet onglet ouvert.</b> En attendant, regardez le film en « animatic » (images + voix).</p>'+
   '<div class="cd" id="qp" style="margin:12px 0"></div>'+
-  '<div class="rw">'+btn('play','🎬 Voir le film maintenant')+btn('playloop','🔁 Lire en boucle','sm')+btn('searchproj','🔎 Rechercher','sm')+btn('exportsrt','Export SRT','sm')+btn('export','Exporter JSON','sm')+btn('exportmd','Exporter Markdown','sm')+'</div>'+
+  '<div class="rw">'+btn('play','🎬 Voir le film maintenant')+btn('playloop','🔁 Lire en boucle','sm')+btn('searchproj','🔎 Rechercher','sm')+'</div>'+exportBar(6)+
   '<div class="kp" id="kp"></div>'+
   '<div class="grid" id="tiles" style="margin-top:12px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))">'+shots().map((x,i)=>tile(x.h,i+1)).join('')+'</div>'+
   '<h3>Notes du réalisateur</h3><textarea data-f="notes" data-id="P" rows="4" placeholder="Idées, consignes, remarques…">'+esc(P.notes||'')+'</textarea>'+
@@ -1245,6 +1276,7 @@ function render(keep){
     return '<button class="st '+(i==page?'on':can?'ok':'')+'" '+(can?'data-a="go" data-n="'+i+'"':'disabled')+'>'+(i+1)+'. '+s+'</button>';
   }).join('');
   $('#main').innerHTML=view();
+  const he=document.getElementById('hdrExport'); if(he) he.style.display=(P.scenes&&P.scenes.length&&page>=4)?'grid':'' ;
   if(TASK){paintFeed();pgb()}
   else if(page==0){keysChips();recentSessions()}
   else if(page==6){stats();qui()}
