@@ -22,6 +22,11 @@ FREE HIGGS est une application web monopage (single-file HTML) qui utilise l'API
 - 💾 Sauvegarde locale (IndexedDB)
 - 🎨 20+ genres cinématographiques (fiction, animation, expérimental, etc.)
 - 📱 Interface responsive
+- 🌙 Thème sombre / clair
+- ⌨️ Raccourcis clavier (Espace, Ctrl+S, Échap)
+- 📋 Export Markdown et copie du synopsis
+- 🔄 Duplication de personnages, scènes et plans
+- 🔁 Lecture en boucle et recherche dans le projet
 
 ## Versions
 
@@ -30,7 +35,8 @@ FREE HIGGS est une application web monopage (single-file HTML) qui utilise l'API
 | v3 | `versions/v3.html` | Itération 3 |
 | v4 | `versions/v4.html` | Itération 4 |
 | v5 | `versions/v5.html` | Itération 5 |
-| v6 | `index.html` | Dernière version (actuelle) |
+| v6 | `versions/v6.html` | Itération 6 |
+| v7 | `index.html` | Dernière version (actuelle) |
 
 ## Utilisation
 

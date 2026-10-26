@@ -1,5 +1,14 @@
 # Changelog
 
+## v7 (2026-10-26)
+- Nouvelle version enrichie : thème sombre, raccourcis clavier, duplication de personnages/scènes/plans
+- Export Markdown et copie du synopsis
+- Genres supplémentaires (Productivité, Voyage) et format 4:3
+- Sessions : duplication, renommage, effacement global, liste des films récents
+- Lecteur : lecture en boucle, recherche dans le projet, notes du réalisateur
+- Statistiques enrichies (durée estimée)
+- Aide rapide et pied de page
+
 ## v6 (2026-10-26)
 - Restructuration du repo : versions dans `versions/`, README, LICENSE, .gitignore
 - Meta tags SEO et Open Graph ajoutés
