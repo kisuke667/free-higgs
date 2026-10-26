@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=5">
 <meta name="description" content="Studio créatif IA — génération de films, images et vidéos par intelligence artificielle.">
 <meta name="author" content="kisuke667">
 <meta property="og:title" content="FREE HIGGS — Studio Créatif IA">
@@ -77,8 +77,9 @@ header{
   -webkit-backdrop-filter:blur(16px) saturate(1.2);
   border-bottom:1px solid var(--line);
 }
-@media(max-width:980px){header{grid-template-columns:1fr auto; gap:12px}}
-.logo{
+
+/* 980 moved to HIGGSFIELD MOBILE */
+/* deduped */.logo{
   display:flex;align-items:center;gap:12px;
   font-family:var(--display);font-weight:700;letter-spacing:-0.02em;line-height:0.9;
 }
@@ -369,12 +370,86 @@ button:disabled{opacity:.34;cursor:not-allowed;transform:none}
 .site-foot a:hover{color:var(--ink);border-color:var(--ink)}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .hero,.cd,.ch{animation:fadeIn .4s cubic-bezier(.16,1,.3,1) both}
-@media(max-width:700px){
-  h2{font-size:24px}
-  .st{padding:7px 10px;font-size:10px}
-  header{padding:12px 14px}
-  .hero{padding:20px}
+/* ── HIGGSFIELD MOBILE — iPhone first ── */
+
+@media(max-width:980px){
+  header{
+    grid-template-columns:1fr;
+    gap:10px;
+    padding:12px 14px;
+    position:sticky;
+  }
+  .logo{order:1}
+  #steps{order:3;justify-content:flex-start;padding-bottom:2px;margin:0 -14px;padding-left:14px;padding-right:14px}
+  .hb{order:2;justify-self:stretch;justify-content:space-between}
+  .hb #qchip{margin-right:auto}
 }
+@media(max-width:700px){
+  main{padding:18px 14px}
+  h2{font-size:26px;letter-spacing:-0.02em}
+  h3{font-size:12px}
+  .hero{padding:18px;border-radius:16px}
+  .hero h2{font-size:24px}
+  .hero-kicker{font-size:9px}
+  .st{padding:7px 11px;font-size:10px;min-height:34px}
+  .grid{grid-template-columns:1fr;gap:12px}
+  .choice{grid-template-columns:1fr;gap:12px}
+  .gc{gap:7px}
+  .gc button{padding:8px 12px;font-size:12px;min-height:38px}
+  .mg{grid-template-columns:repeat(2,1fr);gap:10px}
+  .kp{gap:10px}
+  .kp > div{min-width:calc(50% - 5px);flex:none}
+  .ft{flex-direction:column;align-items:stretch}
+  .ft .big{width:100%;justify-content:center}
+  .rw{gap:8px}
+  button,.btn{min-height:42px}
+  .sm{min-height:36px}
+  .big{padding:16px 20px;font-size:12px}
+  /* iOS: prevent zoom */
+  textarea,input[type=text],select{font-size:16px}
+  /* modal full bleed on phone */
+  #md{padding:0;align-items:flex-end}
+  #md>div{max-width:100%;max-height:92vh;border-radius:20px 20px 0 0;padding:20px 16px;border-left:none;border-right:none;border-bottom:none}
+  #con{height:52vh}
+  #toast{bottom:calc(16px + env(safe-area-inset-bottom));left:14px;right:14px;transform:none}
+  #toast div{width:100%;text-align:center;justify-content:center}
+  .im{border-radius:12px}
+  .tl{border-radius:14px}
+}
+@media(max-width:390px){
+  main{padding:14px 12px}
+  .logo-type b{font-size:15px}
+  .logo-mark{width:32px;height:32px;font-size:12px;border-radius:8px}
+  .ver{font-size:9px;padding:3px 7px}
+  h2{font-size:22px}
+  .hero{padding:16px}
+  .cd,.ch{padding:12px;border-radius:16px}
+  .kp > div{padding:12px}
+  .kp b{font-size:19px}
+}
+@media(max-width:340px){
+  .hb{gap:6px}
+  .hb .sm{width:32px;height:32px;font-size:12px}
+  #steps{gap:5px}
+  .st{padding:6px 9px;font-size:9.5px}
+}
+/* iOS safe areas */
+@supports(padding:max(0px)){
+  header{padding-left:max(14px, env(safe-area-inset-left));padding-right:max(14px, env(safe-area-inset-right))}
+  main{padding-left:max(14px, env(safe-area-inset-left));padding-right:max(14px, env(safe-area-inset-right))}
+  #con{padding-bottom:env(safe-area-inset-bottom)}
+}
+/* scroll snap for steps on touch */
+@media(hover:none) and (pointer:coarse){
+  #steps{scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+  .st{scroll-snap-align:start}
+  .gc{ -webkit-overflow-scrolling:touch}
+  button:active,.btn:active{transform:scale(0.98)}
+}
+/* fix 100vw overflow on iPhone */
+html,body{overflow-x:hidden}
+img,video{max-width:100%}
+
 
 body.light{--bg:#F6F5EF;--bg-soft:#FFFFFF;--panel:#FFFFFF;--panel-2:#F2F0EB;--panel-3:#EDE9E2;--line:rgba(0,0,0,0.08);--line-strong:rgba(0,0,0,0.14);--ink:#0A0A0B;--ink-2:#1A1A1D;--dim:#6B6B70;--muted:#8E8E93}
 body.light header{background:rgba(246,245,239,0.82)}
@@ -386,7 +461,7 @@ body.light .im{background:#EDE9E2}
 <header>
   <div class="logo">
     <div class="logo-mark">FH</div>
-    <div class="logo-type"><b>FREE <span>HIGGS</span></b><i>HIGGSFIELD EDITION — STUDIO CRÉATIF IA</i></div>
+    <div class="logo-type"><b>FREE <span>HIGGS</span></b><i>HIGGSFIELD · STUDIO IA</i></div>
     <span class="ver">v9</span>
   </div>
   <nav id="steps"></nav>
@@ -1079,7 +1154,7 @@ const V={0:{},1:{},2:{},3:{},4:{},5:{},6:{}};
 V[0].cfg=()=>{
  const first=KEYS.list[0]||mkKey('');
  const provider=first.provider||'agnes';
- return '<div class="hero" style="padding:0;overflow:hidden;border-color:rgba(232,255,66,0.18)"><div style="padding:28px;background:radial-gradient(600px 300px at 20% 0%, rgba(232,255,66,0.12), transparent 60%), linear-gradient(180deg, rgba(255,255,255,0.02), transparent)"><div class="hero-kicker">HIGGSFIELD EDITION — STUDIO CINÉMA IA</div><h2 style="margin:8px 0 8px;font-size:42px">FREE HIGGS <b>STUDIO</b></h2><p class="sub" style="max-width:620px">Le studio créatif Higgsfield-grade. Génère tes films, tes images, tes vidéos — en une seule coulée. Sans compromis. Comme Soul Cinema, mais à toi.</p><div style="display:flex;gap:8px;margin-top:14px"><span class="chip">Higgsfield Soul</span><span class="chip">Kling 4.0</span><span class="chip">Seedance</span><span class="chip">Veo · Runware · KIE</span></div></div></div><div class="hero">'+hd(1,'Connectez vos <b>fournisseurs IA</b>')+
+ return '<div class="hero" style="padding:0;overflow:hidden;border-color:rgba(232,255,66,0.18)"><div style="padding:28px;background:radial-gradient(600px 300px at 20% 0%, rgba(232,255,66,0.12), transparent 60%), linear-gradient(180deg, rgba(255,255,255,0.02), transparent)"><div class="hero-kicker">HIGGSFIELD EDITION — STUDIO CINÉMA IA</div><h2 style="margin:8px 0 8px;font-size:clamp(28px, 6vw, 42px)">FREE HIGGS <b>STUDIO</b></h2><p class="sub" style="max-width:620px">Le studio créatif Higgsfield-grade. Génère tes films, tes images, tes vidéos — en une seule coulée. Sans compromis. Comme Soul Cinema, mais à toi.</p><div style="display:flex;gap:8px;margin-top:14px"><span class="chip">Higgsfield Soul</span><span class="chip">Kling 4.0</span><span class="chip">Seedance</span><span class="chip">Veo · Runware · KIE</span></div></div></div><div class="hero">'+hd(1,'Connectez vos <b>fournisseurs IA</b>')+
  guide('FREE HIGGS accepte plusieurs clés et plusieurs fournisseurs. Ajoutez une ou plusieurs clés par fournisseur. Les API doivent être compatibles avec le format OpenAI pour le texte et/ou les images. Pour la vidéo, choisissez un fournisseur vidéo et un modèle compatibles. Les clés sont stockées dans ce navigateur.')+
  '<h3>Fournisseur à ajouter</h3>'+
  '<label class="f"><span class="lab">Fournisseur</span><select id="provider">'+Object.entries(PROVIDERS).map(([id,x])=>'<option value="'+id+'" '+(provider===id?'selected':'')+'>'+esc(x.label)+'</option>').join('')+'</select></label>'+
