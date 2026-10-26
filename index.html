@@ -1,71 +1,484 @@
 <!DOCTYPE html>
-<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=5">
 <meta name="description" content="Studio créatif IA — génération de films, images et vidéos par intelligence artificielle.">
 <meta name="author" content="kisuke667">
 <meta property="og:title" content="FREE HIGGS — Studio Créatif IA">
 <meta property="og:description" content="Génération de films, images et vidéos par IA.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#0a84ff">
-<title>FREE HIGGS v6 — Studio Créatif IA</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#060608">
+<title>FREE HIGGS v9 — HIGGSFIELD EDITION</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f4f7fb;--p:#fff;--ink:#0b1a2b;--dim:#6b7c93;--ln:#d5deea;--a:#0a84ff;--b:#ff5a1f;--ok:#12b76a;--er:#e5383b;--m:'Share Tech Mono',ui-monospace,monospace}
+/* ─══════════════════════════════════════════
+   FREE HIGGS — HIGGSFIELD EDITION v9
+   Noir obsidienne · Lime électrique · Studio brut
+   ─══════════════════════════════════════════ */
+:root{
+  --bg:#060608;
+  --bg-soft:#0A0A0C;
+  --panel:#111113;
+  --panel-2:#17171A;
+  --panel-3:#1E1E21;
+  --line:rgba(255,255,255,0.07);
+  --line-strong:rgba(255,255,255,0.13);
+  --ink:#F2F0EB;
+  --ink-2:#E8E6E1;
+  --dim:#9A9AA0;
+  --muted:#6B6B70;
+  --faint:#3A3A3E;
+  --accent:#E8FF42;
+  --accent-2:#C8E600;
+  --accent-ink:#060608;
+  --accent-glow:0 0 0 1px rgba(232,255,66,0.18), 0 12px 40px rgba(232,255,66,0.14);
+  --violet:#8B5CF6;
+  --orange:#FF4D12;
+  --ok:#22C55E;
+  --er:#FF3B30;
+  --mono:'JetBrains Mono', ui-monospace, monospace;
+  --sans:'Inter', system-ui, -apple-system, sans-serif;
+  --display:'Space Grotesk', Inter, system-ui, sans-serif;
+  --radius:18px;
+  --radius-sm:12px;
+  --radius-pill:999px;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font:16px/1.5 Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);min-height:100vh;padding-bottom:70px}
-body::before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(var(--ln) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,var(--ln) 1px,transparent 1px) 0 0/40px 40px;opacity:.5}
-body::after{content:"";position:fixed;top:0;left:0;right:0;height:6px;z-index:25;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 10px);opacity:.25;pointer-events:none}
-header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--ink);padding:10px 18px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between}
-.logo{font:800 20px system-ui;letter-spacing:.04em}.logo b{color:var(--a)}.logo i{display:block;font:10px var(--m);letter-spacing:.3em;color:var(--dim);font-style:normal}
-#steps{display:flex;gap:4px;flex-wrap:wrap}
-.st{font:11px var(--m);letter-spacing:.06em;text-transform:uppercase;padding:5px 9px;border:1px solid var(--ln);background:#fff;color:var(--dim)}
-.st.ok{color:var(--ink);border-color:var(--ink)}.st.on{background:var(--ink);color:#fff;border-color:var(--ink)}.st:disabled{opacity:.45}.st.on:disabled{opacity:1}
-.hb{display:flex;gap:6px;align-items:center}
-main{max-width:1100px;margin:0 auto;padding:22px 16px}
-.hero{background:var(--p);border:1px solid var(--ln);padding:22px;margin-bottom:16px;position:relative}
-.hero::before,.hero::after{content:"";position:absolute;width:14px;height:14px;border:2px solid var(--a)}
-.hero::before{top:-1px;left:-1px;border-right:0;border-bottom:0}.hero::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
-.lab{font:11px var(--m);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-h2{font:700 28px system-ui;letter-spacing:.04em;margin:6px 0 8px}h2 b{color:var(--a)}h3{font:700 15px system-ui;letter-spacing:.06em;margin:16px 0 4px}
-p.sub{color:var(--dim);margin-bottom:12px;max-width:780px}
-.guide{display:flex;gap:12px;align-items:center;border:1px solid var(--a);background:#eef6ff;padding:12px 14px;margin:10px 0 16px}
-.guide.go{border-color:var(--ok);background:#effaf4}.guide.er{border-color:var(--er);background:#fff1f1;display:block}.guide.wt{border-color:var(--b);background:#fff6f0}
-textarea,input[type=text],select{width:100%;font:13px var(--m);padding:9px;border:1px solid var(--ln);background:#f9fbfd;color:var(--ink);outline:0}
-textarea:focus,input:focus,select:focus{border-color:var(--a);background:#fff}textarea{resize:vertical;min-height:70px;margin:4px 0}
-label.f{display:block;margin:6px 0}label.f span{display:block}
-button,.btn{font:600 12px var(--m);letter-spacing:.1em;text-transform:uppercase;padding:9px 14px;border:1px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer;display:inline-block}
-button:hover:not(:disabled),.btn:hover{background:var(--ink);color:#fff}button:disabled{opacity:.35;cursor:not-allowed}
-.big{background:var(--a);border-color:var(--a);color:#fff;padding:14px 26px;font-size:14px;letter-spacing:.16em}.big:hover:not(:disabled){background:#0066cc;border-color:#0066cc}
-.sm{padding:5px 9px;font-size:10px}.ft{display:flex;justify-content:space-between;gap:10px;margin-top:20px;flex-wrap:wrap;align-items:center}
-.chips{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}.chip{font:11px var(--m);padding:2px 8px;border:1px solid var(--ok);color:var(--ok)}.chip.off{border-color:var(--er);color:var(--er)}.chip.cd{border-color:var(--b);color:var(--b)}
-.gc{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}.gc button.sel{background:var(--a);border-color:var(--a);color:#fff}
-.choice{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:10px 0}
-.ch{border:1px solid var(--ink);padding:16px;cursor:pointer;background:#fff}.ch:hover{background:#f3f8ff}.ch.sel{border-color:var(--a);box-shadow:inset 0 0 0 2px var(--a);background:#eef6ff}.ch b{display:block;font:700 15px system-ui;margin-bottom:4px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
-.cd{border:1px solid var(--ln);background:#fff;padding:10px;position:relative}.cd.pk{border-color:var(--a);box-shadow:0 0 0 1px var(--a)}
-.im{position:relative;background:#e8eef6;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:6px;font:11px var(--m);color:var(--dim)}
+html{scrollbar-width:thin;scrollbar-color:var(--faint) transparent}
+::selection{background:var(--accent);color:var(--accent-ink)}
+body{
+  font:15px/1.6 var(--sans);
+  color:var(--ink);
+  background:var(--bg);
+  min-height:100vh;
+  padding-bottom:80px;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+/* grain + grid */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(900px 600px at 18% 0%, rgba(232,255,66,0.07), transparent 60%),
+    radial-gradient(1100px 700px at 92% 8%, rgba(139,92,246,0.09), transparent 55%),
+    radial-gradient(800px 500px at 50% 100%, rgba(255,77,18,0.05), transparent 60%);
+  pointer-events:none;
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;opacity:.035;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+}
+/* ── HEADER ── HIGGSFIELD STUDIO */
+header{
+  position:sticky;top:0;z-index:30;
+  display:grid;grid-template-columns:auto 1fr auto;
+  align-items:center;gap:18px;
+  padding:14px 20px;
+  background:rgba(6,6,8,0.82);
+  backdrop-filter:blur(16px) saturate(1.2);
+  -webkit-backdrop-filter:blur(16px) saturate(1.2);
+  border-bottom:1px solid var(--line);
+}
+
+/* 980 moved to HIGGSFIELD MOBILE */
+/* deduped */.logo{
+  display:flex;align-items:center;gap:12px;
+  font-family:var(--display);font-weight:700;letter-spacing:-0.02em;line-height:0.9;
+}
+.logo-mark{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--accent);color:var(--accent-ink);
+  display:grid;place-items:center;
+  font:800 14px var(--mono);letter-spacing:-0.04em;
+}
+.logo-type{line-height:1}
+.logo-type b{font-size:17px;letter-spacing:-0.02em;color:var(--ink);font-weight:700}
+.logo-type b span{color:var(--accent)}
+.logo-type i{
+  display:block;margin-top:2px;
+  font:500 8.5px var(--mono);letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);font-style:normal
+}
+.ver{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:4px 8px;border-radius:var(--radius-pill);
+  background:var(--accent);color:var(--accent-ink);
+  font:700 10px var(--mono);letter-spacing:0.06em;
+}
+.ver::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent-ink);opacity:.7;animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{opacity:.7}50%{opacity:.25}}
+#steps{
+  display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;
+  justify-self:center;max-width:100%;
+}
+#steps::-webkit-scrollbar{display:none}
+.st{
+  flex:none;
+  font:600 10.5px var(--mono);letter-spacing:0.08em;text-transform:uppercase;
+  padding:8px 12px;border-radius:var(--radius-pill);
+  border:1px solid var(--line);background:transparent;color:var(--dim);
+  cursor:pointer;transition:all .18s;white-space:nowrap;
+}
+.st:hover:not(:disabled){border-color:var(--line-strong);color:var(--ink);background:rgba(255,255,255,0.04)}
+.st.ok{color:var(--ink-2);border-color:var(--line-strong);background:rgba(255,255,255,0.05)}
+.st.on{background:var(--ink);color:var(--bg);border-color:var(--ink);font-weight:700}
+.st:disabled{opacity:.32;cursor:not-allowed}
+.st.on:disabled{opacity:1}
+.hb{display:flex;gap:8px;align-items:center;justify-self:end}
+.hb .sm{
+  width:36px;height:36px;padding:0;display:grid;place-items:center;
+  border-radius:var(--radius-pill);font-size:14px;
+}
+#qchip{border-radius:var(--radius-pill);font:600 10px var(--mono);padding:6px 10px}
+/* ── LAYOUT */
+main{max-width:1240px;margin:0 auto;padding:32px 20px}
+@media(max-width:700px){main{padding:20px 14px}}
+/* ── HERO ── editorial */
+.hero{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:28px;
+  margin-bottom:20px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg, transparent, rgba(232,255,66,0.45), transparent);
+  opacity:.9;
+}
+.hero::after{
+  content:"";position:absolute;inset:0;border-radius:var(--radius);
+  border:1px solid rgba(255,255,255,0.03);pointer-events:none;
+}
+.hero-head{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px;
+}
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  font:600 10px var(--mono);letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);
+}
+.hero-kicker::before{content:"";width:22px;height:1px;background:var(--accent)}
+.lab{
+  font:600 10px var(--mono);letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);
+}
+h2{
+  font-family:var(--display);font-weight:700;font-size:34px;letter-spacing:-0.03em;line-height:0.95;
+  margin:8px 0 10px;color:var(--ink);
+}
+h2 b{color:var(--accent);font-weight:700}
+@media(max-width:700px){h2{font-size:26px}}
+h3{
+  font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;
+  margin:22px 0 8px;color:var(--ink-2);
+}
+p.sub{color:var(--dim);margin-bottom:14px;max-width:760px;font-size:14.5px;line-height:1.6}
+/* ── GUIDES ── Higgsfield callout */
+.guide{
+  display:flex;gap:12px;align-items:flex-start;
+  border:1px solid var(--line);border-left:3px solid var(--accent);
+  background:rgba(255,255,255,0.03);
+  padding:14px 16px;margin:14px 0 18px;border-radius:12px;
+  font-size:13.5px;line-height:1.55;color:var(--ink-2);
+}
+.guide.go{border-left-color:var(--ok);background:rgba(34,197,94,0.08)}
+.guide.er{border-left-color:var(--er);background:rgba(255,59,48,0.08);display:block}
+.guide.wt{border-left-color:var(--orange);background:rgba(255,77,18,0.08)}
+.guide b{color:var(--ink)}
+/* ── INPUTS */
+textarea,input[type=text],select{
+  width:100%;font:13.5px var(--mono);line-height:1.5;
+  padding:12px 14px;border-radius:12px;
+  border:1px solid var(--line);background:var(--panel-2);color:var(--ink);
+  outline:0;transition:border-color .15s, box-shadow .15s, background .15s;
+}
+textarea::placeholder,input::placeholder{color:var(--muted)}
+textarea:focus,input:focus,select:focus{
+  border-color:rgba(232,255,66,0.45);background:var(--panel-3);
+  box-shadow:0 0 0 4px rgba(232,255,66,0.10);
+}
+textarea{resize:vertical;min-height:78px;margin:6px 0}
+label.f{display:block;margin:10px 0}
+label.f span{display:block;margin-bottom:6px}
+/* ── BUTTONS ── Higgsfield pill */
+button,.btn{
+  font:700 11px var(--mono);letter-spacing:0.08em;text-transform:uppercase;
+  padding:11px 16px;border-radius:var(--radius-pill);
+  border:1px solid var(--line);background:var(--panel-2);color:var(--ink);
+  cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  transition:all .16s;white-space:nowrap;
+}
+button:hover:not(:disabled),.btn:hover{
+  background:var(--ink);color:var(--bg);border-color:var(--ink);
+  transform:translateY(-1px);
+}
+button:active:not(:disabled){transform:translateY(0)}
+button:disabled{opacity:.34;cursor:not-allowed;transform:none}
+.big{
+  background:var(--accent);border-color:var(--accent);color:var(--accent-ink);
+  padding:14px 22px;font-size:12px;letter-spacing:0.10em;
+  box-shadow:var(--accent-glow);
+}
+.big:hover:not(:disabled){background:var(--accent-2);border-color:var(--accent-2);color:var(--accent-ink);box-shadow:0 0 0 1px rgba(232,255,66,0.22), 0 16px 40px rgba(232,255,66,0.18);transform:translateY(-2px)}
+.sm{
+  padding:7px 12px;font-size:10.5px;border-radius:var(--radius-pill);
+}
+.ft{display:flex;justify-content:space-between;gap:12px;margin-top:24px;flex-wrap:wrap;align-items:center}
+/* ── CHIPS / PILLS */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.chip{
+  font:600 11px var(--mono);padding:6px 10px;border-radius:var(--radius-pill);
+  border:1px solid rgba(34,197,94,0.22);background:rgba(34,197,94,0.10);color:#86EFAC;
+}
+.chip.off{border-color:rgba(255,59,48,0.22);background:rgba(255,59,48,0.10);color:#FDA4A0}
+.chip.cd{border-color:rgba(255,77,18,0.22);background:rgba(255,77,18,0.10);color:#FFB18A}
+/* ── GENRE GRID */
+.gc{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px}
+.gc button{
+  padding:9px 13px;border-radius:var(--radius-pill);font-size:11.5px;
+  background:var(--panel-2);border-color:var(--line);color:var(--dim);
+}
+.gc button.sel{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.choice{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:14px 0}
+.ch{
+  border:1px solid var(--line);padding:20px;border-radius:16px;
+  cursor:pointer;background:var(--panel);transition:all .18s;
+}
+.ch:hover{border-color:var(--line-strong);background:var(--panel-2);transform:translateY(-2px)}
+.ch.sel{border-color:var(--accent);background:rgba(232,255,66,0.06);box-shadow:0 0 0 1px rgba(232,255,66,0.18)}
+.ch b{display:block;font:700 15px var(--display);margin-bottom:6px;color:var(--ink)}
+/* ── CARD GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.cd{
+  border:1px solid var(--line);background:var(--panel);padding:14px;
+  border-radius:18px;position:relative;transition:all .18s;
+}
+.cd:hover{border-color:var(--line-strong);transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,0.35)}
+.cd.pk{border-color:rgba(232,255,66,0.28);box-shadow:0 0 0 1px rgba(232,255,66,0.12), 0 10px 30px rgba(0,0,0,0.3)}
+.im{
+  position:relative;background:#0B0B0D;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  margin-bottom:10px;border-radius:14px;
+  font:10px var(--mono);color:var(--muted);
+  border:1px solid var(--line);
+}
 .im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.sp,.sp2{border:2px solid var(--a);border-top-color:transparent;border-radius:50%;animation:r 1s linear infinite}.sp{position:absolute;width:26px;height:26px;z-index:2}.sp2{display:inline-block;width:16px;height:16px;flex:none}@keyframes r{to{transform:rotate(360deg)}}
-.ip{background:#f6f9fc;border:1px solid var(--ln);padding:8px;margin:6px 0}.rw{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px;align-items:center}
-.up{border:1px solid var(--ink);cursor:pointer}
-.bar{height:6px;background:var(--ln);margin:12px 0}.bar i{display:block;height:100%;background:var(--a);width:0;transition:width .4s}
-.feed{margin:10px 0}.fi{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--ln);font-size:16px}.fi.ok{color:var(--ok)}.fi.er{color:var(--er)}.fi em{margin-left:auto;font:11px var(--m);color:var(--dim);font-style:normal}.fi .ic{width:18px;text-align:center;flex:none}
-.mg{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin-top:12px}.mn .im{margin:0}.mn .lab{font-size:9px;padding-top:2px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--dim);margin-right:6px}.dot.run{background:var(--ok)}.dot.full{background:var(--b);animation:bl 1s infinite}@keyframes bl{50%{opacity:.25}}
-.lad{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}.lad i{font:11px var(--m);font-style:normal;padding:3px 8px;border:1px solid var(--ln);color:var(--dim)}.lad i.past{border-color:var(--b);color:var(--b)}.lad i.on{background:var(--b);color:#fff;border-color:var(--b)}
-.tl{border:1px solid var(--ln);background:#fff}.tl.ok{border-color:var(--ok)}.tl.run{border-color:var(--a)}.tl.er{border-color:var(--er)}
-.th{position:relative;background:#e8eef6;overflow:hidden}.th img,.th video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.tg{position:absolute;top:4px;left:4px;z-index:2;font:10px var(--m);background:var(--ink);color:#fff;padding:1px 5px}.nw{position:absolute;top:4px;right:4px;z-index:2;font:10px var(--m);font-style:normal;background:var(--b);color:#fff;padding:1px 5px}
-.tx{font-size:13px;padding:6px 8px;line-height:1.3}.mt{font:10px var(--m);color:var(--dim);padding:0 8px 7px}
-.kp{display:flex;gap:22px;flex-wrap:wrap;margin:12px 0}.kp b{font:600 22px Orbitron;display:block}
-#con{position:fixed;left:0;right:0;bottom:0;height:34vh;z-index:50;background:#0b1a2b;color:#bfe3ff;transform:translateY(100%);transition:transform .25s;display:flex;flex-direction:column}#con.on{transform:none}
-#lb{flex:1;overflow:auto;padding:8px 12px;font:12px/1.5 var(--m)}.lg.er{color:#ff8a8a}.lg.wr{color:#ffc477}.lg.ok{color:#7dffb5}
-#md{position:fixed;inset:0;background:rgba(11,26,43,.55);z-index:70;display:none;align-items:center;justify-content:center;padding:16px}#md.on{display:flex}#md>div{background:#fff;max-width:640px;width:100%;max-height:85vh;overflow:auto;padding:20px;border:1px solid var(--ink)}
-#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:90;display:flex;flex-direction:column;gap:6px;align-items:center}#toast div{background:var(--ink);color:#fff;font:12px var(--m);padding:8px 14px}
-#pl{position:fixed;inset:0;background:#000;z-index:100;display:none;align-items:center;justify-content:center}#pl.on{display:flex}#pv,#pi{max-width:100vw;max-height:100vh}#sub{position:absolute;left:5%;right:5%;bottom:7%;text-align:center;color:#fff;font:600 22px/1.3 system-ui;text-shadow:0 2px 8px #000}#pl button{position:absolute;top:14px;right:14px}
-@media(max-width:700px){h2{font-size:21px}.st{padding:4px 6px;font-size:9px}}
+.im::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg, transparent 62%, rgba(0,0,0,0.55) 100%);
+  pointer-events:none;
+}
+.sp,.sp2{border:2px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:r 1s linear infinite}
+.sp{position:absolute;width:28px;height:28px;z-index:2}
+.sp2{display:inline-block;width:16px;height:16px;flex:none}
+@keyframes r{to{transform:rotate(360deg)}}
+.ip{
+  background:var(--panel-2);border:1px solid var(--line);
+  padding:10px;margin:10px 0;border-radius:12px;
+}
+.ip input{margin-bottom:8px}
+.rw{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;align-items:center}
+.up{border:1px solid var(--line);cursor:pointer;border-radius:var(--radius-pill)}
+.bar{height:6px;background:rgba(255,255,255,0.08);margin:16px 0;border-radius:var(--radius-pill);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s;border-radius:var(--radius-pill)}
+.feed{margin:12px 0}
+.fi{
+  display:flex;gap:12px;align-items:center;
+  padding:12px 0;border-bottom:1px solid var(--line);
+  font-size:13px;color:var(--ink-2);
+}
+.fi.ok{color:var(--ink)}
+.fi.er{color:var(--er)}
+.fi em{margin-left:auto;font:10px var(--mono);color:var(--muted);font-style:normal}
+.fi .ic{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;flex:none;font-size:11px;background:var(--panel-2);border:1px solid var(--line)}
+.mg{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:14px}
+.mn .im{margin:0;border-radius:12px}
+.mn .lab{font-size:9.5px;padding-top:6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--muted);margin-right:6px}
+.dot.run{background:var(--ok);box-shadow:0 0 8px rgba(34,197,94,0.6)}
+.dot.full{background:var(--orange);animation:bl 1s infinite}
+@keyframes bl{50%{opacity:.3}}
+.lad{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.lad i{
+  font:600 11px var(--mono);font-style:normal;padding:6px 10px;
+  border-radius:var(--radius-pill);border:1px solid var(--line);color:var(--dim);background:var(--panel-2)
+}
+.lad i.past{border-color:rgba(255,77,18,0.22);color:var(--orange);background:rgba(255,77,18,0.08)}
+.lad i.on{background:var(--orange);color:#fff;border-color:var(--orange)}
+.tl{border:1px solid var(--line);background:var(--panel);border-radius:16px;overflow:hidden}
+.tl.ok{border-color:rgba(34,197,94,0.22)}
+.tl.run{border-color:rgba(232,255,66,0.22)}
+.tl.er{border-color:rgba(255,59,48,0.22)}
+.th{position:relative;background:#0B0B0D;overflow:hidden}
+.th img,.th video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tg{
+  position:absolute;top:8px;left:8px;z-index:2;
+  font:700 9px var(--mono);letter-spacing:0.08em;text-transform:uppercase;
+  background:rgba(0,0,0,0.72);backdrop-filter:blur(8px);
+  color:#fff;padding:4px 8px;border-radius:var(--radius-pill);border:1px solid rgba(255,255,255,0.12)
+}
+.nw{
+  position:absolute;top:8px;right:8px;z-index:2;
+  font:700 9px var(--mono);letter-spacing:0.06em;text-transform:uppercase;
+  background:var(--accent);color:var(--accent-ink);padding:4px 8px;border-radius:var(--radius-pill)
+}
+.tx{font-size:13px;padding:10px 12px 6px;line-height:1.45;color:var(--ink-2)}
+.mt{font:10px var(--mono);color:var(--muted);padding:0 12px 10px;letter-spacing:0.02em}
+.kp{display:flex;gap:16px;flex-wrap:wrap;margin:16px 0}
+.kp > div{
+  flex:1;min-width:110px;padding:14px 16px;border-radius:14px;
+  background:var(--panel-2);border:1px solid var(--line);
+}
+.kp b{font:700 22px var(--display);display:block;color:var(--ink);letter-spacing:-0.02em}
+.kp span.lab{display:block;margin-bottom:4px}
+/* console */
+#con{
+  position:fixed;left:0;right:0;bottom:0;height:36vh;z-index:50;
+  background:rgba(10,10,12,0.96);backdrop-filter:blur(16px);
+  color:#D9E0EC;border-top:1px solid var(--line);
+  transform:translateY(100%);transition:transform .28s cubic-bezier(.16,1,.3,1);
+  display:flex;flex-direction:column;
+}
+#con.on{transform:none}
+#lb{flex:1;overflow:auto;padding:10px 14px;font:12px/1.6 var(--mono)}
+.lg.er{color:#FF8A8A}.lg.wr{color:#FFC77A}.lg.ok{color:#7DFFB5}
+#md{position:fixed;inset:0;background:rgba(0,0,0,0.64);backdrop-filter:blur(10px);z-index:70;display:none;align-items:center;justify-content:center;padding:16px}
+#md.on{display:flex}
+#md>div{
+  background:var(--panel);max-width:680px;width:100%;max-height:86vh;overflow:auto;
+  padding:24px;border:1px solid var(--line);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.6)
+}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:90;display:flex;flex-direction:column;gap:8px;align-items:center}
+#toast div{
+  background:var(--ink);color:var(--bg);
+  font:600 12px var(--mono);padding:10px 16px;border-radius:var(--radius-pill);
+  box-shadow:0 10px 30px rgba(0,0,0,0.4)
+}
+#pl{position:fixed;inset:0;background:#000;z-index:100;display:none;align-items:center;justify-content:center}
+#pl.on{display:flex}
+#pv,#pi{max-width:100vw;max-height:100vh}
+#sub{
+  position:absolute;left:5%;right:5%;bottom:7%;text-align:center;
+  color:#fff;font:600 20px/1.35 var(--display);text-shadow:0 2px 12px rgba(0,0,0,0.9)
+}
+#pl button{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.18);color:#fff;backdrop-filter:blur(8px)}
+#pl button:hover{background:#fff;color:#000}
+
+.export-dock{
+  margin-top:18px;padding:16px 18px;border-radius:16px;
+  background:linear-gradient(135deg, rgba(232,255,66,0.08), rgba(139,92,246,0.06));
+  border:1px solid rgba(232,255,66,0.16);position:relative;overflow:hidden;
+}
+.export-dock::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg, transparent, rgba(232,255,66,0.55), transparent);
+}
+.export-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+
+/* footer Higgsfield */
+.site-foot{
+  text-align:center;padding:28px 16px;margin-top:24px;
+  border-top:1px solid var(--line);
+  color:var(--muted);font:10px var(--mono);letter-spacing:0.08em;text-transform:uppercase;
+}
+.site-foot a{color:var(--dim);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px}
+.site-foot a:hover{color:var(--ink);border-color:var(--ink)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.hero,.cd,.ch{animation:fadeIn .4s cubic-bezier(.16,1,.3,1) both}
+/* ── HIGGSFIELD MOBILE — iPhone first ── */
+
+@media(max-width:980px){
+  header{
+    grid-template-columns:1fr;
+    gap:10px;
+    padding:12px 14px;
+    position:sticky;
+  }
+  .logo{order:1}
+  #steps{order:3;justify-content:flex-start;padding-bottom:2px;margin:0 -14px;padding-left:14px;padding-right:14px}
+  .hb{order:2;justify-self:stretch;justify-content:space-between}
+  .hb #qchip{margin-right:auto}
+}
+@media(max-width:700px){
+  main{padding:18px 14px}
+  h2{font-size:26px;letter-spacing:-0.02em}
+  h3{font-size:12px}
+  .hero{padding:18px;border-radius:16px}
+  .hero h2{font-size:24px}
+  .hero-kicker{font-size:9px}
+  .st{padding:7px 11px;font-size:10px;min-height:34px}
+  .grid{grid-template-columns:1fr;gap:12px}
+  .choice{grid-template-columns:1fr;gap:12px}
+  .gc{gap:7px}
+  .gc button{padding:8px 12px;font-size:12px;min-height:38px}
+  .mg{grid-template-columns:repeat(2,1fr);gap:10px}
+  .kp{gap:10px}
+  .kp > div{min-width:calc(50% - 5px);flex:none}
+  .ft{flex-direction:column;align-items:stretch}
+  .ft .big{width:100%;justify-content:center}
+  .rw{gap:8px}
+  button,.btn{min-height:42px}
+  .sm{min-height:36px}
+  .big{padding:16px 20px;font-size:12px}
+  /* iOS: prevent zoom */
+  textarea,input[type=text],select{font-size:16px}
+  /* modal full bleed on phone */
+  #md{padding:0;align-items:flex-end}
+  #md>div{max-width:100%;max-height:92vh;border-radius:20px 20px 0 0;padding:20px 16px;border-left:none;border-right:none;border-bottom:none}
+  #con{height:52vh}
+  #toast{bottom:calc(16px + env(safe-area-inset-bottom));left:14px;right:14px;transform:none}
+  #toast div{width:100%;text-align:center;justify-content:center}
+  .im{border-radius:12px}
+  .tl{border-radius:14px}
+}
+@media(max-width:390px){
+  main{padding:14px 12px}
+  .logo-type b{font-size:15px}
+  .logo-mark{width:32px;height:32px;font-size:12px;border-radius:8px}
+  .ver{font-size:9px;padding:3px 7px}
+  h2{font-size:22px}
+  .hero{padding:16px}
+  .cd,.ch{padding:12px;border-radius:16px}
+  .kp > div{padding:12px}
+  .kp b{font-size:19px}
+}
+@media(max-width:340px){
+  .hb{gap:6px}
+  .hb .sm{width:32px;height:32px;font-size:12px}
+  #steps{gap:5px}
+  .st{padding:6px 9px;font-size:9.5px}
+}
+/* iOS safe areas */
+@supports(padding:max(0px)){
+  header{padding-left:max(14px, env(safe-area-inset-left));padding-right:max(14px, env(safe-area-inset-right))}
+  main{padding-left:max(14px, env(safe-area-inset-left));padding-right:max(14px, env(safe-area-inset-right))}
+  #con{padding-bottom:env(safe-area-inset-bottom)}
+}
+/* scroll snap for steps on touch */
+@media(hover:none) and (pointer:coarse){
+  #steps{scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+  .st{scroll-snap-align:start}
+  .gc{ -webkit-overflow-scrolling:touch}
+  button:active,.btn:active{transform:scale(0.98)}
+}
+/* fix 100vw overflow on iPhone */
+html,body{overflow-x:hidden}
+img,video{max-width:100%}
+
+
+body.light{--bg:#F6F5EF;--bg-soft:#FFFFFF;--panel:#FFFFFF;--panel-2:#F2F0EB;--panel-3:#EDE9E2;--line:rgba(0,0,0,0.08);--line-strong:rgba(0,0,0,0.14);--ink:#0A0A0B;--ink-2:#1A1A1D;--dim:#6B6B70;--muted:#8E8E93}
+body.light header{background:rgba(246,245,239,0.82)}
+body.light .im{background:#EDE9E2}
+
+.cd:hover .im img{transform:scale(1.02);transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.im img{transition:transform .35s}
 </style></head><body>
-<header><div class="logo">FREE <b>HIGGS</b><i>VOTRE STUDIO CRÉATIF IA</i></div><span style="font:10px var(--m);color:var(--dim);border:1px solid var(--ln);padding:2px 6px">v6</span><nav id="steps"></nav>
-<div class="hb"><span class="chip" id="qchip"></span><button class="sm" data-a="sess">Mes films</button><button class="sm" data-a="con">Journal</button></div></header>
+<header>
+  <div class="logo">
+    <div class="logo-mark">FH</div>
+    <div class="logo-type"><b>FREE <span>HIGGS</span></b><i>HIGGSFIELD · STUDIO IA</i></div>
+    <span class="ver">v9</span>
+  </div>
+  <nav id="steps"></nav>
+  <div class="hb"><span class="chip" id="qchip"></span><button class="sm" data-a="export" title="Exporter JSON" style="display:none" id="hdrExport">⬇</button><button class="sm" data-a="help" title="Aide">?</button><button class="sm" data-a="theme" title="Thème">◐</button><button class="sm" data-a="sess">Mes films</button><button class="sm" data-a="con">Journal</button></div>
+</header>
 <main id="main"></main>
 <div id="con"><div style="display:flex;justify-content:space-between;padding:6px 12px;border-bottom:1px solid #26405c;font:12px var(--m)"><span>JOURNAL TECHNIQUE</span><button class="sm" data-a="con" style="color:#bfe3ff;border-color:#4a6a8a">✕</button></div><div id="lb"></div></div>
 <div id="md"><div id="mdc"></div></div><div id="toast"></div>
@@ -123,6 +536,15 @@ const G=[['Fiction',[
   "Publicité|premium commercial, glossy, product hero shots",
   "Clip musical|music video, stylized, rhythmic visuals",
   "Teaser|teaser, mysterious, minimal reveals"
+]],['Productivité',[
+  "Présentation produit|product showcase, clean studio lighting, premium commercial",
+  "Tutoriel|educational tutorial, clear framing, friendly host",
+  "Livre blanc|explainer video, motion graphics, professional tone",
+  "Démo logicielle|software demo, screen capture look, modern UI"
+]],['Voyage',[
+  "Voyage cinématographique|travel film, sweeping landscapes, golden hour",
+  "Documentaire voyage|travel documentary, authentic locals, aerial shots",
+  "Road movie|road movie, desert highways, vintage car, sunset"
 ]]];
 
 /* ═════════════════════════════════════════════════════════════════════
@@ -380,6 +802,7 @@ const newP=()=>({
   synRaw:'',syn:null,final:'',title:'',
   nsc:5,
   chars:[],scenes:[],
+  notes:'',
   sub:{},
   q:{step:0,next:0,st:'idle',on:false}
 });
@@ -516,9 +939,26 @@ async function imgPass(list,label){
 /* ═════════════════════════════════════════════════════════════════════
    AFFICHAGE
    ═════════════════════════════════════════════════════════════════════ */
-const guide=(h,c)=>'<div class="guide '+(c||'')+'"><div>'+h+'</div></div>';
-const hd=(n,t)=>'<div class="lab">ÉTAPE '+n+' / 7</div><h2>'+t+'</h2>';
+const guide=(h,c)=>'<div class="guide '+(c||'')+'"><div style="font-size:13px;line-height:1.6">'+h+'</div></div>';
+const hd=(n,t)=>'<div class="hero-kicker">ÉTAPE '+String(n).padStart(2,'0')+' / 07 — STUDIO</div><h2>'+t+'</h2>';
 const btn=(a,l,c,x)=>'<button class="'+(c||'')+'" data-a="'+a+'" '+(x||'')+'>'+l+'</button>';
+
+const exportBar=(lvl)=>{
+  const hs=P.scenes&&P.scenes.length>0, sh=shots().length;
+  if(!hs) return '';
+  lvl=lvl||4;
+  return '<div class="export-dock"><div class="export-head"><span class="lab" style="color:var(--ink)">⬢ LIVRABLES — prêts dès l\'étape 4</span><span class="lab" style="opacity:.6">'+P.scenes.length+' scènes'+(sh?' · '+sh+' plans':'')+'</span></div>'
+  +'<div class="rw" style="margin-top:12px">'
+  +btn('export','⬇ JSON','sm')
+  +btn('exportmd','⬇ Markdown','sm')
+  +btn('exportcsv','⬇ CSV','sm')
+  +btn('exporthtml','⬇ HTML','sm')
+  +btn('copydlg','📋 Dialogues','sm')
+  +(lvl>=5?btn('copyprompts','📋 Prompts','sm')+btn('exportsrt','⬇ SRT','sm'):'')
+  +'</div>'
+  +'<div class="lab" style="margin-top:8px;opacity:.45;font-size:9.5px">JSON = dossier complet · Markdown = traitement · CSV = tableur · HTML = dossier livrable · SRT = sous-titres</div></div>';
+};
+
 const foot=(prev,next)=>'<div class="ft">'+(prev||'<span></span>')+(next||'')+'</div>';
 const nextBtn=(a,l,x)=>'<button class="big" id="nx" data-a="'+a+'" data-lbl="'+esc(l)+'" '+(x||'')+'>'+l+' →</button>';
 function syncNext(){const b=$('#nx');if(!b)return;const bz=anyBusy();b.disabled=bz||b.dataset.off=='1';b.textContent=bz?'Images en cours…':b.dataset.lbl+' →'}
@@ -530,10 +970,10 @@ const imgPanel=o=>'<div class="ip"><input type="text" data-mod="'+o.id+'" placeh
   (o.err?'<div class="lab" style="color:var(--er);margin-top:4px">'+esc(o.err)+'</div>':'')+'</div>';
 const fld=(o,f,l,ta)=>'<label class="f"><span class="lab">'+l+'</span>'+(ta?'<textarea data-f="'+f+'" data-id="'+o.id+'" rows="'+ta+'">'+esc(o[f])+'</textarea>':'<input type="text" data-f="'+f+'" data-id="'+o.id+'" value="'+esc(o[f])+'">')+'</label>';
 const csv=(o,l)=>'<label class="f"><span class="lab">'+l+'</span><input type="text" data-f="chars" data-arr="1" data-id="'+o.id+'" value="'+esc((o.chars||[]).join(', '))+'"></label>';
-const charCard=c=>'<div class="cd" id="c-'+c.id+'">'+imBox(c,'3/4')+imgPanel(c)+fld(c,'name','Nom')+fld(c,'role','Rôle')+fld(c,'desc','Fiche physique (anglais)',3)+fld(c,'outfit','Costume (anglais)',2)+'<div class="rw"><button class="sm" data-a="del" data-id="'+c.id+'" '+(c.busy?'disabled':'')+'>🗑 Supprimer</button></div></div>';
+const charCard=c=>'<div class="cd" id="c-'+c.id+'">'+imBox(c,'3/4')+imgPanel(c)+fld(c,'name','Nom')+fld(c,'role','Rôle')+fld(c,'desc','Fiche physique (anglais)',3)+fld(c,'outfit','Costume (anglais)',2)+'<div class="rw"><button class="sm" data-a="dupchar" data-id="'+c.id+'">⧉ Dupliquer</button><button class="sm" data-a="del" data-id="'+c.id+'" '+(c.busy?'disabled':'')+'>🗑 Supprimer</button></div></div>';
 const charIn=c=>'<div class="cd" id="i-'+c.id+'">'+imBox(c,'3/4')+fld(c,'name','Nom')+fld(c,'desc','Description (ou importez une photo : l\'IA la décrit)',3)+'<div class="rw"><label class="sm btn up" '+(c.busy?'style="opacity:.35;pointer-events:none"':'')+'>⬆ Importer une photo<input type="file" accept="image/*" hidden data-up="'+c.id+'"></label><button class="sm" data-a="del" data-id="'+c.id+'">🗑</button></div></div>';
 const sceneCard=(s,i)=>'<div class="cd" id="c-'+s.id+'"><div class="lab">Scène '+(i+1)+'</div>'+imBox(s)+imgPanel(s)+fld(s,'title','Titre')+fld(s,'summary','Résumé',3)+fld(s,'decor','Décor (anglais)',2)+fld(s,'mood','Ambiance (anglais)')+csv(s,'Personnages présents (séparés par des virgules)')+fld(s,'dialogue','Dialogues (NOM: réplique)',4)+'<div class="rw"><button class="sm" data-a="del" data-id="'+s.id+'" '+(s.busy?'disabled':'')+'>🗑 Supprimer la scène</button></div></div>';
-const shotCard=h=>'<div class="cd" id="c-'+h.id+'">'+imBox(h)+imgPanel(h)+fld(h,'size','Type de plan (wide, medium, close-up…)')+fld(h,'action','Action visuelle (anglais)',3)+fld(h,'camera','Caméra (anglais)')+csv(h,'Personnages dans le plan')+fld(h,'who','Qui parle')+fld(h,'line','Réplique dite (français)',2)+'<div class="rw"><button class="sm" data-a="del" data-id="'+h.id+'" '+(h.busy?'disabled':'')+'>🗑 Supprimer le plan</button></div></div>';
+const shotCard=h=>'<div class="cd" id="c-'+h.id+'">'+imBox(h)+imgPanel(h)+fld(h,'size','Type de plan (wide, medium, close-up…)')+fld(h,'action','Action visuelle (anglais)',3)+fld(h,'camera','Caméra (anglais)')+csv(h,'Personnages dans le plan')+fld(h,'who','Qui parle')+fld(h,'line','Réplique dite (français)',2)+'<div class="rw"><button class="sm" data-a="dupshot" data-id="'+h.id+'">⧉ Dupliquer</button><button class="sm" data-a="del" data-id="'+h.id+'" '+(h.busy?'disabled':'')+'>🗑 Supprimer le plan</button></div></div>';
 const mini=o=>'<div class="mn" id="m-'+o.id+'"><div class="im" style="aspect-ratio:'+(o.role!==undefined?'3/4':AR())+'">'+(o.img?'<img src="'+esc(ref(o.img))+'" alt="">':'<span>'+(o.err?'✕':'…')+'</span>')+(o.busy?'<i class="sp"></i>':'')+'</div><div class="lab">'+esc(o.name||o.title||o.size||'')+'</div></div>';
 const LBL={wait:'en attente',run:'en cours',ok:'prête',er:'échec'};
 const tile=(h,i)=>'<div class="tl '+h.vst+'" id="t-'+h.id+'"><div class="th" style="aspect-ratio:'+AR()+'">'+(h.video?'<video src="'+esc(h.video)+'" controls playsinline preload="metadata" data-id="'+h.id+'"></video>':h.img?'<img src="'+esc(ref(h.img))+'" alt="">':'')+'<b class="tg">'+i+'</b>'+(h.video&&!h.seen?'<em class="nw">NOUVEAU</em>':'')+'</div><div class="tx">'+esc(h.line?(h.who?h.who+' : ':'')+h.line:h.action||'')+'</div><div class="mt">'+(h.img?LBL[h.vst]||'':'image manquante')+(h.vst=='run'&&h.msg?' · '+esc(h.msg):'')+(h.err?' · '+esc(h.err):'')+'</div>'+(h.vst=='er'?'<div style="padding:0 8px 8px"><button class="sm" data-a="retry" data-id="'+h.id+'">Relancer</button></div>':'')+'</div>';
@@ -743,7 +1183,7 @@ const V={0:{},1:{},2:{},3:{},4:{},5:{},6:{}};
 V[0].cfg=()=>{
  const first=KEYS.list[0]||mkKey('');
  const provider=first.provider||'agnes';
- return '<div class="hero">'+hd(1,'Connectez vos <b>fournisseurs IA</b>')+
+ return '<div class="hero" style="padding:0;overflow:hidden;border-color:rgba(232,255,66,0.18)"><div style="padding:28px;background:radial-gradient(600px 300px at 20% 0%, rgba(232,255,66,0.12), transparent 60%), linear-gradient(180deg, rgba(255,255,255,0.02), transparent)"><div class="hero-kicker">HIGGSFIELD EDITION — STUDIO CINÉMA IA</div><h2 style="margin:8px 0 8px;font-size:clamp(28px, 6vw, 42px)">FREE HIGGS <b>STUDIO</b></h2><p class="sub" style="max-width:620px">Le studio créatif Higgsfield-grade. Génère tes films, tes images, tes vidéos — en une seule coulée. Sans compromis. Comme Soul Cinema, mais à toi.</p><div style="display:flex;gap:8px;margin-top:14px"><span class="chip">Higgsfield Soul</span><span class="chip">Kling 4.0</span><span class="chip">Seedance</span><span class="chip">Veo · Runware · KIE</span></div></div></div><div class="hero">'+hd(1,'Connectez vos <b>fournisseurs IA</b>')+
  guide('FREE HIGGS accepte plusieurs clés et plusieurs fournisseurs. Ajoutez une ou plusieurs clés par fournisseur. Les API doivent être compatibles avec le format OpenAI pour le texte et/ou les images. Pour la vidéo, choisissez un fournisseur vidéo et un modèle compatibles. Les clés sont stockées dans ce navigateur.')+
  '<h3>Fournisseur à ajouter</h3>'+
  '<label class="f"><span class="lab">Fournisseur</span><select id="provider">'+Object.entries(PROVIDERS).map(([id,x])=>'<option value="'+id+'" '+(provider===id?'selected':'')+'>'+esc(x.label)+'</option>').join('')+'</select></label>'+
@@ -757,14 +1197,14 @@ V[0].cfg=()=>{
  '<label class="f"><span class="lab">Mode vidéo Agnès</span><select id="plan"><option value="free" '+(KEYS.plan==='free'?'selected':'')+'>Gratuit — modèle vidéo standard</option><option value="plan" '+(KEYS.plan==='plan'?'selected':'')+'>Token Plan — modèle vidéo avancé</option></select></label>'+
  '<div id="kl" class="chips">'+KEYS.list.map((k,i)=>'<span class="chip '+(k.off?'off':'')+'">'+esc((PROVIDERS[k.provider]||PROVIDERS.custom).label)+' · …'+esc(k.k.slice(-4))+'</span>').join('')+'</div>'+
  '<div class="rw">'+btn('savekeys','Enregistrer ce fournisseur','big')+btn('clearprovider','Retirer ses clés','sm')+'</div>'+
- '<p class="sub" style="margin-top:12px">Important : avoir une clé ne garantit pas que le fournisseur prend en charge la génération d’images ou de vidéos. Les modèles et routes API varient selon le fournisseur. N’utilisez pas de clé secrète sur un site public partagé.</p></div>';
+ '<p class="sub" style="margin-top:12px">Important : avoir une clé ne garantit pas que le fournisseur prend en charge la génération d’images ou de vidéos. Les modèles et routes API varient selon le fournisseur. N’utilisez pas de clé secrète sur un site public partagé.</p><div id="recent"></div></div>';
 };
 V[1].cfg=()=>{
   const sel=P.genre&&P.genre.name;
   return '<div class="hero">'+hd(2,'Quel <b>film</b> voulez-vous créer ?')+guide('👉 À vous : choisissez un genre et un format, écrivez votre idée puis cliquez sur Lancer. L\'IA fera tout le reste.')+
     '<h3>1 · Genre</h3>'+
     G.map(([c,l])=>'<div class="lab">'+c+'</div><div class="gc">'+l.map(x=>{const p=x.split('|');return '<button class="'+(sel==p[0]?'sel':'')+'" data-a="genre" data-n="'+esc(p[0])+'" data-s="'+esc(p[1])+'">'+esc(p[0])+'</button>'}).join('')+'</div>').join('')+
-    '<h3>2 · Format de l\'image</h3><div class="gc">'+[['16:9','Paysage 16:9 (cinéma)'],['9:16','Portrait 9:16 (mobile)'],['1:1','Carré 1:1']].map(r=>'<button class="'+(P.ratio==r[0]?'sel':'')+'" data-a="ratio" data-n="'+r[0]+'">'+r[1]+'</button>').join('')+'</div>'+
+    '<h3>2 · Format de l\'image</h3><div class="gc">'+[['16:9','Paysage 16:9 (cinéma)'],['9:16','Portrait 9:16 (mobile)'],['1:1','Carré 1:1'],['4:3','Paysage 4:3 (classique)']].map(r=>'<button class="'+(P.ratio==r[0]?'sel':'')+'" data-a="ratio" data-n="'+r[0]+'">'+r[1]+'</button>').join('')+'</div>'+
     foot(btn('go','← Précédent','','data-n="0"'),nextBtn('go','Continuer',sel?'data-n="2"':'disabled data-off="1"'))+'</div>';
 };
 
@@ -780,7 +1220,7 @@ V[2].pick=()=>'<div class="hero">'+hd(3,'Choisissez votre <b>synopsis</b>')+guid
 V[2].fin=()=>'<div class="hero">'+hd(3,'Votre <b>synopsis</b> final')+guide('✓ Synopsis prêt. 👉 Relisez-le, modifiez-le si besoin, puis cliquez sur Suivant. Il guidera tout le film.','go')+
   '<label class="f"><span class="lab">Titre du film</span><input type="text" data-f="title" data-id="P" value="'+esc(P.title)+'"></label>'+
   '<label class="f"><span class="lab">Synopsis</span><textarea data-f="final" data-id="P" rows="10">'+esc(P.final)+'</textarea></label>'+
-  foot(btn('synback','← '+(P.syn?'Revoir les propositions':'Modifier mon texte')),nextBtn('go','Continuer vers les personnages','data-n="3"'))+'</div>';
+  foot(btn('synback','← '+(P.syn?'Revoir les propositions':'Modifier mon texte')), '<span class="rw">'+btn('copysyn','📋 Copier le synopsis','sm')+nextBtn('go','Continuer vers les personnages','data-n="3"')+'</span>')+'</div>';
 
 V[3].cfg=()=>'<div class="hero">'+hd(4,'Les <b>personnages</b>')+guide('👉 À vous : choisissez comment créer vos personnages. Les portraits sont ensuite générés automatiquement.')+
   '<div class="choice"><div class="ch" data-a="chai"><b>✦ L\'IA crée les personnages</b>Elle lit votre synopsis, imagine les personnages et crée leurs portraits. (Recommandé)</div></div>'+
@@ -798,25 +1238,28 @@ V[4].cfg=()=>'<div class="hero">'+hd(5,'Les <b>scènes</b>')+guide('👉 À vous
   '<div class="gc">'+[[3,'Court · 3 scènes'],[5,'Moyen · 5 scènes'],[8,'Long · 8 scènes'],[12,'Très long · 12 scènes']].map(n=>'<button class="'+((P.nsc||5)==n[0]?'sel':'')+'" data-a="nsc" data-n="'+n[0]+'">'+n[1]+'</button>').join('')+'</div>'+
   foot(btn('go','← Précédent','','data-n="3"'),nextBtn('scgo','✦ Écrire le scénario'))+'</div>';
 
-V[4].rev=()=>'<div class="hero">'+hd(5,'Vos <b>scènes</b>')+guide('✓ Scénario et images prêts. 👉 Relisez les dialogues, modifiez ce que vous voulez, puis cliquez sur Continuer.','go')+
+V[4].rev=()=>'<div class="hero">'+hd(5,'Vos <b>scènes</b>')+guide('✓ Scénario et images prêts. 👉 Relisez les dialogues, modifiez ce que vous voulez. <b>Vos livrables sont déjà exportables ci-dessous</b>, même sans vidéos.','go')+
   '<div class="grid">'+P.scenes.map(sceneCard).join('')+'</div>'+
-  '<div class="rw" style="margin-top:12px">'+btn('addscene','+ Ajouter une scène')+btn('redo','↺ Refaire avec l\'IA','','data-n="4"')+'</div>'+
+  '<div class="rw" style="margin-top:12px">'+btn('addscene','+ Ajouter une scène')+btn('dupscene','⧉ Dupliquer la dernière','sm')+btn('redo','↺ Refaire avec l\'IA','','data-n="4"')+'</div>'+
+  exportBar(4)+
   foot(btn('go','← Précédent','','data-n="3"'),nextBtn('go','Continuer vers les plans','data-n="5"'))+'</div>';
 
 V[5].cfg=()=>'<div class="hero">'+hd(6,'Les <b>plans</b>')+guide('👉 L\'IA va découper chaque scène en plans, puis créer l\'image de départ de chaque plan.')+
   foot(btn('go','← Précédent','','data-n="4"'),nextBtn('plgo','✦ Découper et créer les images'))+'</div>';
 
-V[5].rev=()=>'<div class="hero">'+hd(6,'Vos <b>plans</b>')+guide('✓ Plans et images prêts. 👉 Chaque image deviendra une vidéo. Modifiez les images ou les répliques si besoin, puis cliquez sur Continuer.','go')+
+V[5].rev=()=>'<div class="hero">'+hd(6,'Vos <b>plans</b>')+guide('✓ Plans et images prêts. 👉 Chaque image deviendra une vidéo. <b>Livrables déjà disponibles</b> : exportez JSON/Markdown/CSV/SRT dès maintenant.','go')+
   P.scenes.map((s,i)=>'<h3>Scène '+(i+1)+' — '+esc(s.title)+'</h3><div class="grid">'+((s.shots||[]).map(shotCard).join('')||'<span class="lab">Pas de plan.</span>')+'</div><div class="rw" style="margin-top:6px">'+btn('addshot','+ Ajouter un plan','sm','data-id="'+s.id+'"')+'</div>').join('')+
   '<div class="rw" style="margin-top:12px">'+btn('redo','↺ Refaire avec l\'IA','','data-n="5"')+'</div>'+
+  exportBar(5)+
   foot(btn('go','← Précédent','','data-n="4"'),nextBtn('go','Continuer vers les vidéos','data-n="6"'))+'</div>';
 
 V[6].cfg=()=>'<div class="hero">'+hd(7,'Les <b>vidéos</b>')+
   '<p class="sub">Chaque image de plan est transformée en vidéo par Agnès. La file d\'attente vidéo est souvent saturée : l\'app envoie les plans un par un, et si c\'est plein elle attend toute seule (3, 6, 12, 24… minutes) avant de réessayer. <b>Gardez cet onglet ouvert.</b> En attendant, regardez le film en « animatic » (images + voix).</p>'+
   '<div class="cd" id="qp" style="margin:12px 0"></div>'+
-  '<div class="rw">'+btn('play','🎬 Voir le film maintenant')+btn('export','Exporter le projet','sm')+'</div>'+
+  '<div class="rw">'+btn('play','🎬 Voir le film maintenant')+btn('playloop','🔁 Lire en boucle','sm')+btn('searchproj','🔎 Rechercher','sm')+'</div>'+exportBar(6)+
   '<div class="kp" id="kp"></div>'+
   '<div class="grid" id="tiles" style="margin-top:12px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))">'+shots().map((x,i)=>tile(x.h,i+1)).join('')+'</div>'+
+  '<h3>Notes du réalisateur</h3><textarea data-f="notes" data-id="P" rows="4" placeholder="Idées, consignes, remarques…">'+esc(P.notes||'')+'</textarea>'+
   foot(btn('go','← Précédent','','data-n="5"'))+'</div>';
 
 function view(){
@@ -833,14 +1276,22 @@ function render(keep){
     return '<button class="st '+(i==page?'on':can?'ok':'')+'" '+(can?'data-a="go" data-n="'+i+'"':'disabled')+'>'+(i+1)+'. '+s+'</button>';
   }).join('');
   $('#main').innerHTML=view();
+  const he=document.getElementById('hdrExport'); if(he) he.style.display=(P.scenes&&P.scenes.length&&page>=4)?'grid':'' ;
   if(TASK){paintFeed();pgb()}
-  else if(page==0)keysChips();
+  else if(page==0){keysChips();recentSessions()}
   else if(page==6){stats();qui()}
   else syncNext();
   if(!keep)scrollTo(0,0);
   save();
 }
 function keysChips(){const e=$('#kl');if(!e)return;e.innerHTML=KEYS.list.map((k,i)=>'<span class="chip '+(k.off?'off':'')+'">#'+(i+1)+' …'+esc(k.k.slice(-4))+'</span>').join('')}
+async function recentSessions(){
+  const e=document.getElementById('recent'); if(!e) return;
+  try{
+    const l=(await dbAll('sessions')).sort((a,b)=>b.upd-a.upd).slice(0,5);
+    e.innerHTML=l.length?'<div class="lab" style="margin-top:10px">Films récents</div>'+l.map(p=>'<div class="cd" style="margin-top:6px"><b>'+esc(p.title||(p.genre&&p.genre.name)||'Sans titre')+'</b><div class="lab">'+new Date(p.upd).toLocaleString('fr-FR')+' · '+ (p.scenes||[]).length+' scènes</div><div class="rw">'+btn('open','Ouvrir','sm','data-id="'+p.id+'"')+'</div></div>').join(''):'';
+  }catch(err){}
+}
 
 /* ═════════════════════════════════════════════════════════════════════
    FILE D'ATTENTE VIDÉO
@@ -871,10 +1322,10 @@ function stats(){
   const a=shots(),k=$('#kp');
   if(!k)return;
   const n=s=>a.filter(x=>x.h.vst==s&&x.h.img).length;
-  k.innerHTML='<div><span class="lab">Plans</span><b>'+a.length+'</b></div><div><span class="lab">Vidéos prêtes</span><b>'+n('ok')+'</b></div><div><span class="lab">En cours</span><b>'+n('run')+'</b></div><div><span class="lab">En attente</span><b>'+n('wait')+'</b></div><div><span class="lab">Échecs</span><b>'+n('er')+'</b></div><div><span class="lab">Non vues</span><b>'+a.filter(x=>x.h.video&&!x.h.seen).length+'</b></div>';
+  k.innerHTML='<div><span class="lab">Plans</span><b>'+a.length+'</b></div><div><span class="lab">Vidéos prêtes</span><b>'+n('ok')+'</b></div><div><span class="lab">En cours</span><b>'+n('run')+'</b></div><div><span class="lab">En attente</span><b>'+n('wait')+'</b></div><div><span class="lab">Échecs</span><b>'+n('er')+'</b></div><div><span class="lab">Non vues</span><b>'+a.filter(x=>x.h.video&&!x.h.seen).length+'</b></div><div><span class="lab">Durée estimée</span><b>'+Math.round(a.length*9)+' s</b></div>';
 }
 const vp=(h,s)=>san(st()+'. '+h.action+'. Camera: '+h.camera+'. Setting: '+s.decor+'. '+(h.line?(h.who||'The character')+' says in French, lips in sync: "'+h.line+'".':'No speech.')+' Realistic ambient sound effects only, no music, no subtitles, no on-screen text. Keep the identity, outfit and visual style of the first frame identical throughout.');
-const dims=()=>P.ratio=='9:16'?[480,854]:P.ratio=='1:1'?[640,640]:[854,480];
+const dims=()=>P.ratio=='9:16'?[480,854]:P.ratio=='1:1'?[640,640]:P.ratio=='4:3'?[640,480]:[854,480];
 function sat(){Q.st='full';Q.next=Date.now()+BACK[Q.step]*60000;log('wr','file vidéo saturée → nouveau test dans '+BACK[Q.step]+' min');toast('File Agnès saturée — retest dans '+BACK[Q.step]+' min');Q.step=Math.min(Q.step+1,BACK.length-1);save();qui()}
 async function launchExternalVideo(h,s,o,fr,D){
   const provider=o.provider,model=o.videoModel||PROVIDERS[provider].video;
@@ -1119,13 +1570,15 @@ function speak(t){
   u.lang='fr-FR';
   speechSynthesis.speak(u);
 }
-async function play(){
+async function play(loop){
+  loop=!!loop;
   const a=shots().filter(x=>x.h.video||x.h.img);
   if(!a.length)return toast('Rien à lire pour l\'instant');
   playing=true;
   $('#pl').classList.add('on');
   const v=$('#pv'),im=$('#pi');
-  for(let i=0;i<a.length;i++){
+  let i=0;
+  while(i<a.length){
     if(!playing)break;
     const h=a[i].h;
     $('#sub').textContent=h.line?(h.who?h.who+' : ':'')+h.line:'';
@@ -1140,6 +1593,8 @@ async function play(){
       speak(h.line);
       await sleep(Math.max(3500,(h.line||'').length*75));
     }
+    i++;
+    if(loop&&i>=a.length)i=0;
   }
   stopPlay();save();
 }
@@ -1172,6 +1627,18 @@ async function onClick(e){
   if(TASK&&OK_DURING.indexOf(a)<0)return toast('Une opération est en cours : patientez ou cliquez sur Arrêter');
   if(a=='go')go(+b.dataset.n);
   else if(a=='con')$('#con').classList.toggle('on');
+  else if(a=='help'){
+    $('#mdc').innerHTML='<h3>Aide rapide</h3>'+
+      '<p class="sub">1. Ajoutez au moins une clé API (page 1).</p>'+
+      '<p class="sub">2. Choisissez un genre et un format (page 2).</p>'+
+      '<p class="sub">3. Écrivez votre idée et laissez l\'IA l\'analyser (page 3).</p>'+
+      '<p class="sub">4. Validez les personnages, scènes, plans (pages 4-6).</p>'+
+      '<p class="sub">5. Lancez la production des vidéos (page 7). Gardez l\'onglet ouvert.</p>'+
+      '<p class="sub">Raccourcis : Espace = lire le film, Ctrl/Cmd+S = sauvegarder, Échap = quitter le lecteur.</p>'+
+      '<div class="rw">'+btn('closemd','Fermer')+'</div>';
+    $('#md').classList.add('on');
+  }
+  else if(a=='theme'){document.body.classList.toggle('light');const isLight=document.body.classList.contains('light');localStorage.setItem('fh_theme',isLight?'light':'dark');const b=e.target.closest('[data-a]');if(b)b.textContent=isLight?'●':'◐';toast(isLight?'Mode clair':'Mode Higgsfield')}
   else if(a=='closemd')$('#md').classList.remove('on');
   else if(a=='savekeys'){
     const provider=$('#provider').value, preset=PROVIDERS[provider];
@@ -1211,14 +1678,38 @@ async function onClick(e){
   else if(a=='nsc'){P.nsc=+b.dataset.n;render(true)}
   else if(a=='scgo'){if(P.scenes.length&&!confirm('Remplacer les scènes existantes ?'))return;runScenes(P.nsc||5)}
   else if(a=='plgo')runShots();
+  else if(a=='copydlg'){
+    const t=P.scenes.map((sc,i)=>'Scène '+(i+1)+' — '+sc.title+'\n'+(sc.dialogue||'')).join('\n\n');
+    if(navigator.clipboard)navigator.clipboard.writeText(t).then(()=>toast('Dialogues copiés')).catch(()=>toast('Copie impossible'));else toast('Presse-papiers non disponible');
+  }
+  else if(a=='dupscene'){
+    if(!P.scenes.length)return toast('Aucune scène à dupliquer');
+    const s=JSON.parse(JSON.stringify(P.scenes[P.scenes.length-1]));
+    s.id=uid();s.title=s.title+' (copie)';s.img=null;s.busy=false;s.shots=[];
+    P.scenes.push(s);render(true);toast('Scène dupliquée');
+  }
   else if(a=='addscene'){P.scenes.push({id:uid(),title:'Nouvelle scène',summary:'',decor:'',mood:'',chars:[],dialogue:'',img:null,busy:false,shots:[]});render(true)}
+  else if(a=='dupshot'){
+    const f=find(id);if(!f||f.t!='h')return;
+    const h=JSON.parse(JSON.stringify(f.o));h.id=uid();h.img=null;h.video=null;h.vst='wait';h.busy=false;h.task=null;h.seen=false;
+    (f.s.shots=f.s.shots||[]).push(h);render(true);toast('Plan dupliqué');
+  }
   else if(a=='addshot'){const f=find(id);if(f){const s=f.o;(s.shots=s.shots||[]).push({id:uid(),size:'medium',camera:'static',action:'',chars:[],who:'',line:'',img:null,busy:false,vst:'wait'});render(true)}}
+  else if(a=='copyprompts'){
+    const t=shots().map((x,i)=>'Plan '+(i+1)+': '+x.h.action).join('\n');
+    if(navigator.clipboard)navigator.clipboard.writeText(t).then(()=>toast('Prompts copiés')).catch(()=>toast('Copie impossible'));else toast('Presse-papiers non disponible');
+  }
   else if(a=='redo')redo(+b.dataset.n);
   else if(a=='gen'){const i=document.querySelector('[data-mod="'+id+'"]');gen(id,{extra:i&&i.value.trim()})}
   else if(a=='mod'){
     const i=document.querySelector('[data-mod="'+id+'"]');
     if(i&&i.value.trim())gen(id,{edit:true,extra:i.value.trim()});
     else{toast('Écrivez d\'abord ce que vous voulez changer');if(i)i.focus()}
+  }
+  else if(a=='dupchar'){
+    const f=find(id);if(!f||f.t!='c')return;
+    const c=JSON.parse(JSON.stringify(f.o));c.id=uid();c.name=c.name+' (copie)';c.img=null;c.busy=false;
+    P.chars.push(c);render(true);toast('Personnage dupliqué');
   }
   else if(a=='del'){
     if(!confirm('Supprimer ?'))return;
@@ -1237,17 +1728,74 @@ async function onClick(e){
   else if(a=='qnow'){Q.on=true;Q.next=0;log('in','test manuel de la file vidéo');save()}
   else if(a=='retry'){const f=find(id);f.o.vst='wait';f.o.err='';Q.on=true;if(Q.st=='paused'||Q.st=='idle')Q.st='run';refresh(id);qui()}
   else if(a=='play')play();
+  else if(a=='playloop')play(true);
+  else if(a=='searchproj'){
+    const q=(prompt('Rechercher dans le projet :')||'').toLowerCase().trim();
+    if(!q)return;
+    const hits=[];
+    P.scenes.forEach((sc,i)=>{if((sc.title+' '+sc.summary+' '+sc.dialogue).toLowerCase().includes(q))hits.push('Scène '+(i+1)+' — '+sc.title)});
+    P.chars.forEach(c=>{if((c.name+' '+c.role+' '+c.desc).toLowerCase().includes(q))hits.push('Personnage — '+c.name)});
+    alert(hits.length?hits.join('\n'):'Aucun résultat');
+  }
   else if(a=='stopplay')stopPlay();
   else if(a=='export'){
     const u=URL.createObjectURL(new Blob([JSON.stringify(P)],{type:'application/json'}));
     const l=document.createElement('a');
     l.href=u;l.download=(P.title||'film')+'.json';l.click();
   }
+  else if(a=='copysyn'){
+    const t=P.final||'';
+    if(navigator.clipboard)navigator.clipboard.writeText(t).then(()=>toast('Synopsis copié dans le presse-papiers')).catch(()=>toast('Copie impossible'));
+    else toast('Presse-papiers non disponible');
+  }
+  else if(a=='exportsrt'){
+    let srt='',idx=1,t=0;
+    shots().forEach(x=>{
+      const dur=9;
+      const start=t,end=t+dur;
+      const fmt=n=>{const h=Math.floor(n/3600),m=Math.floor((n%3600)/60),sec=Math.floor(n%60),ms=Math.round((n-sec)*1000);return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0')+',000'};
+      if(x.h.line){srt+=idx+'\n'+fmt(start)+' --> '+fmt(end)+'\n'+(x.h.who?x.h.who+': ':'')+x.h.line+'\n\n';idx++}
+      t=end;
+    });
+    const u=URL.createObjectURL(new Blob([srt],{type:'text/plain'}));
+    const l=document.createElement('a');l.href=u;l.download=(P.title||'film')+'.srt';l.click();
+  }
+  else if(a=='exportmd'){
+    let md='# '+(P.title||'Film')+'\n\n';
+    md+='Genre : '+(P.genre?P.genre.name:'')+'\n\n';
+    md+='## Synopsis\n\n'+(P.final||'')+'\n\n';
+    md+='## Personnages\n\n';
+    P.chars.forEach(c=>{md+='### '+c.name+' — '+c.role+'\n'+c.desc+'\n\n';});
+    if(P.notes)md+='## Notes\n\n'+P.notes+'\n\n';
+    md+='## Scènes\n\n';
+    P.scenes.forEach((sc,i)=>{md+='### Scène '+(i+1)+' — '+sc.title+'\n'+sc.summary+'\n\nDécor : '+sc.decor+'\n\nAmbiance : '+sc.mood+'\n\n';
+      if(sc.dialogue)md+='Dialogues :\n'+sc.dialogue+'\n\n';
+      (sc.shots||[]).forEach((h,j)=>{md+='- Plan '+(j+1)+' ('+h.size+') : '+h.action+'\n  '+(h.line?(h.who?h.who+' : ':'')+h.line:'')+'\n';});
+      md+='\n';
+    });
+    const u=URL.createObjectURL(new Blob([md],{type:'text/markdown'}));
+    const l=document.createElement('a');
+    l.href=u;l.download=(P.title||'film')+'.md';l.click();
+  }
   else if(a=='sess')sessions();
   else if(a=='new'){setP(newP());$('#md').classList.remove('on');page=KEYS.list.length?1:0;render()}
   else if(a=='open'){
     const p=await dbGet('sessions',id);
     if(p){setP(p);page=KEYS.list.length?Math.max(1,Math.min(p.page||1,6)):0;$('#md').classList.remove('on');render();resume()}
+  }
+  else if(a=='renamesess'){
+    const p=await dbGet('sessions',id);
+    if(p){const t=prompt('Nouveau titre :',p.title||(p.genre&&p.genre.name)||'');if(t!=null){p.title=t;p.upd=Date.now();await dbPut('sessions',p);if(P.id==id)P.title=t;toast('Renommé');sessions()}}
+  }
+  else if(a=='dup'){
+    const p=await dbGet('sessions',id);
+    if(p){const c=JSON.parse(JSON.stringify(p));c.id=uid()+uid();c.title=(c.title||'')+' (copie)';c.created=Date.now();c.upd=Date.now();await dbPut('sessions',c);toast('Session dupliquée');sessions()}
+  }
+  else if(a=='clearallsess'){
+    if(!confirm('Supprimer toutes les sessions ?'))return;
+    const l=await dbAll('sessions');
+    for(const p of l)await dbDel('sessions',p.id);
+    setP(newP());page=KEYS.list.length?1:0;render();sessions();toast('Sessions effacées');
   }
   else if(a=='delsess'){
     if(!confirm('Supprimer cette session ?'))return;
@@ -1307,16 +1855,16 @@ document.addEventListener('play',e=>{
     }
   }
 },true);
-document.addEventListener('keydown',e=>{if(e.key=='Escape'&&playing)stopPlay()});
+document.addEventListener('keydown',e=>{if(e.key=='Escape'&&playing)stopPlay();if(e.key==' '&&page==6&&!TASK&&!playing){e.preventDefault();play()};if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()=='s'){e.preventDefault();save();toast('Sauvegardé')}});
 async function sessions(){
   const l=(await dbAll('sessions')).sort((a,b)=>b.upd-a.upd);
-  $('#mdc').innerHTML='<h3>Mes films</h3><p class="sub">Tout est enregistré automatiquement dans ce navigateur : textes, images, vidéos générées.</p><div class="rw">'+btn('new','+ Nouveau film','big')+btn('closemd','Fermer')+'</div>'+
+  $('#mdc').innerHTML='<h3>Mes films</h3><p class="sub">Tout est enregistré automatiquement dans ce navigateur : textes, images, vidéos générées.</p><div class="rw">'+btn('new','+ Nouveau film','big')+btn('clearallsess','Tout effacer','sm')+btn('closemd','Fermer')+'</div>'+
     l.map(p=>{
       const sh=p.scenes.flatMap(s=>s.shots||[]);
       const nv=sh.filter(h=>h.video&&!h.seen).length;
       return '<div class="cd" style="margin-top:8px"><b>'+esc(p.title||(p.genre&&p.genre.name)||'Sans titre')+'</b>'+(p.id==P.id?' · <span class="lab">en cours</span>':'')+
         '<div class="lab">'+new Date(p.upd).toLocaleString('fr-FR')+' · '+p.scenes.length+' scènes · '+sh.filter(h=>h.img).length+' images · '+sh.filter(h=>h.video).length+' vidéos'+(nv?' · '+nv+' non vues':'')+'</div>'+
-        '<div class="rw">'+btn('open','Ouvrir','sm','data-id="'+p.id+'"')+btn('delsess','Supprimer','sm','data-id="'+p.id+'"')+'</div></div>';
+        '<div class="rw">'+btn('open','Ouvrir','sm','data-id="'+p.id+'"')+btn('dup','Dupliquer','sm','data-id="'+p.id+'"')+btn('renamesess','Renommer','sm','data-id="'+p.id+'"')+btn('delsess','Supprimer','sm','data-id="'+p.id+'"')+'</div></div>';
     }).join('');
   $('#md').classList.add('on');
 }
@@ -1357,10 +1905,12 @@ function resume(){
     const last=await dbGet('config','last'),p=last&&await dbGet('sessions',last.v);
     setP(p||newP());
   }catch(e){setP(newP())}
+  if(localStorage.getItem('fh_theme')==='light'){document.body.classList.add('light')} else {document.body.classList.remove('light')}
   page=KEYS.list.length?Math.max(1,Math.min(P.page||1,6)):0;
   render();
   resume();
   log('in','FREE HIGGS prêt · '+KEYS.list.length+' clé(s)');
   if(KEYS.list.length)onEnter();
 })();
-</script></body></html>
+</script>
+<div class="site-foot">FREE HIGGS v9 — HIGGSFIELD EDITION · Noir obsidienne · Lime électrique · MIT · <a href="https://github.com/kisuke667/free-higgs">GitHub</a> · Inspiré par Higgsfield Soul Cinema</div></body></html>
