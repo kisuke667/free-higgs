@@ -5,7 +5,7 @@
 > **Fork enrichi** de [CINÉ-GENESIS d'Agnes AI Film Maker](https://github.com/laurentvoanhofficiel-jpg/Agnes-ai-film-maker-Universal-one-page-HTML-4-all) par Laurent Voan Ho — réinventé en **HIGGSFIELD EDITION**.
 
 [![Live](https://img.shields.io/badge/Live-higgsfree-E8FF42?style=for-the-badge)](https://free-higgs-psi.vercel.app)
-[![Version](https://img.shields.io/badge/version-v9_HIGGSFIELD-111113?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v10_BLUFFANT-111113?style=flat-square)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/License-MIT-8E8E93?style=flat-square)](LICENSE)
 [![Stack](https://img.shields.io/badge/stack-HTML_·_CSS_·_Vanilla_JS-0A0A0C?style=flat-square)](#stack-technique)
 
@@ -51,7 +51,7 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 
 ---
 
-## ⚡ Fonctionnalités v9
+## ⚡ Fonctionnalités v10
 
 ### Studio
 - **Pipeline verrouillé** : tu valides chaque étape, l'IA n'avance pas sans toi
@@ -67,7 +67,7 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 ### Higgsfield-grade UI (v9)
 - **Thème obsidienne** `#060608` / `#111113`, hairlines `7%`, grain cinéma, halos lime/violet
 - **Accent lime** `#E8FF42` (glow), typos `Space Grotesk` (display) + `Inter` + `JetBrains Mono`
-- **Header studio** : marque `FH`, badge `v9` pulsant, steps en pilules `999px`, verre dépoli `blur(16px)`
+- **Header studio** : marque `HF`, badge `v10` pulsant, steps en pilules `999px`, verre dépoli `blur(16px)`
 - **Héros éditorial** : kicker trait lime, titres `clamp(28px,6vw,42px)`, callouts barre latérale
 - **Cartes premium** : `18px` radius, `hover lift + scale 1.02`, ombres studio
 - **Light mode** conservé (`.light` → `#F6F5EF`)
@@ -107,7 +107,8 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 | v6 | `versions/v6.html` | Itération 6 — restructure repo |
 | v7 | `versions/v7.html` | Enrich studio — dark mode, shortcuts, export MD, genres |
 | v8 | `versions/v8.html` | Refonte indigo/violet + exports SRT |
-| **v9** | **`index.html`** | **HIGGSFIELD EDITION — Noir obsidienne · Lime · iPhone · livrables dès étape 4 (actuelle)** |
+| v9 | `versions/v9.html` | HIGGSFREE rebrand — HIGGSFIELD EDITION v9 archivée |
+| **v10** | **`index.html`** | **BLUFFANT — boot cinématique · curseur lime · marquee · spotlight · palette ⌘K (actuelle)** |
 
 Détails : voir [CHANGELOG.md](CHANGELOG.md).
 

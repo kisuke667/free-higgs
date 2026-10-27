@@ -6,11 +6,11 @@
 <meta property="og:description" content="Génération de films, images et vidéos par IA.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#060608">
-<title>HIGGSFREE v9 — HIGGSFIELD EDITION</title>
+<title>HIGGSFREE v10 — HIGGSFIELD EDITION</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ─══════════════════════════════════════════
-   HIGGSFREE — HIGGSFIELD EDITION v9
+   HIGGSFREE — HIGGSFIELD EDITION v10
    Noir obsidienne · Lime électrique · Studio brut
    ─══════════════════════════════════════════ */
 :root{
@@ -469,20 +469,60 @@ body.light .im{background:#EDE9E2}
 
 .cd:hover .im img{transform:scale(1.02);transition:transform .35s cubic-bezier(.16,1,.3,1)}
 .im img{transition:transform .35s}
+/* ── V10 BLUFFANT · boot / marquee / cursor / spotlight / reveal / palette ── */
+:root{--ease:cubic-bezier(.16,1,.3,1)}
+#boot{position:fixed;inset:0;z-index:200;background:#060608;display:flex;flex-direction:column;gap:18px;align-items:center;justify-content:center;transition:opacity .5s var(--ease),visibility .5s}
+#boot.done{opacity:0;visibility:hidden}
+#boot .b-logo{font:700 30px var(--display);letter-spacing:-.02em}
+#boot .b-logo span{color:var(--accent)}
+#boot .b-bar{width:200px;height:2px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden}
+#boot .b-bar i{display:block;height:100%;width:40%;background:var(--accent);border-radius:99px;animation:boot 1s infinite var(--ease)}
+@keyframes boot{0%{transform:translateX(-100%)}100%{transform:translateX(350%)}}
+#boot .b-sub{font:500 10px var(--mono);letter-spacing:.22em;color:var(--muted);text-transform:uppercase}
+.marquee{overflow:hidden;white-space:nowrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0;font:600 11px var(--mono);letter-spacing:.2em;color:var(--dim);text-transform:uppercase;background:rgba(255,255,255,.012)}
+.marquee span{display:inline-block;padding-left:100%;animation:mq 24s linear infinite;will-change:transform}
+.marquee b{color:var(--accent)}
+@keyframes mq{to{transform:translateX(-100%)}}
+@media (prefers-reduced-motion:reduce){.marquee span{animation:none}#boot .b-bar i{animation:none}main>*{animation:none}}
+#cur,#curR{position:fixed;top:0;left:0;pointer-events:none;z-index:150;border-radius:50%}
+#cur{width:6px;height:6px;background:var(--accent)}
+#curR{width:28px;height:28px;border:1px solid rgba(232,255,66,.5);transition:width .25s var(--ease),height .25s var(--ease)}
+@media (hover:none),(pointer:coarse){#cur,#curR{display:none}}
+main>*{animation:rise .5s var(--ease) both}
+main>*:nth-child(2){animation-delay:.06s}main>*:nth-child(3){animation-delay:.12s}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.cd{position:relative}
+.cd::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(232,255,66,.09),transparent 60%)}
+.cd:hover::after{opacity:1}
+.hero{position:relative}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,20%),rgba(232,255,66,.07),transparent 60%)}
+.hero:hover::after{opacity:1}
+.st.on{box-shadow:var(--accent-glow)}
+#toast div{animation:tin .35s var(--ease);border-left:3px solid var(--accent)}
+@keyframes tin{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
+#pal{position:fixed;inset:0;z-index:120;display:none;align-items:flex-start;justify-content:center;padding:12vh 16px 16px;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#pal.on{display:flex}
+#pal .p-box{background:var(--panel);border:1px solid var(--line-strong);border-radius:16px;width:100%;max-width:520px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.6)}
+#pal input{width:100%;background:transparent;border:0;outline:0;color:var(--ink);font:500 16px var(--sans);padding:16px 18px;border-bottom:1px solid var(--line)}
+#pal .p-list{max-height:300px;overflow:auto;padding:8px}
+#pal .p-it{display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:transparent;border:0;color:var(--ink-2);font:600 13px var(--sans);padding:10px 12px;border-radius:10px;cursor:pointer}
+#pal .p-it small{font:500 11px var(--mono);color:var(--muted)}
+#pal .p-it.sel,#pal .p-it:hover{background:rgba(232,255,66,.1);color:var(--ink)}
 </style></head><body>
 <header>
   <div class="logo">
-    <div class="logo-mark">FH</div>
-    <div class="logo-type"><b>FREE <span>HIGGS</span></b><i>HIGGSFIELD · STUDIO IA</i></div>
-    <span class="ver">v9</span>
+    <div class="logo-mark">HF</div>
+    <div class="logo-type"><b>HIGGS<span>FREE</span></b><i>HIGGSFIELD · STUDIO IA</i></div>
+    <span class="ver">v10</span>
   </div>
   <nav id="steps"></nav>
   <div class="hb"><span class="chip" id="qchip"></span><button class="sm" data-a="export" title="Exporter JSON" style="display:none" id="hdrExport">⬇</button><button class="sm" data-a="help" title="Aide">?</button><button class="sm" data-a="theme" title="Thème">◐</button><button class="sm" data-a="sess">Mes films</button><button class="sm" data-a="con">Journal</button></div>
 </header>
+<div class="marquee" aria-hidden="true"><span>HIGGSFREE <b>✦</b> SOUL CINEMA <b>✦</b> STUDIO IA <b>✦</b> 7 ÉTAPES <b>✦</b> KLING 4.0 <b>✦</b> SEEDANCE <b>✦</b> VEO <b>✦</b> HIGGSFREE <b>✦</b> SOUL CINEMA <b>✦</b> STUDIO IA <b>✦</b> 7 ÉTAPES <b>✦</b> KLING 4.0 <b>✦</b> SEEDANCE <b>✦</b> VEO <b>✦</b>&nbsp;</span></div>
 <main id="main"></main>
 <div id="con"><div style="display:flex;justify-content:space-between;padding:6px 12px;border-bottom:1px solid #26405c;font:12px var(--m)"><span>JOURNAL TECHNIQUE</span><button class="sm" data-a="con" style="color:#bfe3ff;border-color:#4a6a8a">✕</button></div><div id="lb"></div></div>
 <div id="md"><div id="mdc"></div></div><div id="toast"></div>
-<div id="pl"><video id="pv" playsinline style="display:none"></video><img id="pi" alt="" style="display:none"><div id="sub"></div><button data-a="stopplay">✕ Quitter</button></div>
+<div id="boot"><div class="b-logo">HIGGS<span>FREE</span></div><div class="b-bar"><i></i></div><div class="b-sub">Studio IA · v10</div></div><div id="cur"></div><div id="curR"></div><div id="pal"><div class="p-box"><input id="palIn" placeholder="Aller à… (Clés, Scènes, Vidéos)" autocomplete="off"><div class="p-list" id="palList"></div></div></div><div id="pl"><video id="pv" playsinline style="display:none"></video><img id="pi" alt="" style="display:none"><div id="sub"></div><button data-a="stopplay">✕ Quitter</button></div>
 
 <script>
 /* ═════════════════════════════════════════════════════════════════════
@@ -1896,6 +1936,53 @@ function resume(){
   });
   qui();
 }
+/* ═════════════════════════════════════════════════════════════════════
+   V10 BLUFFANT — boot / curseur / spotlight / palette ⌘K
+   ═════════════════════════════════════════════════════════════════════ */
+(function(){
+  var b=document.getElementById("boot");
+  function hideBoot(){if(b&&!b.classList.contains("done")){b.classList.add("done");setTimeout(function(){if(b&&b.parentNode)b.parentNode.removeChild(b)},650)}}
+  window.addEventListener("load",function(){setTimeout(hideBoot,900)});
+  setTimeout(hideBoot,2600);
+  var c=document.getElementById("cur"),r=document.getElementById("curR");
+  var mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+  if(window.matchMedia&&matchMedia("(hover:hover) and (pointer:fine)").matches&&c&&r){
+    document.addEventListener("mousemove",function(e){mx=e.clientX;my=e.clientY;c.style.transform="translate("+mx+"px,"+my+"px) translate(-50%,-50%)"},{passive:true});
+    (function loop(){rx+=(mx-rx)*.16;ry+=(my-ry)*.16;r.style.transform="translate("+rx+"px,"+ry+"px) translate(-50%,-50%)";requestAnimationFrame(loop)})();
+  }
+  document.addEventListener("mousemove",function(e){
+    var t=(e.target&&e.target.closest)?e.target.closest(".cd,.hero,.export-dock"):null;
+    if(t){var o=t.getBoundingClientRect();t.style.setProperty("--mx",(e.clientX-o.left)+"px");t.style.setProperty("--my",(e.clientY-o.top)+"px")}
+  },{passive:true});
+  var pal=document.getElementById("pal"),inp=document.getElementById("palIn"),lst=document.getElementById("palList"),sel=0;
+  function items(){return STEPS.map(function(s,i){return {t:(i+1)+". "+s,i:i}})}
+  function drawPal(q){
+    q=(q||"").toLowerCase();sel=0;
+    var f=items().filter(function(o){return o.t.toLowerCase().indexOf(q)>-1});
+    window._palF=f;
+    lst.innerHTML=f.map(function(o,j){return '<button class="p-it'+(j===0?' sel':'')+'" data-i="'+o.i+'"><small>ETAPE '+(o.i+1)+'</small> '+o.t.split(". ")[1]+'</button>'}).join("")||'<div style="padding:16px;color:var(--muted);font:12px var(--mono)">Aucune etape</div>';
+  }
+  function markPal(){
+    var f=lst.querySelectorAll(".p-it");
+    for(var j=0;j<f.length;j++){if(j===sel)f[j].classList.add("sel");else f[j].classList.remove("sel")}
+    if(f[sel]&&f[sel].scrollIntoView)f[sel].scrollIntoView({block:"nearest"});
+  }
+  function openPal(){drawPal("");pal.classList.add("on");inp.value="";setTimeout(function(){inp.focus()},30)}
+  function closePal(){pal.classList.remove("on")}
+  document.addEventListener("keydown",function(e){
+    if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"){e.preventDefault();if(pal.classList.contains("on"))closePal();else openPal()}
+    if(e.key==="Escape")closePal();
+  });
+  inp.addEventListener("input",function(){drawPal(inp.value)});
+  inp.addEventListener("keydown",function(e){
+    var n=(window._palF||[]).length;
+    if(e.key==="ArrowDown"){e.preventDefault();sel=Math.min(sel+1,n-1);markPal()}
+    else if(e.key==="ArrowUp"){e.preventDefault();sel=Math.max(sel-1,0);markPal()}
+    else if(e.key==="Enter"){e.preventDefault();var f=window._palF||[];if(f[sel]){closePal();go(f[sel].i)}}
+  });
+  lst.addEventListener("click",function(e){var t=e.target.closest?e.target.closest(".p-it"):null;if(t){closePal();go(parseInt(t.getAttribute("data-i"),10))}});
+  pal.addEventListener("click",function(e){if(e.target===pal)closePal()});
+})();
 (async()=>{
   try{db=await Promise.race([openDB(),new Promise((_,rj)=>setTimeout(()=>rj(new Error('délai dépassé')),3000))])}
   catch(e){db=null;fall(e)}
@@ -1913,4 +2000,4 @@ function resume(){
   if(KEYS.list.length)onEnter();
 })();
 </script>
-<div class="site-foot">HIGGSFREE v9 — HIGGSFIELD EDITION · Noir obsidienne · Lime électrique · MIT · <a href="https://github.com/kisuke667/higgsfree">GitHub</a> · Inspiré par <a href="https://github.com/laurentvoanhofficiel-jpg/Agnes-ai-film-maker-Universal-one-page-HTML-4-all">CINÉ-GENESIS</a> de Laurent Voan Ho · Hommage Higgsfield Soul Cinema</div></body></html>
+<div class="site-foot">HIGGSFREE v10 — HIGGSFIELD EDITION · Noir obsidienne · Lime électrique · MIT · <a href="https://github.com/kisuke667/higgsfree">GitHub</a> · Inspiré par <a href="https://github.com/laurentvoanhofficiel-jpg/Agnes-ai-film-maker-Universal-one-page-HTML-4-all">CINÉ-GENESIS</a> de Laurent Voan Ho · Hommage Higgsfield Soul Cinema</div></body></html>

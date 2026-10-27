@@ -1,5 +1,16 @@
 # Changelog
 
+## v10 — BLUFFANT (2026-10-27)
+- Écran de démarrage cinématique : logo HIGGSFREE + barre lime, sortie en fondu
+- Bandeau défilant Soul Cinema sous le header (marquee lime, respect `prefers-reduced-motion`)
+- Curseur personnalisé lime (point + anneau magnétique, desktop `hover:fine` uniquement)
+- Cartes avec spotlight suivant la souris (`--mx/--my`, radial lime 9%)
+- Apparition en cascade du contenu à chaque étape (`rise`, délais 60/120ms)
+- Palette de navigation `⌘K/Ctrl+K` : saut direct aux 7 étapes, flèches + Entrée
+- Toasts avec entrée animée et liseré lime, steps actifs avec glow
+- Logo corrigé `HF` + `HIGGSFREE`, badge `v10` (rebrand v9 terminé)
+- Archive `versions/v9.html` (état v9 HIGGSFREE pré-bluffant)
+
 ## v9 — HIGGSFIELD EDITION (2026-10-26)
 - Studio noir obsidienne digne de Higgsfield : fond #060608, surfaces #111113, hairlines 7%, grain cinématographique
 - Lime électrique #E8FF42 en accent principal (glow), typographies Space Grotesk + Inter + JetBrains Mono
