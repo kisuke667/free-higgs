@@ -2,15 +2,15 @@
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=5">
 <meta name="description" content="Studio créatif IA — génération de films, images et vidéos par intelligence artificielle.">
 <meta name="author" content="kisuke667">
-<meta property="og:title" content="FREE HIGGS — Studio Créatif IA">
+<meta property="og:title" content="HIGGSFREE — Studio Créatif IA">
 <meta property="og:description" content="Génération de films, images et vidéos par IA.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#060608">
-<title>FREE HIGGS v9 — HIGGSFIELD EDITION</title>
+<title>HIGGSFREE v9 — HIGGSFIELD EDITION</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ─══════════════════════════════════════════
-   FREE HIGGS — HIGGSFIELD EDITION v9
+   HIGGSFREE — HIGGSFIELD EDITION v9
    Noir obsidienne · Lime électrique · Studio brut
    ─══════════════════════════════════════════ */
 :root{
@@ -1183,8 +1183,8 @@ const V={0:{},1:{},2:{},3:{},4:{},5:{},6:{}};
 V[0].cfg=()=>{
  const first=KEYS.list[0]||mkKey('');
  const provider=first.provider||'agnes';
- return '<div class="hero" style="padding:0;overflow:hidden;border-color:rgba(232,255,66,0.18)"><div style="padding:28px;background:radial-gradient(600px 300px at 20% 0%, rgba(232,255,66,0.12), transparent 60%), linear-gradient(180deg, rgba(255,255,255,0.02), transparent)"><div class="hero-kicker">HIGGSFIELD EDITION — STUDIO CINÉMA IA</div><h2 style="margin:8px 0 8px;font-size:clamp(28px, 6vw, 42px)">FREE HIGGS <b>STUDIO</b></h2><p class="sub" style="max-width:620px">Le studio créatif Higgsfield-grade. Génère tes films, tes images, tes vidéos — en une seule coulée. Sans compromis. Comme Soul Cinema, mais à toi.</p><div style="display:flex;gap:8px;margin-top:14px"><span class="chip">Higgsfield Soul</span><span class="chip">Kling 4.0</span><span class="chip">Seedance</span><span class="chip">Veo · Runware · KIE</span></div></div></div><div class="hero">'+hd(1,'Connectez vos <b>fournisseurs IA</b>')+
- guide('FREE HIGGS accepte plusieurs clés et plusieurs fournisseurs. Ajoutez une ou plusieurs clés par fournisseur. Les API doivent être compatibles avec le format OpenAI pour le texte et/ou les images. Pour la vidéo, choisissez un fournisseur vidéo et un modèle compatibles. Les clés sont stockées dans ce navigateur.')+
+ return '<div class="hero" style="padding:0;overflow:hidden;border-color:rgba(232,255,66,0.18)"><div style="padding:28px;background:radial-gradient(600px 300px at 20% 0%, rgba(232,255,66,0.12), transparent 60%), linear-gradient(180deg, rgba(255,255,255,0.02), transparent)"><div class="hero-kicker">HIGGSFIELD EDITION — STUDIO CINÉMA IA</div><h2 style="margin:8px 0 8px;font-size:clamp(28px, 6vw, 42px)">HIGGSFREE <b>STUDIO</b></h2><p class="sub" style="max-width:620px">Le studio créatif Higgsfield-grade. Génère tes films, tes images, tes vidéos — en une seule coulée. Sans compromis. Comme Soul Cinema, mais à toi.</p><div style="display:flex;gap:8px;margin-top:14px"><span class="chip">Higgsfield Soul</span><span class="chip">Kling 4.0</span><span class="chip">Seedance</span><span class="chip">Veo · Runware · KIE</span></div></div></div><div class="hero">'+hd(1,'Connectez vos <b>fournisseurs IA</b>')+
+ guide('HIGGSFREE accepte plusieurs clés et plusieurs fournisseurs. Ajoutez une ou plusieurs clés par fournisseur. Les API doivent être compatibles avec le format OpenAI pour le texte et/ou les images. Pour la vidéo, choisissez un fournisseur vidéo et un modèle compatibles. Les clés sont stockées dans ce navigateur.')+
  '<h3>Fournisseur à ajouter</h3>'+
  '<label class="f"><span class="lab">Fournisseur</span><select id="provider">'+Object.entries(PROVIDERS).map(([id,x])=>'<option value="'+id+'" '+(provider===id?'selected':'')+'>'+esc(x.label)+'</option>').join('')+'</select></label>'+
  '<label class="f"><span class="lab">URL de base de l’API</span><input type="text" id="base" placeholder="https://api.example.com/v1" value="'+esc(first.base||PROVIDERS[provider].base)+'"></label>'+
@@ -1373,7 +1373,7 @@ async function launchExternalVideo(h,s,o,fr,D){
   if(provider==='magichour'){
     const base=(o.base||'https://api.magichour.ai').replace(/\/+$/,'');
     const m=model||'default';
-    const body={name:'FREE HIGGS '+new Date().toISOString().slice(0,19),end_seconds:/^veo/.test(m)?6:5,aspect_ratio:P.ratio,style:{prompt}};
+    const body={name:'HIGGSFREE '+new Date().toISOString().slice(0,19),end_seconds:/^veo/.test(m)?6:5,aspect_ratio:P.ratio,style:{prompt}};
     if(m!=='default')body.model=m;
     if(!/^(gemini|kling-2|wan-2)/.test(m))body.audio=true;
     const d=await checked(await fetch(base+'/v1/text-to-video',{method:'POST',headers,body:JSON.stringify(body)}));
@@ -1909,8 +1909,8 @@ function resume(){
   page=KEYS.list.length?Math.max(1,Math.min(P.page||1,6)):0;
   render();
   resume();
-  log('in','FREE HIGGS prêt · '+KEYS.list.length+' clé(s)');
+  log('in','HIGGSFREE prêt · '+KEYS.list.length+' clé(s)');
   if(KEYS.list.length)onEnter();
 })();
 </script>
-<div class="site-foot">FREE HIGGS v9 — HIGGSFIELD EDITION · Noir obsidienne · Lime électrique · MIT · <a href="https://github.com/kisuke667/free-higgs">GitHub</a> · Inspiré par <a href="https://github.com/laurentvoanhofficiel-jpg/Agnes-ai-film-maker-Universal-one-page-HTML-4-all">CINÉ-GENESIS</a> de Laurent Voan Ho · Hommage Higgsfield Soul Cinema</div></body></html>
+<div class="site-foot">HIGGSFREE v9 — HIGGSFIELD EDITION · Noir obsidienne · Lime électrique · MIT · <a href="https://github.com/kisuke667/higgsfree">GitHub</a> · Inspiré par <a href="https://github.com/laurentvoanhofficiel-jpg/Agnes-ai-film-maker-Universal-one-page-HTML-4-all">CINÉ-GENESIS</a> de Laurent Voan Ho · Hommage Higgsfield Soul Cinema</div></body></html>
