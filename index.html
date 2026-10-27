@@ -6,11 +6,11 @@
 <meta property="og:description" content="Génération de films, images et vidéos par IA.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#060608">
-<title>HIGGSFREE v10 — HIGGSFIELD EDITION</title>
+<title>HIGGSFREE v11 — CINEMA STUDIO</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ─══════════════════════════════════════════
-   HIGGSFREE — HIGGSFIELD EDITION v10
+   HIGGSFREE — CINEMA STUDIO v11
    Noir obsidienne · Lime électrique · Studio brut
    ─══════════════════════════════════════════ */
 :root{
@@ -508,21 +508,71 @@ main>*:nth-child(2){animation-delay:.06s}main>*:nth-child(3){animation-delay:.12
 #pal .p-it{display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:transparent;border:0;color:var(--ink-2);font:600 13px var(--sans);padding:10px 12px;border-radius:10px;cursor:pointer}
 #pal .p-it small{font:500 11px var(--mono);color:var(--muted)}
 #pal .p-it.sel,#pal .p-it:hover{background:rgba(232,255,66,.1);color:var(--ink)}
+/* ── V11 CINÉMA : un vrai hero de studio, pas des effets accessoires ── */
+.marquee,#boot,#cur,#curR{display:none!important}
+.cd::after,.hero::after{display:none!important}
+#main{max-width:1400px;padding-top:28px}
+.cinema-home{display:grid;grid-template-columns:1fr .92fr;min-height:540px;position:relative;isolation:isolate;overflow:hidden;margin:0 0 14px;border:1px solid rgba(255,255,255,.13);border-radius:22px;background:linear-gradient(118deg,#0b0c0d 0%,#101112 48%,#08090b 100%);box-shadow:0 24px 90px rgba(0,0,0,.34)}
+.cinema-home:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 82% 45%,rgba(255,77,18,.10),transparent 42%),radial-gradient(ellipse at 15% 0%,rgba(232,255,66,.07),transparent 45%)}
+.cinema-copy{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:clamp(28px,5.2vw,76px);position:relative;z-index:2}
+.cinema-kicker{display:flex;align-items:center;gap:10px;color:#b9b9b4;font:600 10px var(--mono);letter-spacing:.18em;text-transform:uppercase}
+.cinema-live{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px rgba(232,255,66,.85)}
+.cinema-rule{width:42px;height:1px;background:rgba(255,255,255,.24)}
+.cinema-edition{margin-top:46px;color:#878780;font:500 10px var(--mono);letter-spacing:.18em;text-transform:uppercase}
+.cinema-title{margin:13px 0 20px;color:#f3f0e8;font:700 clamp(54px,7.3vw,106px)/.84 var(--display);letter-spacing:-.085em;text-transform:uppercase}
+.cinema-title span{display:block;white-space:nowrap}
+.cinema-title em{display:block;color:var(--accent);font-style:normal}
+.cinema-desc{max-width:390px;color:#a6a6a0;font:400 clamp(14px,1.3vw,17px)/1.6 var(--sans)}
+.cinema-cta{display:inline-flex;align-items:center;justify-content:space-between;gap:36px;min-height:50px;margin-top:28px;padding:0 18px 0 20px;background:var(--accent);color:#090a06;border:1px solid var(--accent);border-radius:4px;text-decoration:none;font:700 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s}
+.cinema-cta:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(232,255,66,.2)}
+.cinema-cta span{font-size:18px;line-height:1}
+.cinema-signoff{display:flex;align-items:center;gap:12px;margin-top:28px;color:#777771;font:500 9px var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.cinema-signoff:before{content:"";width:24px;height:1px;background:var(--accent);opacity:.8}
+.cinema-stage{display:flex;align-items:center;justify-content:center;min-width:0;padding:28px 36px 28px 0;position:relative}
+.cinema-stage:before{content:"";position:absolute;top:10%;bottom:10%;left:0;width:1px;background:linear-gradient(transparent,rgba(255,255,255,.12),transparent)}
+.poster-shell{width:min(100%,490px);aspect-ratio:1.03;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.16);background:#090a0c;box-shadow:0 28px 80px rgba(0,0,0,.5);transform:rotate(1.2deg);transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s}
+.poster-shell:hover{transform:rotate(0) translateY(-4px);box-shadow:0 38px 100px rgba(0,0,0,.65)}
+.poster-shell svg{display:block;width:100%;height:100%}
+.poster-top,.poster-bottom{position:absolute;left:18px;right:18px;display:flex;justify-content:space-between;gap:8px;color:rgba(255,255,255,.66);font:500 8px var(--mono);letter-spacing:.17em;text-transform:uppercase}
+.poster-top{top:16px}.poster-bottom{bottom:15px;align-items:end}
+.poster-bottom strong{display:block;color:#f5f0e6;font:700 17px/.95 var(--display);letter-spacing:-.035em}
+.poster-bottom small{display:block;margin-top:5px;color:var(--accent);font:500 7px var(--mono);letter-spacing:.16em}
+.poster-stamp{align-self:start;padding:5px 7px;border:1px solid rgba(232,255,66,.55);color:var(--accent);font:600 7px var(--mono);letter-spacing:.14em}
+.cinema-pipeline{display:grid;grid-template-columns:190px 1fr;align-items:center;gap:20px;margin:0 0 24px;padding:14px 18px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(90deg,rgba(255,255,255,.025),rgba(255,255,255,.008))}
+.pipeline-label{color:#8a8a83;font:600 9px var(--mono);letter-spacing:.15em;text-transform:uppercase}
+.pipeline-label b{display:block;margin-top:5px;color:var(--ink);font:600 13px var(--display);letter-spacing:.01em;text-transform:none}
+.pipeline-track{display:grid;grid-template-columns:repeat(7,minmax(52px,1fr));position:relative}
+.pipeline-track:before{content:"";position:absolute;top:9px;left:7%;right:7%;height:1px;background:linear-gradient(90deg,var(--accent),rgba(232,255,66,.18))}
+.pipeline-step{position:relative;display:flex;flex-direction:column;align-items:center;gap:7px;color:#888880;font:500 8px var(--mono);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.pipeline-step i{display:grid;place-items:center;width:19px;height:19px;border:1px solid rgba(232,255,66,.4);border-radius:50%;background:#111;color:var(--accent);font:600 8px var(--mono);font-style:normal}
+.pipeline-step:first-child i{background:var(--accent);color:#0a0a08}
+#studio-setup{scroll-margin-top:90px;border-radius:16px}
+#studio-setup>.hero-kicker{color:var(--accent)}
+.chapter-head{display:flex;align-items:flex-start;gap:16px;margin:0 0 12px}
+.chapter-index{flex:none;color:var(--accent);font:500 12px var(--mono);letter-spacing:.08em;padding-top:9px}
+.chapter-index:after{content:"";display:block;width:26px;height:1px;margin-top:8px;background:rgba(232,255,66,.6)}
+.chapter-copy h2{margin-top:3px}
+body.light .cinema-home{background:linear-gradient(118deg,#171715,#26231e 55%,#151412);color:#f7f3eb}
+body.light .cinema-desc{color:#d1cdc3}
+@media(max-width:900px){.cinema-home{grid-template-columns:1fr .88fr;min-height:480px}.cinema-copy{padding:30px}.cinema-title{font-size:clamp(52px,7vw,76px)}.cinema-stage{padding-right:22px}.cinema-pipeline{grid-template-columns:140px 1fr;gap:10px}}
+@media(max-width:680px){#main{padding:18px 12px}.cinema-home{grid-template-columns:1fr;min-height:0;border-radius:16px}.cinema-copy{padding:30px 24px 22px}.cinema-edition{margin-top:30px}.cinema-title{font-size:clamp(50px,13vw,72px);margin-bottom:14px}.cinema-desc{font-size:14px}.cinema-cta{margin-top:21px;min-height:46px}.cinema-signoff{margin-top:18px}.cinema-stage{padding:12px 24px 28px}.cinema-stage:before{display:none}.poster-shell{width:100%;max-width:430px;aspect-ratio:1.14;transform:none}.cinema-pipeline{display:block;padding:13px 12px;margin-bottom:18px}.pipeline-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.pipeline-label b{margin:0}.pipeline-track{overflow-x:auto;grid-template-columns:repeat(7,72px);justify-content:start;padding:2px 0 5px;scroll-snap-type:x proximity}.pipeline-step{scroll-snap-align:start}.pipeline-track:before{left:9px;right:auto;width:calc(7 * 72px - 30px)}.chapter-head{gap:10px}.chapter-index{font-size:10px}}
+@media(max-width:390px){.cinema-copy{padding:26px 18px 20px}.cinema-title{font-size:48px}.cinema-kicker{font-size:8px;letter-spacing:.12em}.poster-top,.poster-bottom{left:12px;right:12px}.poster-bottom strong{font-size:14px}}
+.cinema-workbar{display:grid;grid-template-columns:minmax(160px,.7fr) minmax(170px,1.1fr) minmax(170px,.9fr) 96px;align-items:center;gap:18px;min-height:96px;margin:0 0 18px;padding:14px 18px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:linear-gradient(100deg,rgba(232,255,66,.045),rgba(255,255,255,.018) 42%,rgba(255,77,18,.045));position:relative;overflow:hidden}.cinema-workbar:before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent)}.cw-brand small,.cw-project small,.cw-progress small{display:block;color:#85857f;font:500 8px var(--mono);letter-spacing:.15em;text-transform:uppercase}.cw-brand b{display:block;margin-top:5px;color:var(--ink);font:700 13px var(--display);letter-spacing:.02em}.cw-project strong{display:block;margin-top:5px;color:#f1efe8;font:600 20px var(--display);letter-spacing:-.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cw-progress span{display:block;margin-top:6px;color:#aaa9a1;font:500 9px var(--mono);letter-spacing:.08em;text-transform:uppercase}.cw-bar{height:2px;margin-top:9px;background:rgba(255,255,255,.11)}.cw-bar i{display:block;height:100%;background:var(--accent);box-shadow:0 0 12px rgba(232,255,66,.4)}.cw-art{height:64px;border:1px solid rgba(255,255,255,.15);background:radial-gradient(circle at 65% 39%,#111214 0 11px,#ff7a2d 12px,#e8ff42 13px,#ff4d12 17px,transparent 36px),radial-gradient(ellipse at 65% 45%,rgba(255,77,18,.34),transparent 60%),linear-gradient(155deg,#25251d,#0a0b0d 70%);position:relative;overflow:hidden}.cw-art:after{content:"";position:absolute;left:0;right:0;bottom:0;height:24px;background:linear-gradient(155deg,transparent 15%,#141512 16% 35%,transparent 36%),linear-gradient(180deg,transparent,#08090a)}@media(max-width:680px){.cinema-workbar{grid-template-columns:1fr auto;gap:12px;min-height:82px;padding:12px 14px}.cw-project{grid-column:1}.cw-progress{grid-column:1;grid-row:2}.cw-art{grid-column:2;grid-row:1/3;width:80px;height:58px}.cw-brand{display:none}.cw-project strong{font-size:17px}.cw-progress span{font-size:8px}.cw-bar{margin-top:6px}}
+@media(prefers-reduced-motion:reduce){.poster-shell,.cinema-cta{transition:none}}
 </style></head><body>
 <header>
   <div class="logo">
     <div class="logo-mark">HF</div>
     <div class="logo-type"><b>HIGGS<span>FREE</span></b><i>HIGGSFIELD · STUDIO IA</i></div>
-    <span class="ver">v10</span>
+    <span class="ver">v11</span>
   </div>
   <nav id="steps"></nav>
   <div class="hb"><span class="chip" id="qchip"></span><button class="sm" data-a="export" title="Exporter JSON" style="display:none" id="hdrExport">⬇</button><button class="sm" data-a="help" title="Aide">?</button><button class="sm" data-a="theme" title="Thème">◐</button><button class="sm" data-a="sess">Mes films</button><button class="sm" data-a="con">Journal</button></div>
 </header>
-<div class="marquee" aria-hidden="true"><span>HIGGSFREE <b>✦</b> SOUL CINEMA <b>✦</b> STUDIO IA <b>✦</b> 7 ÉTAPES <b>✦</b> KLING 4.0 <b>✦</b> SEEDANCE <b>✦</b> VEO <b>✦</b> HIGGSFREE <b>✦</b> SOUL CINEMA <b>✦</b> STUDIO IA <b>✦</b> 7 ÉTAPES <b>✦</b> KLING 4.0 <b>✦</b> SEEDANCE <b>✦</b> VEO <b>✦</b>&nbsp;</span></div>
 <main id="main"></main>
 <div id="con"><div style="display:flex;justify-content:space-between;padding:6px 12px;border-bottom:1px solid #26405c;font:12px var(--m)"><span>JOURNAL TECHNIQUE</span><button class="sm" data-a="con" style="color:#bfe3ff;border-color:#4a6a8a">✕</button></div><div id="lb"></div></div>
 <div id="md"><div id="mdc"></div></div><div id="toast"></div>
-<div id="boot"><div class="b-logo">HIGGS<span>FREE</span></div><div class="b-bar"><i></i></div><div class="b-sub">Studio IA · v10</div></div><div id="cur"></div><div id="curR"></div><div id="pal"><div class="p-box"><input id="palIn" placeholder="Aller à… (Clés, Scènes, Vidéos)" autocomplete="off"><div class="p-list" id="palList"></div></div></div><div id="pl"><video id="pv" playsinline style="display:none"></video><img id="pi" alt="" style="display:none"><div id="sub"></div><button data-a="stopplay">✕ Quitter</button></div>
+<div id="pal"><div class="p-box"><input id="palIn" placeholder="Aller à… (Clés, Scènes, Vidéos)" autocomplete="off"><div class="p-list" id="palList"></div></div></div><div id="pl"><video id="pv" playsinline style="display:none"></video><img id="pi" alt="" style="display:none"><div id="sub"></div><button data-a="stopplay">✕ Quitter</button></div>
 
 <script>
 /* ═════════════════════════════════════════════════════════════════════
@@ -980,7 +1030,7 @@ async function imgPass(list,label){
    AFFICHAGE
    ═════════════════════════════════════════════════════════════════════ */
 const guide=(h,c)=>'<div class="guide '+(c||'')+'"><div style="font-size:13px;line-height:1.6">'+h+'</div></div>';
-const hd=(n,t)=>'<div class="hero-kicker">ÉTAPE '+String(n).padStart(2,'0')+' / 07 — STUDIO</div><h2>'+t+'</h2>';
+const hd=(n,t)=>'<div class="chapter-head"><div class="chapter-index">'+String(n).padStart(2,'0')+' / 07</div><div class="chapter-copy"><div class="hero-kicker">HIGGSFREE · FABRICATION DU FILM</div><h2>'+t+'</h2></div></div>';
 const btn=(a,l,c,x)=>'<button class="'+(c||'')+'" data-a="'+a+'" '+(x||'')+'>'+l+'</button>';
 
 const exportBar=(lvl)=>{
@@ -1220,10 +1270,63 @@ function runShots(){
    ═════════════════════════════════════════════════════════════════════ */
 const V={0:{},1:{},2:{},3:{},4:{},5:{},6:{}};
 
+function cinemaHome(){return `<section class="cinema-home" aria-label="Bienvenue dans le studio HIGGSFREE">
+  <div class="cinema-copy">
+    <div class="cinema-kicker"><i class="cinema-live"></i> HIGGSFREE PICTURES <i class="cinema-rule"></i> STUDIO CRÉATIF IA</div>
+    <div class="cinema-edition">VOTRE STUDIO. VOTRE REGARD. AUCUNE LIMITE.</div>
+    <h1 class="cinema-title"><span>UNE IDÉE.</span><em>UN FILM.</em><span>EN GRAND.</span></h1>
+    <p class="cinema-desc">Du premier mot au dernier plan. Écrivez votre histoire, façonnez chaque image, gardez la main sur votre film.</p>
+    <a class="cinema-cta" href="#studio-setup">Entrer dans le studio <span aria-hidden="true">↘</span></a>
+    <div class="cinema-signoff">7 étapes · de l’idée à l’écran <span>⌘K pour naviguer</span></div>
+  </div>
+  <div class="cinema-stage">
+    <div class="poster-shell" role="img" aria-label="Illustration originale du studio : une éclipse incandescente au-dessus d’un paysage cinématographique">
+      <svg viewBox="0 0 600 540" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="skyV11" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#202019"/><stop offset=".46" stop-color="#161514"/><stop offset="1" stop-color="#07090c"/></linearGradient>
+          <radialGradient id="auraV11"><stop stop-color="#ff8d39" stop-opacity=".52"/><stop offset=".42" stop-color="#ff4d12" stop-opacity=".18"/><stop offset="1" stop-color="#ff4d12" stop-opacity="0"/></radialGradient>
+          <linearGradient id="ringV11" x1=".15" y1=".15" x2=".9" y2=".9"><stop stop-color="#e8ff42"/><stop offset=".35" stop-color="#ffb53d"/><stop offset=".72" stop-color="#ff4d12"/><stop offset="1" stop-color="#e8ff42"/></linearGradient>
+          <linearGradient id="terrainV11" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#303028"/><stop offset="1" stop-color="#090b0c"/></linearGradient>
+          <linearGradient id="beamV11" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ff9b48" stop-opacity=".23"/><stop offset="1" stop-color="#e8ff42" stop-opacity="0"/></linearGradient>
+          <filter id="glowV11"><feGaussianBlur stdDeviation="20"/></filter>
+          <filter id="grainV11"><feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" stitchTiles="stitch"/><feColorMatrix values=".7 0 0 0 .1 .7 0 0 0 .1 .7 0 0 0 .1 0 0 0 .12 0"/></filter>
+        </defs>
+        <rect width="600" height="540" fill="url(#skyV11)"/>
+        <circle cx="363" cy="222" r="185" fill="url(#auraV11)" filter="url(#glowV11)"/>
+        <path d="M350 243 70 470h450L381 239Z" fill="url(#beamV11)" opacity=".9"/>
+        <circle cx="365" cy="220" r="137" fill="none" stroke="url(#ringV11)" stroke-width="2" opacity=".7"/>
+        <circle cx="365" cy="220" r="121" fill="url(#ringV11)"/>
+        <circle cx="397" cy="205" r="111" fill="#111214"/>
+        <path d="M0 346 85 305l54 28 70-62 67 57 51-20 67 41 62-34 53 32 91-51v244H0Z" fill="#191a18"/>
+        <path d="M0 393 67 362l72 33 80-56 58 49 72-38 75 48 73-43 103 44v141H0Z" fill="url(#terrainV11)"/>
+        <path d="M0 449c79-26 121-7 188-25 67-18 112 13 171-2 67-17 124-17 241 12v106H0Z" fill="#080a0c"/>
+        <path d="M0 451c92-23 133-8 188-26 67-21 117 11 171-3 73-18 137-12 241 12" fill="none" stroke="#e8ff42" stroke-opacity=".48" stroke-width="1"/>
+        <g fill="#08090a" opacity=".94"><path d="M121 367h26v74h-26zM115 357h38v12h-38zM132 339h4v18h-4z"/><path d="M490 366h25v67h-25zM485 358h35v10h-35zM500 343h4v15h-4z"/></g>
+        <g transform="translate(350 376)"><ellipse cx="8" cy="74" rx="26" ry="5" fill="#050607"/><circle cx="8" cy="8" r="6" fill="#08090a"/><path d="M2 15h13l12 38-9 3-9-21-3 22-14 1 4-27Z" fill="#08090a"/><path d="M-8 22q14-14 31-5l7 32-10 5-13-24-5 27-16-1Z" fill="#101111"/></g>
+        <g stroke="#e8ff42" stroke-opacity=".18" stroke-width="1"><path d="M24 24h34M24 24v34M576 24h-34M576 24v34M24 516h34M24 516v-34M576 516h-34M576 516v-34"/><path d="M0 480h600" stroke-opacity=".08"/><path d="M0 488h600" stroke-opacity=".05"/></g>
+        <rect width="600" height="540" filter="url(#grainV11)" opacity=".22"/>
+        <text x="34" y="76" fill="#e8ff42" font-family="monospace" font-size="8" letter-spacing="3">HIGGSFREE / ORIGINAL CONCEPT</text>
+        <text x="34" y="94" fill="#ffffff" fill-opacity=".58" font-family="monospace" font-size="7" letter-spacing="2">FRAME 001 · THE LAST LIGHT</text>
+        <text x="565" y="76" text-anchor="end" fill="#ffffff" fill-opacity=".65" font-family="monospace" font-size="8" letter-spacing="2">16:9</text>
+      </svg>
+      <div class="poster-top"><span>Concept art · Studio no. 01</span><span class="poster-stamp">ORIGINAL</span></div>
+      <div class="poster-bottom"><div><strong>THE LAST LIGHT</strong><small>UNE IMAGE. UNE HISTOIRE. VOTRE FILM.</small></div><span>HFG / 001</span></div>
+    </div>
+  </div>
+</section>
+<div class="cinema-pipeline" id="workflow"><div class="pipeline-label">CHAÎNE DE FABRICATION<b>Votre film, plan par plan</b></div><div class="pipeline-track"><span class="pipeline-step"><i>01</i>Clés</span><span class="pipeline-step"><i>02</i>Genre</span><span class="pipeline-step"><i>03</i>Synopsis</span><span class="pipeline-step"><i>04</i>Personnages</span><span class="pipeline-step"><i>05</i>Scènes</span><span class="pipeline-step"><i>06</i>Plans</span><span class="pipeline-step"><i>07</i>Film</span></div></div>`}
+
+function cinemaWorkbar(){
+  const current=P.title||(P.genre&&P.genre.name)||'NOUVEAU FILM';
+  const step=String(page+1).padStart(2,'0');
+  const pct=Math.round((page+1)/STEPS.length*100);
+  return '<section class="cinema-workbar" aria-label="Progression du projet"><div class="cw-brand"><small>HIGGSFREE PICTURES</small><b>PRODUCTION SLATE</b></div><div class="cw-project"><small>PROJET EN COURS · ÉTAPE '+step+' / 07</small><strong>'+esc(current)+'</strong></div><div class="cw-progress"><small>'+esc(STEPS[page]||'Studio')+' · '+pct+'%</small><div class="cw-bar"><i style="width:'+pct+'%"></i></div><span>FABRICATION DU FILM</span></div><div class="cw-art" aria-hidden="true"></div></section>';
+}
+
 V[0].cfg=()=>{
  const first=KEYS.list[0]||mkKey('');
  const provider=first.provider||'agnes';
- return '<div class="hero" style="padding:0;overflow:hidden;border-color:rgba(232,255,66,0.18)"><div style="padding:28px;background:radial-gradient(600px 300px at 20% 0%, rgba(232,255,66,0.12), transparent 60%), linear-gradient(180deg, rgba(255,255,255,0.02), transparent)"><div class="hero-kicker">HIGGSFIELD EDITION — STUDIO CINÉMA IA</div><h2 style="margin:8px 0 8px;font-size:clamp(28px, 6vw, 42px)">HIGGSFREE <b>STUDIO</b></h2><p class="sub" style="max-width:620px">Le studio créatif Higgsfield-grade. Génère tes films, tes images, tes vidéos — en une seule coulée. Sans compromis. Comme Soul Cinema, mais à toi.</p><div style="display:flex;gap:8px;margin-top:14px"><span class="chip">Higgsfield Soul</span><span class="chip">Kling 4.0</span><span class="chip">Seedance</span><span class="chip">Veo · Runware · KIE</span></div></div></div><div class="hero">'+hd(1,'Connectez vos <b>fournisseurs IA</b>')+
+ return cinemaHome()+'<div class="hero" id="studio-setup">'+hd(1,'Connectez vos <b>fournisseurs IA</b>')+
  guide('HIGGSFREE accepte plusieurs clés et plusieurs fournisseurs. Ajoutez une ou plusieurs clés par fournisseur. Les API doivent être compatibles avec le format OpenAI pour le texte et/ou les images. Pour la vidéo, choisissez un fournisseur vidéo et un modèle compatibles. Les clés sont stockées dans ce navigateur.')+
  '<h3>Fournisseur à ajouter</h3>'+
  '<label class="f"><span class="lab">Fournisseur</span><select id="provider">'+Object.entries(PROVIDERS).map(([id,x])=>'<option value="'+id+'" '+(provider===id?'selected':'')+'>'+esc(x.label)+'</option>').join('')+'</select></label>'+
@@ -1315,7 +1418,7 @@ function render(keep){
     const can=!TASK&&i!=page&&(i==0||(KEYS.list.length&&i<=P.max));
     return '<button class="st '+(i==page?'on':can?'ok':'')+'" '+(can?'data-a="go" data-n="'+i+'"':'disabled')+'>'+(i+1)+'. '+s+'</button>';
   }).join('');
-  $('#main').innerHTML=view();
+  $('#main').innerHTML=(page>0?cinemaWorkbar():'')+view();
   const he=document.getElementById('hdrExport'); if(he) he.style.display=(P.scenes&&P.scenes.length&&page>=4)?'grid':'' ;
   if(TASK){paintFeed();pgb()}
   else if(page==0){keysChips();recentSessions()}
@@ -2000,4 +2103,4 @@ function resume(){
   if(KEYS.list.length)onEnter();
 })();
 </script>
-<div class="site-foot">HIGGSFREE v10 — HIGGSFIELD EDITION · Noir obsidienne · Lime électrique · MIT · <a href="https://github.com/kisuke667/higgsfree">GitHub</a> · Inspiré par <a href="https://github.com/laurentvoanhofficiel-jpg/Agnes-ai-film-maker-Universal-one-page-HTML-4-all">CINÉ-GENESIS</a> de Laurent Voan Ho · Hommage Higgsfield Soul Cinema</div></body></html>
+<div class="site-foot">HIGGSFREE v11 — HIGGSFIELD EDITION · Noir obsidienne · Lime électrique · MIT · <a href="https://github.com/kisuke667/higgsfree">GitHub</a> · Inspiré par <a href="https://github.com/laurentvoanhofficiel-jpg/Agnes-ai-film-maker-Universal-one-page-HTML-4-all">CINÉ-GENESIS</a> de Laurent Voan Ho · Hommage Higgsfield Soul Cinema</div></body></html>

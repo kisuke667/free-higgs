@@ -1,11 +1,11 @@
-# HIGGSFREE — HIGGSFIELD EDITION
+# HIGGSFREE — CINEMA STUDIO · HIGGSFIELD EDITION
 
 > **Noir obsidienne · Lime électrique · Studio brut** — digne de [Higgsfield Soul Cinema](https://higgsfield.ai).
 > Studio créatif IA monopage pour générer des films complets : scénario → personnages → scènes → plans → vidéos.
 > **Fork enrichi** de [CINÉ-GENESIS d'Agnes AI Film Maker](https://github.com/laurentvoanhofficiel-jpg/Agnes-ai-film-maker-Universal-one-page-HTML-4-all) par Laurent Voan Ho — réinventé en **HIGGSFIELD EDITION**.
 
-[![Live](https://img.shields.io/badge/Live-higgsfree-E8FF42?style=for-the-badge)](https://free-higgs-psi.vercel.app)
-[![Version](https://img.shields.io/badge/version-v10_BLUFFANT-111113?style=flat-square)](CHANGELOG.md)
+[![Preview](https://img.shields.io/badge/Preview-HIGGSFREE-E8FF42?style=for-the-badge)](https://higgsfree-psi.vercel.app)
+[![Version](https://img.shields.io/badge/version-v11_CINEMA_STUDIO-111113?style=flat-square)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/License-MIT-8E8E93?style=flat-square)](LICENSE)
 [![Stack](https://img.shields.io/badge/stack-HTML_·_CSS_·_Vanilla_JS-0A0A0C?style=flat-square)](#stack-technique)
 
@@ -19,7 +19,7 @@
 
 ## ✨ Démo
 
-**→ https://free-higgs-psi.vercel.app** (alias mis à jour après rename Vercel) — ouvre `index.html` et c'est parti. 100% navigateur, aucune build.
+**→ https://higgsfree-psi.vercel.app** — preview Vercel protégée par SSO; ouvre `index.html` pour tester en local. 100% navigateur, aucune build.
 
 ---
 
@@ -51,7 +51,12 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 
 ---
 
-## ⚡ Fonctionnalités v10
+## ⚡ Fonctionnalités v11
+
+### Direction artistique
+- **Hero cinéma immersif** : composition éditoriale plein cadre et illustration SVG originale, sans image distante ni dépendance
+- **Parcours visible** : pipeline 7 étapes, CTA vers la configuration, titres de chapitre numérotés
+- **Accessibilité** : mise en page iPhone-first, `prefers-reduced-motion`, palette clavier `⌘K/Ctrl+K`
 
 ### Studio
 - **Pipeline verrouillé** : tu valides chaque étape, l'IA n'avance pas sans toi
@@ -67,8 +72,8 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 ### Higgsfield-grade UI (v9)
 - **Thème obsidienne** `#060608` / `#111113`, hairlines `7%`, grain cinéma, halos lime/violet
 - **Accent lime** `#E8FF42` (glow), typos `Space Grotesk` (display) + `Inter` + `JetBrains Mono`
-- **Header studio** : marque `HF`, badge `v10` pulsant, steps en pilules `999px`, verre dépoli `blur(16px)`
-- **Héros éditorial** : kicker trait lime, titres `clamp(28px,6vw,42px)`, callouts barre latérale
+- **Header studio** : marque `HF`, badge `v11`, steps en pilules `999px`, verre dépoli `blur(16px)`
+- **Hero Cinema Studio (v11)** : affiche vectorielle originale (éclipse, décor, silhouette), titre XXL, CTA direct, pipeline 7 étapes
 - **Cartes premium** : `18px` radius, `hover lift + scale 1.02`, ombres studio
 - **Light mode** conservé (`.light` → `#F6F5EF`)
 
@@ -108,7 +113,8 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 | v7 | `versions/v7.html` | Enrich studio — dark mode, shortcuts, export MD, genres |
 | v8 | `versions/v8.html` | Refonte indigo/violet + exports SRT |
 | v9 | `versions/v9.html` | HIGGSFREE rebrand — HIGGSFIELD EDITION v9 archivée |
-| **v10** | **`index.html`** | **BLUFFANT — boot cinématique · curseur lime · marquee · spotlight · palette ⌘K (actuelle)** |
+| v10 | `versions/v10.html` | Effets UI / palette ⌘K (archive) |
+| **v11** | **`index.html`** | **CINEMA STUDIO — affiche SVG originale, hero éditorial, pipeline film, mobile-first (actuelle)** |
 
 Détails : voir [CHANGELOG.md](CHANGELOG.md).
 
@@ -116,7 +122,7 @@ Détails : voir [CHANGELOG.md](CHANGELOG.md).
 
 ## 🚀 Utilisation
 
-1. Ouvre `index.html` ou va sur **https://free-higgs-psi.vercel.app**
+1. Ouvre `index.html` ou va sur **https://higgsfree-psi.vercel.app** (preview protégée)
 2. **Étape 1** — choisis ton fournisseur, colle ta clé (ex: `https://apihub.agnes-ai.com` + `agnes-3.0-flash`), `Enregistrer`
 3. **Étape 2** — choisis genre + ratio
 4. **Étape 3** — écris ton idée (2 lignes suffisent) → `✦ Analyser avec l'IA` → coche les alternatives → `Valider`

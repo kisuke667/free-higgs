@@ -1,5 +1,14 @@
 # Changelog
 
+## v11 — CINEMA STUDIO (2026-10-27)
+- Remplace les effets décoratifs v10 par une vraie direction artistique de studio cinéma
+- Hero éditorial plein cadre : slogan « Une idée. Un film. En grand. », CTA vers la configuration et affiche originale SVG (éclipse, paysage, silhouette)
+- Pipeline 7 étapes en timeline visuelle, immédiatement compréhensible
+- Titres de chapitre numérotés sur toutes les étapes, typographie et hiérarchie renforcées
+- Responsive iPhone-first : poster recadré, pipeline scroll-snap, aucun asset externe
+- Retire le marquee, le curseur et l’overlay de démarrage; conserve la palette `⌘K/Ctrl+K`
+- Archive `versions/v10.html` (version précédente)
+
 ## v10 — BLUFFANT (2026-10-27)
 - Écran de démarrage cinématique : logo HIGGSFREE + barre lime, sortie en fondu
 - Bandeau défilant Soul Cinema sous le header (marquee lime, respect `prefers-reduced-motion`)
