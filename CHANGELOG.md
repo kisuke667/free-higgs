@@ -1,5 +1,9 @@
 # Changelog
 
+## v12 — MULTI-PROVIDER (2026-10-28)
+- Consolide v11.1 (bouton ⬇ IMG unitaire sur chaque carte perso/scène/plan) et v11.2 (moteur image multi-fournisseurs backport FREE HIGGS AUTO)
+- Archive `versions/v11.html` (état CINEMA STUDIO pré-multi-provider)
+
 ## v11.2 — Moteur image multi-fournisseurs (2026-10-28)
 - Backport de FREE HIGGS AUTO : requêtes image par fournisseur (`imgRequest`) — Agnès, OpenAI (`oaSize`, dall-e), OpenRouter (`chat/completions` + `modalities`, refs en `image_url`), Together (`width/height`, `steps=4` pour schnell), endpoints personnalisés
 - Extraction universelle (`imgFrom`) : `data[].url`, `b64_json`, `choices[].message.images[]`

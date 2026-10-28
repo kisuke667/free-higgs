@@ -5,7 +5,7 @@
 > **Fork enrichi** de [CINÉ-GENESIS d'Agnes AI Film Maker](https://github.com/laurentvoanhofficiel-jpg/Agnes-ai-film-maker-Universal-one-page-HTML-4-all) par Laurent Voan Ho — réinventé en **HIGGSFIELD EDITION**.
 
 [![Preview](https://img.shields.io/badge/Preview-HIGGSFREE-E8FF42?style=for-the-badge)](https://higgsfree-psi.vercel.app)
-[![Version](https://img.shields.io/badge/version-v11_CINEMA_STUDIO-111113?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v12_MULTI_PROVIDER-111113?style=flat-square)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/License-MIT-8E8E93?style=flat-square)](LICENSE)
 [![Stack](https://img.shields.io/badge/stack-HTML_·_CSS_·_Vanilla_JS-0A0A0C?style=flat-square)](#stack-technique)
 
@@ -116,7 +116,8 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 | v8 | `versions/v8.html` | Refonte indigo/violet + exports SRT |
 | v9 | `versions/v9.html` | HIGGSFREE rebrand — HIGGSFIELD EDITION v9 archivée |
 | v10 | `versions/v10.html` | Effets UI / palette ⌘K (archive) |
-| **v11** | **`index.html`** | **CINEMA STUDIO — affiche SVG originale, hero éditorial, pipeline film, mobile-first (actuelle)** |
+| **v12** | **`index.html`** | **MULTI-PROVIDER — moteur image OpenAI/OpenRouter/Together/custom + ⬇ IMG unitaire + modes auto/manuel (actuelle)** |
+| v11 | `versions/v11.html` | CINEMA STUDIO — affiche SVG originale, hero éditorial, pipeline film, mobile-first |
 
 Détails : voir [CHANGELOG.md](CHANGELOG.md).
 
