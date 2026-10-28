@@ -19,7 +19,7 @@
 
 ## ✨ Démo
 
-**→ https://higgsfree-psi.vercel.app** — preview Vercel protégée par SSO; ouvre `index.html` pour tester en local. 100% navigateur, aucune build.
+**→ https://higgsfree-psi.vercel.app** — alias stable (si une protection SSO apparaît, connecte-toi via GitHub) ; sinon ouvre `index.html` pour tester en local. 100% navigateur, aucune build.
 
 ---
 
@@ -51,7 +51,13 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 
 ---
 
-## ⚡ Fonctionnalités v11
+## ⚡ Fonctionnalités v12
+
+### MULTI-PROVIDER (v12)
+- **Moteur image multi-fournisseurs** (backport FREE HIGGS AUTO) : requêtes dédiées par fournisseur — OpenAI (`oaSize`, dall-e), OpenRouter (`chat/completions` + `modalities` image, refs en `image_url`), Together (`width/height`, `steps=4` schnell), endpoints personnalisés génériques
+- **Bascule automatique** : en cas d'échec image chez un fournisseur, le pipeline essaie le suivant compatible au lieu d'échouer (`fimg` score + alternance)
+- **Modes auto/manuel** (étape 1) : automatique = choisit selon compatibilité/disponibilité · manuel = fournisseur préféré imposé, persistance en config
+- **⬇ IMG unitaire** : chaque carte perso/scène/plan a son bouton de téléchargement (`titre-kind-id.ext`, extension selon source, grisé si pas d'image)
 
 ### Direction artistique
 - **Hero cinéma immersif** : composition éditoriale plein cadre et illustration SVG originale, sans image distante ni dépendance
@@ -90,7 +96,7 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 - Raccourcis : `Espace` lecture, `Ctrl/Cmd+S` save, `Échap` quitte
 
 ### Livrables — dès l'étape 4
-> Dock `⬢ LIVRABLES — prêts dès l'étape 4` présent sur **Scènes (4)**, **Plans (5)**, **Vidéos (6)** + bouton `⬇` dans le header dès `scenes.length>0`.
+> Dock `⬢ LIVRABLES — prêts dès l'étape 4` présent sur **Scènes (5)**, **Plans (6)**, **Vidéos (7)** + bouton `⬇` dans le header dès `scenes.length>0`.
 
 | Format | Contenu | Action |
 |--------|---------|--------|
@@ -138,7 +144,7 @@ Tout est stocké dans **ce navigateur** (`Mes films` → ouvrir / dupliquer / re
 
 ## 🧩 Stack technique
 
-- **Single-file HTML** — `index.html` ≈ `115KB`, zéro build, zéro dépendance
+- **Single-file HTML** — `index.html` ≈ `150KB`, zéro build, zéro dépendance
 - **CSS** — Higgsfield design tokens (`--bg`, `--panel`, `--accent`), `Space Grotesk` + `Inter` + `JetBrains Mono`
 - **JS** — Vanilla, `IndexedDB` (`free_higgs_v1`), `fetch` multi-provider, polling `30-60s` + backoff
 - **APIs** — [Agnes AI](https://apihub.agnes-ai.com) + OpenAI-compat (Together, Groq, DeepSeek, Mistral…), vidéo : Pollinations / Runware / KIE / WaveSpeed / Magic Hour / Higgsfield / Glif
