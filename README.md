@@ -164,7 +164,9 @@ netlify deploy --prod
 # ou GitHub Pages : Settings → Pages → Source: main / root
 ```
 
-Vercel : `kisuke667/higgsfree` (alias mis à jour après rename).
+Vercel — projet `kisuke667/higgsfree` (scope `kisuke667`), alias stable `https://higgsfree-psi.vercel.app`.
+Chaque push sur une branche génère une preview éphémère ; seul un merge sur `main` met l'alias à jour.
+`--prod` et merge sur `main` : uniquement sur approbation explicite (`APPROUVÉ POUR PROD`).
 
 ---
 
