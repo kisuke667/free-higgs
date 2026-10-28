@@ -682,12 +682,22 @@ const PROVIDERS={
  kivest:{label:'Kivest AI · unifié (clé requise)',base:'https://ai.ezif.in',text:'',image:'',video:''},
  generatorvideo:{label:'GeneratorVideo · (clé 401 — à renouveler)',base:'https://generatorvideo.ai',text:'',image:'',video:''},
  inferenceport:{label:'InferencePort · proxy 177 modèles (solde $0 — recharger)',base:'https://api.inferenceport.ai/v1',text:'lightning',image:'flux-3',video:'wan2.7-t2v'},
+ genrelay:{label:'GenRelay · crédits gratuits sans carte (Grok Imagine, Veo)',base:'https://genrelay.ai',text:'',image:'',video:'grok-imagine-1.0'},
+ nexaapi:{label:'NexaAPI · $5 offerts sans carte (Kling, Wan, Veo) — endpoint à vérifier',base:'https://nexa-api.com',text:'',image:'',video:'wavespeed'},
+ gemini:{label:'Google Gemini · palier gratuit (AI Studio)',base:'https://generativelanguage.googleapis.com/v1beta/openai',text:'gemini-2.5-flash',image:'',video:''},
+ sambanova:{label:'SambaNova · gratuit sans carte',base:'https://api.sambanova.ai/v1',text:'DeepSeek-V3.1',image:'',video:''},
+ zai:{label:'Z.AI · Flash gratuit sans carte',base:'https://api.z.ai/api/paas/v4',text:'glm-4.5-flash',image:'',video:''},
+ siliconflow:{label:'SiliconFlow · gratuit sans carte (500 RPM)',base:'https://api.siliconflow.cn/v1',text:'Qwen/Qwen3-8B',image:'',video:''},
+ fireworks:{label:'Fireworks · gratuit sans carte',base:'https://api.fireworks.ai/inference/v1',text:'accounts/fireworks/models/llama-v3p3-70b-instruct',image:'',video:''},
+ cohere:{label:'Cohere · essai 1000 appels/mois',base:'https://api.cohere.com/compatibility/v1',text:'command-a-03-2025',image:'',video:''},
+ cloudflare:{label:'Cloudflare Workers AI · gratuit (remplacez ID)',base:'https://api.cloudflare.com/client/v4/accounts/ID/ai/v1',text:'@cf/meta/llama-3.3-70b-instruct-fp8-fast',image:'',video:''},
+ alibaba:{label:'Alibaba Model Studio · Qwen gratuit',base:'https://dashscope-intl.aliyuncs.com/compatible-mode/v1',text:'qwen-turbo',image:'',video:''},
  leiapix:{label:'LeiaPix · animation 3D (OAuth2 client-credentials + presigned S3)',base:'https://api.leiapix.com',text:'',image:'',video:''},
  apipass:{label:'APIPass · endpoint requis',base:'',text:'',image:'',video:''},
  kaggle:{label:'Kaggle · notebook/endpoint requis',base:'',text:'',image:'',video:''},
  custom:{label:'Autre fournisseur / endpoint personnalisé',base:'',text:'',image:'',video:''}
 };
-const VIDEO_DIRECT=new Set(['agnes','pollinations','runware','kieai','wavespeed','magichour','higgsfield','glif','novai','json2video','rewind','arkroute']);
+const VIDEO_DIRECT=new Set(['agnes','pollinations','runware','kieai','wavespeed','magichour','higgsfield','glif','novai','json2video','rewind','arkroute','genrelay']);
 // Fournisseurs image pris en charge par l'adaptateur /images/generations compatible OpenAI.
 // Les fournisseurs ayant une API image propriétaire ne sont pas sélectionnés tant qu'un adaptateur dédié n'est pas implémenté.
 const IMAGE_API_COMPAT=new Set(['agnes','openai','openrouter','together','custom','novai','rewind','arkroute','inferenceport']);
@@ -1439,7 +1449,7 @@ V[0].cfg=()=>{
  '<label class="f"><span class="lab">Modèle de texte / scénario</span><input type="text" id="textModel" placeholder="Nom exact du modèle" value="'+esc(first.textModel||PROVIDERS[provider].text)+'"></label>'+
  '<label class="f"><span class="lab">Modèle d’image</span><input type="text" id="imageModel" placeholder="Laisser vide si non pris en charge" value="'+esc(first.imageModel||PROVIDERS[provider].image)+'"></label>'+
  '<label class="f"><span class="lab">Modèle / identifiant vidéo (selon fournisseur)</span><input type="text" id="videoModel" placeholder="Modèle exact fourni par le service" value="'+esc(first.videoModel||PROVIDERS[provider].video)+'"></label>'+
- '<p class="sub">Vidéo : adaptateurs directs disponibles pour Agnès, NovAI (gratuit), JSON2Video (600s offertes, voix FR), Rewind (compte requis), ArkRoute (crédits requis), Pollinations, Runware, KIE AI et WaveSpeed. Texte/image OpenAI-compat : InferencePort (177 modèles, solde $0). Pour Glif, Hugging Face, Magic Hour, Higgsfield, Kling, Kivest, Replicate, GeneratorVideo, LeiaPix (OAuth2 + presigned S3), APIPass ou Kaggle, il faut un endpoint/modèle spécifique ou un adaptateur dédié.</p>'+
+ '<p class="sub">Vidéo : adaptateurs directs disponibles pour Agnès, NovAI (gratuit), JSON2Video (600s offertes, voix FR), Rewind (compte requis), ArkRoute (crédits requis), GenRelay (crédits gratuits), Pollinations, Runware, KIE AI et WaveSpeed. Texte/image OpenAI-compat : InferencePort (177 modèles, solde $0), Gemini, SambaNova, Z.AI, SiliconFlow, Fireworks, Cohere, Cloudflare, Alibaba. Pour Glif, Hugging Face, Magic Hour, Higgsfield, Kling, Kivest, Replicate, GeneratorVideo, NexaAPI ($5, endpoint à vérifier), LeiaPix (OAuth2 + presigned S3), APIPass ou Kaggle, il faut un endpoint/modèle spécifique ou un adaptateur dédié.</p>'+
  '<h3>Clés API</h3><p class="sub">Collez une clé par ligne. En enregistrant, les clés de ce fournisseur seront remplacées ; les autres fournisseurs seront conservés.</p>'+
  '<textarea id="keys" rows="4" spellcheck="false" placeholder="sk-…">'+esc(KEYS.list.filter(k=>k.provider===provider).map(k=>k.k).join('\\n'))+'</textarea>'+
  '<label class="f"><span class="lab">Mode vidéo Agnès</span><select id="plan"><option value="free" '+(KEYS.plan==='free'?'selected':'')+'>Gratuit — modèle vidéo standard</option><option value="plan" '+(KEYS.plan==='plan'?'selected':'')+'>Token Plan — modèle vidéo avancé</option></select></label>'+
@@ -1688,7 +1698,16 @@ async function launchExternalVideo(h,s,o,fr,D){
     if(!id)throw new Error('Rewind : identifiant de job absent');
     h.task={provider,k:o.k,id,base,model:m};save();await pollExternalVideo(h);return;
   }
-  if(provider==='arkroute'){
+  if(provider==='genrelay'){
+    // GenRelay : crédits gratuits sans carte. POST /v1/videos/generations (renvoie {id}) + GET /v1/videos/generations/{id} (status succeeded, data[0].url).
+    const base=(o.base||'https://genrelay.ai').replace(/\/+$/,'');
+    const m=model||'grok-imagine-1.0';
+    const d=await checked(await fetch(base+'/v1/videos/generations',{method:'POST',headers,body:JSON.stringify({model:m,prompt,duration:5})}));
+    const id=d.id||d.job_id||d.task_id;
+    if(!id)throw new Error('GenRelay : identifiant de job absent');
+    h.task={provider,k:o.k,id,base,model:m};save();await pollExternalVideo(h);return;
+  }
+    if(provider==='arkroute'){
     // ArkRoute : POST /v1/video/generations (task_id, 402 = sans crédits) + GET /v1/video/status/{id}. Fallback pluriel /v1/videos/... si 404.
     const base=(o.base||'https://api.ark-route.com/v1').replace(/\/+$/,'');
     const m=model||'seedance-1.5-pro';
@@ -1767,6 +1786,14 @@ async function pollExternalVideo(h){
       if(m.status==='done'){if(!m.url)throw new Error('JSON2Video terminé sans URL');h.video=m.url;h.vst='ok';h.seen=false;h.msg='vidéo prête';log('ok','vidéo JSON2Video prête');toast('🎬 Vidéo prête');save();refresh(h.id);return;}
       if(['error','failed'].includes(m.status))throw new Error('JSON2Video : '+(m.message||'échec du rendu'));
       h.msg='rendu '+m.status;refresh(h.id);
+    } else if(t.provider==='genrelay'){
+      const r=await fetch(base+'/v1/videos/generations/'+encodeURIComponent(t.id),{headers:{Authorization:'Bearer '+t.k}});
+      if(!r.ok)throw new Error('GenRelay suivi HTTP '+r.status);d=await r.json();
+      const st=String(d.status||d.state||'').toLowerCase();
+      const u=(Array.isArray(d.data)&&d.data[0]&&d.data[0].url)||extractVideoUrl(d);
+      if(st==='succeeded'){if(!u)throw new Error('GenRelay a terminé sans URL vidéo');h.video=u;h.vst='ok';h.seen=false;h.msg='vidéo prête';log('ok','vidéo GenRelay prête');toast('🎬 Vidéo prête');save();refresh(h.id);return;}
+      if(['failed','error','canceled','cancelled'].includes(st))throw new Error(d.error||('GenRelay : '+st));
+      h.msg=st||'en cours';refresh(h.id);
     } else if(t.provider==='rewind'){
       const r=await fetch(base+'/jobs/'+encodeURIComponent(t.id),{headers:{Authorization:'Bearer '+t.k}});
       if(!r.ok)throw new Error('Rewind suivi HTTP '+r.status);d=await r.json();

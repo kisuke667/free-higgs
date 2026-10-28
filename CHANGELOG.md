@@ -5,7 +5,9 @@
 - Fix Pollinations palier public : pas d'`Authorization` factice + URL texte corrigée (`text.pollinations.ai/openai`)
 - Navigation débloquée : `1. Clés API` + étape en cours accessibles pendant une tâche (ajout de clé à chaud)
 - Sauvegarde anti-perte : version allégée (sans `data:`) si quota `localStorage` dépassé
-- Adaptateurs vérifiés : `node --check` + harnais mock 10/10 (novai), 11/11 (json2video) et 10/10 (rewind + arkroute, dont fallback `/v1/videos/`)
+- Adaptateurs vérifiés : `node --check` + harnais mock 10/10 (novai), 11/11 (json2video), 10/10 (rewind + arkroute, dont fallback `/v1/videos/`) et 5/5 (genrelay)
+- Nouveaux presets gratuits sans carte (texte OpenAI-compat) : Gemini, SambaNova, Z.AI, SiliconFlow, Fireworks, Cohere, Cloudflare, Alibaba Qwen ; vidéo : GenRelay (câblé), NexaAPI $5 (preset)
+- Non câblés (bloquants) : Replicate (versions de modèles requises par prédiction) ; vidéo InferencePort (endpoint rejette la clé actuelle) et LeiaPix (output presigné S3 requis)
 - Archive `versions/v12.html`, dossier `DRAGON_IVOIRE_DOSSIER.md` commité
 - Testé KO (non intégrés comme adaptateurs) : Replicate 401 (déclaré, versions requises), GeneratorVideo 401 (déclaré), inferenceport vidéo (endpoint rejette la clé ; texte/image OK, solde $0), LeiaPix (déclaré ; output presigné S3 requis), Kling/Kivest (déclarés, sans clé)
 

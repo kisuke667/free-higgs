@@ -59,7 +59,9 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 - **Rewind** (`https://api.rewind.ai/v1`) : relais 400+ modèles — chat `qwen/qwen3.5-9b`, image `flux.2-klein-4b`, vidéo async `bytedance/seedance-1-5-pro` + poll `/v1/jobs/:id` (clé testée : compte ANONYMOUS, connexion requise côté dashboard)
 - **ArkRoute** (`https://api.ark-route.com/v1`) : chat + image `seedream-4.0` + vidéo async `seedance-1.5-pro` (`/v1/video/generations` + poll `/v1/video/status`, fallback pluriel) — clé listée OK mais 402 sans crédits
 - Fournisseurs déclarés (preset base, en attente de clé valide) : **Replicate**, **Kling AI** (`api-singapore.klingai.com`), **Kivest AI**, **GeneratorVideo**, **LeiaPix** (OAuth2 + presigned S3), **Hugging Face**
-- Non câblés (bloquants) : Replicate (versions de modèles requises par prédiction) ; vidéo InferencePort (endpoint rejette la clé actuelle) et LeiaPix (output presigné S3 requis)
+- **GenRelay** (`https://genrelay.ai`, crédits gratuits sans carte) : vidéo `grok-imagine-1.0` (POST `/v1/videos/generations` + poll, `data[0].url`) — harnais mock 5/5
+- **NexaAPI** (`https://nexa-api.com`, $5 offerts sans carte) : preset vidéo `wavespeed` (Kling, Wan, Veo) — endpoint REST exact à vérifier côté dashboard
+- **Presets LLM gratuits sans carte** : Google Gemini (`generativelanguage…/v1beta/openai`, `gemini-2.5-flash`), SambaNova (`api.sambanova.ai/v1`, `DeepSeek-V3.1`), Z.AI (`api.z.ai/api/paas/v4`, `glm-4.5-flash`), SiliconFlow (`api.siliconflow.cn/v1`, `Qwen/Qwen3-8B`), Fireworks (`api.fireworks.ai/inference/v1`), Cohere (`api.cohere.com/compatibility/v1`, essai 1000 appels/mois), Cloudflare Workers AI (remplacer `ID` du compte), Alibaba Qwen (`dashscope…/compatible-mode/v1`, `qwen-turbo`)
 - **InferencePort** (`https://api.inferenceport.ai/v1`, proxy OpenAI-compat 177 modèles) : texte `lightning`, image `flux-3` (vérifié : endpoints OK, solde $0 — min $0.5 requis) ; vidéo `wan2.7-t2v` en preset (endpoint `/v1/videos/generations` rejette la clé actuelle, adaptateur non câblé)
 - **LeiaPix** (`https://api.leiapix.com`, animation 3D) : preset documenté — OAuth2 client-credentials (`auth.leialoft.com` → access token) + `inputImageUrl` publique + `resultPresignedUrl` S3 perso obligatoire pour l'output (sans bucket : non câblable)
 - **Free.ai** (`https://api.free.ai`, 30k tokens/jour) : texte `/v1/chat/` modèle `qwen7b`
@@ -91,7 +93,7 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 - **Texte** : `agnes-3.0-flash`/`2.5-flash` (fallback), `chat_template_kwargs: {enable_thinking:false}`
 - **Images** : `agnes-image-2.5-flash`, `size:1K`, `ratio`, `response_format:url`, refs `dataURI` via `ensureRef` + `toData` canvas 1024px
 - **Images multi-fournisseurs** (backport FREE HIGGS AUTO) : requêtes dédiées OpenAI/OpenRouter (`modalities` image)/Together/custom, extraction `imgFrom` universelle, `slot()` filtré par compatibilité + refs Agnès/OpenRouter, bascule auto sur échec, modes auto/manuel + fournisseur préféré (étape 1)
-- **Vidéos** : Agnès natif (`num_frames:97`, `720P`) + **11 adaptateurs directs** : Pollinations, Runware, KIE AI, WaveSpeed, Magic Hour, Higgsfield, Glif, NovAI (gratuit), JSON2Video (600s + voix FR), Rewind, ArkRoute — + proxy générique
+- **Vidéos** : Agnès natif (`num_frames:97`, `720P`) + **12 adaptateurs directs** : Pollinations, Runware, KIE AI, WaveSpeed, Magic Hour, Higgsfield, Glif, NovAI (gratuit), JSON2Video (600s + voix FR), Rewind, ArkRoute, GenRelay (crédits gratuits) — + proxy générique
 
 ### Higgsfield-grade UI (v9)
 - **Thème obsidienne** `#060608` / `#111113`, hairlines `7%`, grain cinéma, halos lime/violet
