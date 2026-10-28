@@ -1,5 +1,14 @@
 # Changelog
 
+## v13 — PACK VIDÉO GRATUITE (2026-10-28)
+- Nouveaux providers : NovAI (vidéo gratuite `cogvideox-flash` async + retry saturation, image `cogview-3-flash`, texte `glm-4.6v-flash`), JSON2Video (`x-api-key`, ~600s offertes, MP4 par plan avec voix FR), Free.ai (texte `/v1/chat/` `qwen7b`, 30k tokens/jour), LinkModel (relais texte `kimi-k3.1-pro`)
+- Fix Pollinations palier public : pas d'`Authorization` factice + URL texte corrigée (`text.pollinations.ai/openai`)
+- Navigation débloquée : `1. Clés API` + étape en cours accessibles pendant une tâche (ajout de clé à chaud)
+- Sauvegarde anti-perte : version allégée (sans `data:`) si quota `localStorage` dépassé
+- Adaptateurs vérifiés : `node --check` + harnais mock 10/10 (novai) et 11/11 (json2video)
+- Archive `versions/v12.html`, dossier `DRAGON_IVOIRE_DOSSIER.md` commité
+- Testé KO (non intégrés) : Replicate 401, ArkRoute 402 sans crédits, GeneratorVideo 401, Rewind, inferenceport sans crédits, LeiaPix (presigned URL requise)
+
 ## v12 — MULTI-PROVIDER (2026-10-28)
 - Consolide v11.1 (bouton ⬇ IMG unitaire sur chaque carte perso/scène/plan) et v11.2 (moteur image multi-fournisseurs backport FREE HIGGS AUTO)
 - Archive `versions/v11.html` (état CINEMA STUDIO pré-multi-provider)

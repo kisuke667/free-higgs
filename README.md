@@ -5,7 +5,7 @@
 > **Fork enrichi** de [CINÉ-GENESIS d'Agnes AI Film Maker](https://github.com/laurentvoanhofficiel-jpg/Agnes-ai-film-maker-Universal-one-page-HTML-4-all) par Laurent Voan Ho — réinventé en **HIGGSFIELD EDITION**.
 
 [![Preview](https://img.shields.io/badge/Preview-HIGGSFREE-E8FF42?style=for-the-badge)](https://higgsfree-psi.vercel.app)
-[![Version](https://img.shields.io/badge/version-v12_MULTI_PROVIDER-111113?style=flat-square)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v13_VIDEO_PACK-111113?style=flat-square)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/License-MIT-8E8E93?style=flat-square)](LICENSE)
 [![Stack](https://img.shields.io/badge/stack-HTML_·_CSS_·_Vanilla_JS-0A0A0C?style=flat-square)](#stack-technique)
 
@@ -51,6 +51,17 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 
 ---
 
+## ⚡ Fonctionnalités v13
+
+### PACK VIDÉO GRATUITE (v13)
+- **NovAI** (`https://aiapi-pro.com/v1`) : vidéo `cogvideox-flash` gratuite (async + retry saturation), image `cogview-3-flash`, texte `glm-4.6v-flash`
+- **JSON2Video** (`https://api.json2video.com`, `x-api-key`, ~600s offertes) : rend un MP4 par plan (image du plan + voix off FR des dialogues) en ~10s
+- **Free.ai** (`https://api.free.ai`, 30k tokens/jour) : texte `/v1/chat/` modèle `qwen7b`
+- **LinkModel** (`https://api.linkmodel.ai/v1`, $1 offert) : relais texte `kimi-k3.1-pro` (navigateur : CORS à vérifier)
+- **Pollinations sans clé** : plus d'`Authorization` factice sur le palier public + URL texte corrigée (`text.pollinations.ai/openai`)
+- **Navigation débloquée** : bouton `1. Clés API` + étape en cours cliquables même pendant une génération (ajout de clé à chaud, reprise auto)
+- **Sauvegarde anti-perte** : si le quota `localStorage` déborde, sauve une version allégée (texte conservé) au lieu de tout perdre au reload
+
 ## ⚡ Fonctionnalités v12
 
 ### MULTI-PROVIDER (v12)
@@ -74,7 +85,7 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 - **Texte** : `agnes-3.0-flash`/`2.5-flash` (fallback), `chat_template_kwargs: {enable_thinking:false}`
 - **Images** : `agnes-image-2.5-flash`, `size:1K`, `ratio`, `response_format:url`, refs `dataURI` via `ensureRef` + `toData` canvas 1024px
 - **Images multi-fournisseurs** (backport FREE HIGGS AUTO) : requêtes dédiées OpenAI/OpenRouter (`modalities` image)/Together/custom, extraction `imgFrom` universelle, `slot()` filtré par compatibilité + refs Agnès/OpenRouter, bascule auto sur échec, modes auto/manuel + fournisseur préféré (étape 1)
-- **Vidéos** : Agnès natif (`num_frames:97`, `720P`) + **7 adaptateurs directs** : Pollinations, Runware, KIE AI, WaveSpeed, Magic Hour, Higgsfield, Glif — + proxy générique
+- **Vidéos** : Agnès natif (`num_frames:97`, `720P`) + **9 adaptateurs directs** : Pollinations, Runware, KIE AI, WaveSpeed, Magic Hour, Higgsfield, Glif, NovAI (gratuit), JSON2Video (600s + voix FR) — + proxy générique
 
 ### Higgsfield-grade UI (v9)
 - **Thème obsidienne** `#060608` / `#111113`, hairlines `7%`, grain cinéma, halos lime/violet
@@ -122,7 +133,8 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 | v8 | `versions/v8.html` | Refonte indigo/violet + exports SRT |
 | v9 | `versions/v9.html` | HIGGSFREE rebrand — HIGGSFIELD EDITION v9 archivée |
 | v10 | `versions/v10.html` | Effets UI / palette ⌘K (archive) |
-| **v12** | **`index.html`** | **MULTI-PROVIDER — moteur image OpenAI/OpenRouter/Together/custom + ⬇ IMG unitaire + modes auto/manuel (actuelle)** |
+| **v13** | **`index.html`** | **PACK VIDÉO GRATUITE — NovAI + JSON2Video (voix FR) + Free.ai + LinkModel + nav débloquée + save allégée (actuelle)** |
+| v12 | `versions/v12.html` | MULTI-PROVIDER — moteur image OpenAI/OpenRouter/Together/custom + ⬇ IMG unitaire + modes auto/manuel |
 | v11 | `versions/v11.html` | CINEMA STUDIO — affiche SVG originale, hero éditorial, pipeline film, mobile-first |
 
 Détails : voir [CHANGELOG.md](CHANGELOG.md).
@@ -147,7 +159,7 @@ Tout est stocké dans **ce navigateur** (`Mes films` → ouvrir / dupliquer / re
 - **Single-file HTML** — `index.html` ≈ `150KB`, zéro build, zéro dépendance
 - **CSS** — Higgsfield design tokens (`--bg`, `--panel`, `--accent`), `Space Grotesk` + `Inter` + `JetBrains Mono`
 - **JS** — Vanilla, `IndexedDB` (`free_higgs_v1`), `fetch` multi-provider, polling `30-60s` + backoff
-- **APIs** — [Agnes AI](https://apihub.agnes-ai.com) + OpenAI-compat (Together, Groq, DeepSeek, Mistral…), vidéo : Pollinations / Runware / KIE / WaveSpeed / Magic Hour / Higgsfield / Glif
+- **APIs** — [Agnes AI](https://apihub.agnes-ai.com) + OpenAI-compat (Together, Groq, DeepSeek, Mistral…), gratuites : NovAI / Free.ai / Pollinations public / JSON2Video ; vidéo : Pollinations / Runware / KIE / WaveSpeed / Magic Hour / Higgsfield / Glif / NovAI / JSON2Video
 - **Fonts** — Google Fonts
 - **PWA-ready** — `WakeLock`, `localStorage` fallback, `viewport-fit=cover`
 
@@ -180,6 +192,8 @@ Chaque push sur une branche génère une preview éphémère ; seul un merge sur
 | WaveSpeed | `https://api.wavespeed.ai/api/v3` | `bytedance/seedance-v1.5-pro/text-to-video` | `Bearer` |
 | Runware | `https://api.runware.ai/v1` | `bytedance:2@2` | `Bearer` |
 | Pollinations | `https://gen.pollinations.ai` | `google/veo-3.1-fast` | `?key=` |
+| NovAI | `https://aiapi-pro.com/v1` | `cogvideox-flash` (gratuit) | `Bearer` |
+| JSON2Video | `https://api.json2video.com` | `default` (600s + voix FR) | `x-api-key` |
 | Magic Hour | `https://api.magichour.ai` | `default` | `Bearer` |
 | Glif | `https://simple-api.glif.app` | `workflow_id` | `Bearer` |
 
