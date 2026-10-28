@@ -738,7 +738,7 @@ const tx=(s,m,f)=>new Promise((res,rej)=>{try{const r=f(db.transaction(s,m).obje
 let mode='idb';const mem={sessions:{},config:{}},lsK=(s,k)=>'fh1_'+s+'_'+k;
 function fall(e){if(mode=='idb'){mode='ls';log('wr','IndexedDB indisponible ('+(e&&e.message)+') → stockage de secours');toast('Stockage navigateur limité : sauvegarde de secours activée')}}
 async function dbGet(s,k){if(db&&mode=='idb'){try{return await tx(s,'readonly',o=>o.get(k))}catch(e){fall(e)}}try{const v=localStorage.getItem(lsK(s,k));if(v!=null)return JSON.parse(v)}catch(e){}return mem[s][k]}
-async function dbPut(s,v){const k=v.key||v.id;mem[s][k]=v;if(db&&mode=='idb'){try{return await tx(s,'readwrite',o=>o.put(v))}catch(e){fall(e)}}try{localStorage.setItem(lsK(s,k),JSON.stringify(v))}catch(e){}}
+async function dbPut(s,v){const k=v.key||v.id;mem[s][k]=v;if(db&&mode=='idb'){try{return await tx(s,'readwrite',o=>o.put(v))}catch(e){fall(e)}}try{localStorage.setItem(lsK(s,k),JSON.stringify(v))}catch(e){try{localStorage.setItem(lsK(s,k),JSON.stringify(v,(kk,val)=>typeof val==='string'&&val.length>200&&val.startsWith('data:')?'':val))}catch(e2){log('er','sauvegarde locale impossible (quota) — projet gardé en mémoire')}}}
 async function dbDel(s,k){delete mem[s][k];if(db&&mode=='idb'){try{return await tx(s,'readwrite',o=>o.delete(k))}catch(e){fall(e)}}try{localStorage.removeItem(lsK(s,k))}catch(e){}}
 async function dbAll(s){if(db&&mode=='idb'){try{return await tx(s,'readonly',o=>o.getAll())}catch(e){fall(e)}}const o=Object.assign({},mem[s]);try{for(let i=0;i<localStorage.length;i++){const n=localStorage.key(i);if(n.startsWith(lsK(s,''))){const v=JSON.parse(localStorage.getItem(n));o[v.key||v.id]=v}}}catch(e){}return Object.values(o)}
 let svT;function save(){if(!P)return;clearTimeout(svT);svT=setTimeout(()=>{P.upd=Date.now();dbPut('sessions',P).catch(e=>log('er','sauvegarde : '+e.message))},350)}
@@ -1210,7 +1210,7 @@ setInterval(()=>{if(!TASK||TASK.err)return;const e=$('#el');if(e)e.textContent=M
 /* ═════════════════════════════════════════════════════════════════════
    NAVIGATION
    ═════════════════════════════════════════════════════════════════════ */
-function go(n){if(TASK)return;if(page>0)P.last=page;page=n;render();onEnter()}
+function go(n){if(TASK&&n!==1&&n!==TASK.step)return;if(page>0)P.last=page;page=n;render();onEnter()}
 /* Pas d'auto-advancement : l'utilisateur valide chaque étape avec le bouton */
 function done(step,sub){P.sub[step]=sub;save();render()}
 function onEnter(){
