@@ -58,8 +58,10 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 - **JSON2Video** (`https://api.json2video.com`, `x-api-key`, ~600s offertes) : rend un MP4 par plan (image du plan + voix off FR des dialogues) en ~10s
 - **Rewind** (`https://api.rewind.ai/v1`) : relais 400+ modèles — chat `qwen/qwen3.5-9b`, image `flux.2-klein-4b`, vidéo async `bytedance/seedance-1-5-pro` + poll `/v1/jobs/:id` (clé testée : compte ANONYMOUS, connexion requise côté dashboard)
 - **ArkRoute** (`https://api.ark-route.com/v1`) : chat + image `seedream-4.0` + vidéo async `seedance-1.5-pro` (`/v1/video/generations` + poll `/v1/video/status`, fallback pluriel) — clé listée OK mais 402 sans crédits
-- Fournisseurs déclarés (preset base, en attente de clé valide) : **Replicate**, **Kling AI** (`api-singapore.klingai.com`), **Kivest AI**, **GeneratorVideo**
-- Non câblés (bloquants) : LeiaPix (exige URL presignée S3 perso), inferenceport (sans crédits), Replicate (versions de modèles requises par prédiction)
+- Fournisseurs déclarés (preset base, en attente de clé valide) : **Replicate**, **Kling AI** (`api-singapore.klingai.com`), **Kivest AI**, **GeneratorVideo**, **LeiaPix** (OAuth2 + presigned S3), **Hugging Face**
+- Non câblés (bloquants) : Replicate (versions de modèles requises par prédiction) ; vidéo InferencePort (endpoint rejette la clé actuelle) et LeiaPix (output presigné S3 requis)
+- **InferencePort** (`https://api.inferenceport.ai/v1`, proxy OpenAI-compat 177 modèles) : texte `lightning`, image `flux-3` (vérifié : endpoints OK, solde $0 — min $0.5 requis) ; vidéo `wan2.7-t2v` en preset (endpoint `/v1/videos/generations` rejette la clé actuelle, adaptateur non câblé)
+- **LeiaPix** (`https://api.leiapix.com`, animation 3D) : preset documenté — OAuth2 client-credentials (`auth.leialoft.com` → access token) + `inputImageUrl` publique + `resultPresignedUrl` S3 perso obligatoire pour l'output (sans bucket : non câblable)
 - **Free.ai** (`https://api.free.ai`, 30k tokens/jour) : texte `/v1/chat/` modèle `qwen7b`
 - **LinkModel** (`https://api.linkmodel.ai/v1`, $1 offert) : relais texte `kimi-k3.1-pro` (navigateur : CORS à vérifier)
 - **Pollinations sans clé** : plus d'`Authorization` factice sur le palier public + URL texte corrigée (`text.pollinations.ai/openai`)

@@ -681,6 +681,8 @@ const PROVIDERS={
  kling:{label:'Kling AI · vidéo (clé requise)',base:'https://api-singapore.klingai.com',text:'',image:'',video:'kling-v3'},
  kivest:{label:'Kivest AI · unifié (clé requise)',base:'https://ai.ezif.in',text:'',image:'',video:''},
  generatorvideo:{label:'GeneratorVideo · (clé 401 — à renouveler)',base:'https://generatorvideo.ai',text:'',image:'',video:''},
+ inferenceport:{label:'InferencePort · proxy 177 modèles (solde $0 — recharger)',base:'https://api.inferenceport.ai/v1',text:'lightning',image:'flux-3',video:'wan2.7-t2v'},
+ leiapix:{label:'LeiaPix · animation 3D (OAuth2 client-credentials + presigned S3)',base:'https://api.leiapix.com',text:'',image:'',video:''},
  apipass:{label:'APIPass · endpoint requis',base:'',text:'',image:'',video:''},
  kaggle:{label:'Kaggle · notebook/endpoint requis',base:'',text:'',image:'',video:''},
  custom:{label:'Autre fournisseur / endpoint personnalisé',base:'',text:'',image:'',video:''}
@@ -688,7 +690,7 @@ const PROVIDERS={
 const VIDEO_DIRECT=new Set(['agnes','pollinations','runware','kieai','wavespeed','magichour','higgsfield','glif','novai','json2video','rewind','arkroute']);
 // Fournisseurs image pris en charge par l'adaptateur /images/generations compatible OpenAI.
 // Les fournisseurs ayant une API image propriétaire ne sont pas sélectionnés tant qu'un adaptateur dédié n'est pas implémenté.
-const IMAGE_API_COMPAT=new Set(['agnes','openai','openrouter','together','custom','novai','rewind','arkroute']);
+const IMAGE_API_COMPAT=new Set(['agnes','openai','openrouter','together','custom','novai','rewind','arkroute','inferenceport']);
 // Fournisseurs image qui acceptent des images de référence (cohérence des personnages).
 const IMAGE_REF_COMPAT=new Set(['agnes','openrouter']);
 const imgDims=r=>r==='1:1'?[1024,1024]:r==='9:16'?[576,1024]:[1024,576];
@@ -1437,7 +1439,7 @@ V[0].cfg=()=>{
  '<label class="f"><span class="lab">Modèle de texte / scénario</span><input type="text" id="textModel" placeholder="Nom exact du modèle" value="'+esc(first.textModel||PROVIDERS[provider].text)+'"></label>'+
  '<label class="f"><span class="lab">Modèle d’image</span><input type="text" id="imageModel" placeholder="Laisser vide si non pris en charge" value="'+esc(first.imageModel||PROVIDERS[provider].image)+'"></label>'+
  '<label class="f"><span class="lab">Modèle / identifiant vidéo (selon fournisseur)</span><input type="text" id="videoModel" placeholder="Modèle exact fourni par le service" value="'+esc(first.videoModel||PROVIDERS[provider].video)+'"></label>'+
- '<p class="sub">Vidéo : adaptateurs directs disponibles pour Agnès, NovAI (gratuit), JSON2Video (600s offertes, voix FR), Rewind (compte requis), ArkRoute (crédits requis), Pollinations, Runware, KIE AI et WaveSpeed. Pour Glif, Hugging Face, Magic Hour, Higgsfield, Kling, Kivest, Replicate, GeneratorVideo, APIPass ou Kaggle, il faut un endpoint/modèle spécifique ou un adaptateur dédié.</p>'+
+ '<p class="sub">Vidéo : adaptateurs directs disponibles pour Agnès, NovAI (gratuit), JSON2Video (600s offertes, voix FR), Rewind (compte requis), ArkRoute (crédits requis), Pollinations, Runware, KIE AI et WaveSpeed. Texte/image OpenAI-compat : InferencePort (177 modèles, solde $0). Pour Glif, Hugging Face, Magic Hour, Higgsfield, Kling, Kivest, Replicate, GeneratorVideo, LeiaPix (OAuth2 + presigned S3), APIPass ou Kaggle, il faut un endpoint/modèle spécifique ou un adaptateur dédié.</p>'+
  '<h3>Clés API</h3><p class="sub">Collez une clé par ligne. En enregistrant, les clés de ce fournisseur seront remplacées ; les autres fournisseurs seront conservés.</p>'+
  '<textarea id="keys" rows="4" spellcheck="false" placeholder="sk-…">'+esc(KEYS.list.filter(k=>k.provider===provider).map(k=>k.k).join('\\n'))+'</textarea>'+
  '<label class="f"><span class="lab">Mode vidéo Agnès</span><select id="plan"><option value="free" '+(KEYS.plan==='free'?'selected':'')+'>Gratuit — modèle vidéo standard</option><option value="plan" '+(KEYS.plan==='plan'?'selected':'')+'>Token Plan — modèle vidéo avancé</option></select></label>'+
