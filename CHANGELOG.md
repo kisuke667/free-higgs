@@ -1,5 +1,42 @@
 # Changelog
 
+## v12 — MULTI-PROVIDER (2026-10-28)
+- Consolide v11.1 (bouton ⬇ IMG unitaire sur chaque carte perso/scène/plan) et v11.2 (moteur image multi-fournisseurs backport FREE HIGGS AUTO)
+- Archive `versions/v11.html` (état CINEMA STUDIO pré-multi-provider)
+
+## v11.2 — Moteur image multi-fournisseurs (2026-10-28)
+- Backport de FREE HIGGS AUTO : requêtes image par fournisseur (`imgRequest`) — Agnès, OpenAI (`oaSize`, dall-e), OpenRouter (`chat/completions` + `modalities`, refs en `image_url`), Together (`width/height`, `steps=4` pour schnell), endpoints personnalisés
+- Extraction universelle (`imgFrom`) : `data[].url`, `b64_json`, `choices[].message.images[]`
+- `slot()` : filtre par compatibilité image (`IMAGE_API_COMPAT`), refs limitées à Agnès/OpenRouter (`IMAGE_REF_COMPAT`), modes auto/manuel + fournisseur préféré, score d'échecs (`fimg`) et alternance fournisseurs
+- `call()` : bascule automatique vers un autre fournisseur compatible en cas d'échec image (au lieu d'erreur fatale)
+- Étape 1 : sélecteurs mode auto/manuel + fournisseur préféré, persistance en config
+
+## v11.1 — IMG unitaire (2026-10-28)
+- Bouton `⬇ IMG` sur chaque carte image : personnages (étape 4, IA + import), scènes (étape 5), plans (étape 6)
+- Handler `dlimg` : `fetch` → `blob` → téléchargement, nom `titre-kind-id.ext` (extension selon MIME source), fallback lien direct si CORS
+- Bouton grisé si aucune image sur la carte
+- README à jour (table pipeline, livrables, utilisation)
+
+## v11 — CINEMA STUDIO (2026-10-27)
+- Remplace les effets décoratifs v10 par une vraie direction artistique de studio cinéma
+- Hero éditorial plein cadre : slogan « Une idée. Un film. En grand. », CTA vers la configuration et affiche originale SVG (éclipse, paysage, silhouette)
+- Pipeline 7 étapes en timeline visuelle, immédiatement compréhensible
+- Titres de chapitre numérotés sur toutes les étapes, typographie et hiérarchie renforcées
+- Responsive iPhone-first : poster recadré, pipeline scroll-snap, aucun asset externe
+- Retire le marquee, le curseur et l’overlay de démarrage; conserve la palette `⌘K/Ctrl+K`
+- Archive `versions/v10.html` (version précédente)
+
+## v10 — BLUFFANT (2026-10-27)
+- Écran de démarrage cinématique : logo HIGGSFREE + barre lime, sortie en fondu
+- Bandeau défilant Soul Cinema sous le header (marquee lime, respect `prefers-reduced-motion`)
+- Curseur personnalisé lime (point + anneau magnétique, desktop `hover:fine` uniquement)
+- Cartes avec spotlight suivant la souris (`--mx/--my`, radial lime 9%)
+- Apparition en cascade du contenu à chaque étape (`rise`, délais 60/120ms)
+- Palette de navigation `⌘K/Ctrl+K` : saut direct aux 7 étapes, flèches + Entrée
+- Toasts avec entrée animée et liseré lime, steps actifs avec glow
+- Logo corrigé `HF` + `HIGGSFREE`, badge `v10` (rebrand v9 terminé)
+- Archive `versions/v9.html` (état v9 HIGGSFREE pré-bluffant)
+
 ## v9 — HIGGSFIELD EDITION (2026-10-26)
 - Studio noir obsidienne digne de Higgsfield : fond #060608, surfaces #111113, hairlines 7%, grain cinématographique
 - Lime électrique #E8FF42 en accent principal (glow), typographies Space Grotesk + Inter + JetBrains Mono
