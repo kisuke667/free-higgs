@@ -6,11 +6,11 @@
 <meta property="og:description" content="Génération de films, images et vidéos par IA.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#060608">
-<title>HIGGSFREE v12 — CINEMA STUDIO</title>
+<title>HIGGSFREE v13 — CINEMA STUDIO</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ─══════════════════════════════════════════
-   HIGGSFREE — CINEMA STUDIO v12
+   HIGGSFREE — CINEMA STUDIO v13
    Noir obsidienne · Lime électrique · Studio brut
    ─══════════════════════════════════════════ */
 :root{
@@ -565,7 +565,7 @@ body.light .cinema-desc{color:#d1cdc3}
   <div class="logo">
     <div class="logo-mark">HF</div>
     <div class="logo-type"><b>HIGGS<span>FREE</span></b><i>HIGGSFIELD · STUDIO IA</i></div>
-    <span class="ver">v12</span>
+    <span class="ver">v13</span>
   </div>
   <nav id="steps"></nav>
   <div class="hb"><span class="chip" id="qchip"></span><button class="sm" data-a="export" title="Exporter JSON" style="display:none" id="hdrExport">⬇</button><button class="sm" data-a="help" title="Aide">?</button><button class="sm" data-a="theme" title="Thème">◐</button><button class="sm" data-a="sess">Mes films</button><button class="sm" data-a="con">Journal</button></div>
@@ -671,14 +671,36 @@ const PROVIDERS={
  magichour:{label:'Magic Hour · vidéo',base:'https://api.magichour.ai',text:'',image:'',video:'default'},
  higgsfield:{label:'Higgsfield · vidéo (clé = ID:SECRET)',base:'https://api.higgsfield.ai',text:'',image:'',video:'kling-video/v2.6/pro/text-to-video'},
  glif:{label:'Glif · vidéo (ID du workflow requis)',base:'https://simple-api.glif.app',text:'',image:'',video:''},
+ novai:{label:'NovAI · vidéo gratuite',base:'https://aiapi-pro.com/v1',text:'glm-4.6v-flash',image:'cogview-3-flash',video:'cogvideox-flash'},
+ json2video:{label:'JSON2Video · 600s offertes (voix + images)',base:'https://api.json2video.com',text:'',image:'',video:'default'},
+ freeai:{label:'Free.ai · 30k tokens/jour',base:'https://api.free.ai',text:'qwen7b',image:'',video:''},
+ linkmodel:{label:'LinkModel · relais multi-modèles ($1 offert)',base:'https://api.linkmodel.ai/v1',text:'kimi-k3.1-pro',image:'',video:''},
+ rewind:{label:'Rewind · relais 400+ modèles (compte connecté requis)',base:'https://api.rewind.ai/v1',text:'qwen/qwen3.5-9b',image:'black-forest-labs/flux.2-klein-4b',video:'bytedance/seedance-1-5-pro'},
+ arkroute:{label:'ArkRoute · Kling/Seedance (sans crédits — à recharger)',base:'https://api.ark-route.com/v1',text:'gpt-5.6-sol',image:'seedream-4.0',video:'seedance-1.5-pro'},
+ replicate:{label:'Replicate · prédictions (clé 401 — à renouveler)',base:'https://api.replicate.com/v1',text:'',image:'',video:''},
+ kling:{label:'Kling AI · vidéo (clé requise)',base:'https://api-singapore.klingai.com',text:'',image:'',video:'kling-v3'},
+ kivest:{label:'Kivest AI · unifié (clé requise)',base:'https://ai.ezif.in',text:'',image:'',video:''},
+ generatorvideo:{label:'GeneratorVideo · (clé 401 — à renouveler)',base:'https://generatorvideo.ai',text:'',image:'',video:''},
+ inferenceport:{label:'InferencePort · proxy 177 modèles (solde $0 — recharger)',base:'https://api.inferenceport.ai/v1',text:'lightning',image:'flux-3',video:'wan2.7-t2v'},
+ genrelay:{label:'GenRelay · crédits gratuits sans carte (Grok Imagine, Veo)',base:'https://genrelay.ai',text:'',image:'',video:'grok-imagine-1.0'},
+ nexaapi:{label:'NexaAPI · $5 offerts sans carte (Kling, Wan, Veo) — endpoint à vérifier',base:'https://nexa-api.com',text:'',image:'',video:'wavespeed'},
+ gemini:{label:'Google Gemini · palier gratuit (AI Studio)',base:'https://generativelanguage.googleapis.com/v1beta/openai',text:'gemini-2.5-flash',image:'',video:''},
+ sambanova:{label:'SambaNova · gratuit sans carte',base:'https://api.sambanova.ai/v1',text:'DeepSeek-V3.1',image:'',video:''},
+ zai:{label:'Z.AI · Flash gratuit sans carte',base:'https://api.z.ai/api/paas/v4',text:'glm-4.5-flash',image:'',video:''},
+ siliconflow:{label:'SiliconFlow · gratuit sans carte (500 RPM)',base:'https://api.siliconflow.cn/v1',text:'Qwen/Qwen3-8B',image:'',video:''},
+ fireworks:{label:'Fireworks · gratuit sans carte',base:'https://api.fireworks.ai/inference/v1',text:'accounts/fireworks/models/llama-v3p3-70b-instruct',image:'',video:''},
+ cohere:{label:'Cohere · essai 1000 appels/mois',base:'https://api.cohere.com/compatibility/v1',text:'command-a-03-2025',image:'',video:''},
+ cloudflare:{label:'Cloudflare Workers AI · gratuit (remplacez ID)',base:'https://api.cloudflare.com/client/v4/accounts/ID/ai/v1',text:'@cf/meta/llama-3.3-70b-instruct-fp8-fast',image:'',video:''},
+ alibaba:{label:'Alibaba Model Studio · Qwen gratuit',base:'https://dashscope-intl.aliyuncs.com/compatible-mode/v1',text:'qwen-turbo',image:'',video:''},
+ leiapix:{label:'LeiaPix · animation 3D (OAuth2 client-credentials + presigned S3)',base:'https://api.leiapix.com',text:'',image:'',video:''},
  apipass:{label:'APIPass · endpoint requis',base:'',text:'',image:'',video:''},
  kaggle:{label:'Kaggle · notebook/endpoint requis',base:'',text:'',image:'',video:''},
  custom:{label:'Autre fournisseur / endpoint personnalisé',base:'',text:'',image:'',video:''}
 };
-const VIDEO_DIRECT=new Set(['agnes','pollinations','runware','kieai','wavespeed','magichour','higgsfield','glif']);
+const VIDEO_DIRECT=new Set(['agnes','pollinations','runware','kieai','wavespeed','magichour','higgsfield','glif','novai','json2video','rewind','arkroute','genrelay']);
 // Fournisseurs image pris en charge par l'adaptateur /images/generations compatible OpenAI.
 // Les fournisseurs ayant une API image propriétaire ne sont pas sélectionnés tant qu'un adaptateur dédié n'est pas implémenté.
-const IMAGE_API_COMPAT=new Set(['agnes','openai','openrouter','together','custom']);
+const IMAGE_API_COMPAT=new Set(['agnes','openai','openrouter','together','custom','novai','rewind','arkroute','inferenceport']);
 // Fournisseurs image qui acceptent des images de référence (cohérence des personnages).
 const IMAGE_REF_COMPAT=new Set(['agnes','openrouter']);
 const imgDims=r=>r==='1:1'?[1024,1024]:r==='9:16'?[576,1024]:[1024,576];
@@ -719,6 +741,8 @@ function providerURL(o,kind,url){
  if(kind==='vid')throw Object.assign(new Error('Utilisez le pipeline vidéo dédié au fournisseur choisi.'),{fatal:true});
  const base=(o.base||'').replace(/\/+$/,'');
  if(!base)throw Object.assign(new Error('URL API manquante pour '+o.provider),{fatal:true});
+ if(o.provider==='freeai'&&kind==='txt')return base.replace(/\/v1$/,'')+'/v1/chat/';
+ if(o.provider==='pollinations'&&kind==='txt')return 'https://text.pollinations.ai/openai/chat/completions';
  const route=kind==='txt'?'/chat/completions':kind==='img'?'/images/generations':'';
  if(!route) return url;
  return base+route;
@@ -732,7 +756,7 @@ const tx=(s,m,f)=>new Promise((res,rej)=>{try{const r=f(db.transaction(s,m).obje
 let mode='idb';const mem={sessions:{},config:{}},lsK=(s,k)=>'fh1_'+s+'_'+k;
 function fall(e){if(mode=='idb'){mode='ls';log('wr','IndexedDB indisponible ('+(e&&e.message)+') → stockage de secours');toast('Stockage navigateur limité : sauvegarde de secours activée')}}
 async function dbGet(s,k){if(db&&mode=='idb'){try{return await tx(s,'readonly',o=>o.get(k))}catch(e){fall(e)}}try{const v=localStorage.getItem(lsK(s,k));if(v!=null)return JSON.parse(v)}catch(e){}return mem[s][k]}
-async function dbPut(s,v){const k=v.key||v.id;mem[s][k]=v;if(db&&mode=='idb'){try{return await tx(s,'readwrite',o=>o.put(v))}catch(e){fall(e)}}try{localStorage.setItem(lsK(s,k),JSON.stringify(v))}catch(e){}}
+async function dbPut(s,v){const k=v.key||v.id;mem[s][k]=v;if(db&&mode=='idb'){try{return await tx(s,'readwrite',o=>o.put(v))}catch(e){fall(e)}}try{localStorage.setItem(lsK(s,k),JSON.stringify(v))}catch(e){try{localStorage.setItem(lsK(s,k),JSON.stringify(v,(kk,val)=>typeof val==='string'&&val.length>200&&val.startsWith('data:')?'':val))}catch(e2){log('er','sauvegarde locale impossible (quota) — projet gardé en mémoire')}}}
 async function dbDel(s,k){delete mem[s][k];if(db&&mode=='idb'){try{return await tx(s,'readwrite',o=>o.delete(k))}catch(e){fall(e)}}try{localStorage.removeItem(lsK(s,k))}catch(e){}}
 async function dbAll(s){if(db&&mode=='idb'){try{return await tx(s,'readonly',o=>o.getAll())}catch(e){fall(e)}}const o=Object.assign({},mem[s]);try{for(let i=0;i<localStorage.length;i++){const n=localStorage.key(i);if(n.startsWith(lsK(s,''))){const v=JSON.parse(localStorage.getItem(n));o[v.key||v.id]=v}}}catch(e){}return Object.values(o)}
 let svT;function save(){if(!P)return;clearTimeout(svT);svT=setTimeout(()=>{P.upd=Date.now();dbPut('sessions',P).catch(e=>log('er','sauvegarde : '+e.message))},350)}
@@ -799,7 +823,10 @@ async function call(kind,url,body,tries,opts){
         if(o.provider!=='agnes')delete payload.chat_template_kwargs;
       }
       if(kind==='vid')payload.model=(KEYS.plan==='free'?'agnes-video-v2.0':'agnes-video-2.5-flash');
-      const r=await fetch(target,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+o.k},body:JSON.stringify(payload)});
+      const hh={'Content-Type':'application/json'};
+      // Pollinations : le palier public n'a pas besoin de clé ; une clé courte (= placeholder de saisie) ne doit pas être envoyée.
+      if(!(o.provider==='pollinations'&&String(o.k||'').length<20))hh.Authorization='Bearer '+o.k;
+      const r=await fetch(target,{method:'POST',headers:hh,body:JSON.stringify(payload)});
       if(r.ok){
         if(kind==='img'){
           const dd=await r.clone().json().catch(()=>null);
@@ -1201,7 +1228,7 @@ setInterval(()=>{if(!TASK||TASK.err)return;const e=$('#el');if(e)e.textContent=M
 /* ═════════════════════════════════════════════════════════════════════
    NAVIGATION
    ═════════════════════════════════════════════════════════════════════ */
-function go(n){if(TASK)return;if(page>0)P.last=page;page=n;render();onEnter()}
+function go(n){if(TASK&&n!==1&&n!==TASK.step)return;if(page>0)P.last=page;page=n;render();onEnter()}
 /* Pas d'auto-advancement : l'utilisateur valide chaque étape avec le bouton */
 function done(step,sub){P.sub[step]=sub;save();render()}
 function onEnter(){
@@ -1422,7 +1449,7 @@ V[0].cfg=()=>{
  '<label class="f"><span class="lab">Modèle de texte / scénario</span><input type="text" id="textModel" placeholder="Nom exact du modèle" value="'+esc(first.textModel||PROVIDERS[provider].text)+'"></label>'+
  '<label class="f"><span class="lab">Modèle d’image</span><input type="text" id="imageModel" placeholder="Laisser vide si non pris en charge" value="'+esc(first.imageModel||PROVIDERS[provider].image)+'"></label>'+
  '<label class="f"><span class="lab">Modèle / identifiant vidéo (selon fournisseur)</span><input type="text" id="videoModel" placeholder="Modèle exact fourni par le service" value="'+esc(first.videoModel||PROVIDERS[provider].video)+'"></label>'+
- '<p class="sub">Vidéo : adaptateurs directs disponibles pour Agnès, Pollinations, Runware, KIE AI et WaveSpeed. Pour Glif, Hugging Face, Magic Hour, Higgsfield, APIPass ou Kaggle, il faut un endpoint/modèle spécifique ou un adaptateur dédié.</p>'+
+ '<p class="sub">Vidéo : adaptateurs directs disponibles pour Agnès, NovAI (gratuit), JSON2Video (600s offertes, voix FR), Rewind (compte requis), ArkRoute (crédits requis), GenRelay (crédits gratuits), Pollinations, Runware, KIE AI et WaveSpeed. Texte/image OpenAI-compat : InferencePort (177 modèles, solde $0), Gemini, SambaNova, Z.AI, SiliconFlow, Fireworks, Cohere, Cloudflare, Alibaba. Pour Glif, Hugging Face, Magic Hour, Higgsfield, Kling, Kivest, Replicate, GeneratorVideo, NexaAPI ($5, endpoint à vérifier), LeiaPix (OAuth2 + presigned S3), APIPass ou Kaggle, il faut un endpoint/modèle spécifique ou un adaptateur dédié.</p>'+
  '<h3>Clés API</h3><p class="sub">Collez une clé par ligne. En enregistrant, les clés de ce fournisseur seront remplacées ; les autres fournisseurs seront conservés.</p>'+
  '<textarea id="keys" rows="4" spellcheck="false" placeholder="sk-…">'+esc(KEYS.list.filter(k=>k.provider===provider).map(k=>k.k).join('\\n'))+'</textarea>'+
  '<label class="f"><span class="lab">Mode vidéo Agnès</span><select id="plan"><option value="free" '+(KEYS.plan==='free'?'selected':'')+'>Gratuit — modèle vidéo standard</option><option value="plan" '+(KEYS.plan==='plan'?'selected':'')+'>Token Plan — modèle vidéo avancé</option></select></label>'+
@@ -1631,6 +1658,69 @@ async function launchExternalVideo(h,s,o,fr,D){
     if(!u)throw new Error('Glif : le workflow n’a pas renvoyé d’URL vidéo');
     h.video=u;h.vst='ok';h.seen=false;h.msg='vidéo prête';log('ok','vidéo Glif prête');toast('🎬 Vidéo prête');save();refresh(h.id);return;
   }
+  if(provider==='novai'){
+    // NovAI : POST /v1/video/generations (async) + GET /v1/video/generations/{id}. Le modèle gratuit cogvideox-flash est souvent saturé : réessais patients.
+    const base=(o.base||'https://aiapi-pro.com/v1').replace(/\/+$/,'');
+    const vroot=base.replace(/\/v1$/,'');
+    const m=model||'cogvideox-flash';
+    const body={model:m,prompt,ratio:P.ratio,duration:5,resolution:'720p'};
+    if(fr&&/^https?:/i.test(fr))body.image=fr;
+    let d=null,lastErr='NovAI : soumission impossible';
+    for(let a=0;a<4;a++){
+      try{
+        const r=await fetch(vroot+'/v1/video/generations',{method:'POST',headers,body:JSON.stringify(body)});
+        if(r.status==429){lastErr='NovAI saturé (essai '+(a+1)+'/4, nouvel essai dans 45s)';h.msg=lastErr;refresh(h.id);await sleep(45000);continue;}
+        d=await checked(r);break;
+      }catch(e){lastErr=e.message;h.msg=String(lastErr).slice(0,120);refresh(h.id);await sleep(20000);}
+    }
+    if(!d||!d.id)throw new Error(lastErr);
+    h.task={provider,k:o.k,id:d.id,base:o.base,model:m};save();await pollExternalVideo(h);return;
+  }
+  if(provider==='json2video'){
+    // JSON2Video : POST /v2/movies (x-api-key) avec image du plan + voix off des dialogues -> MP4 rendu en ~10s. Quota gratuit 600s.
+    const res=P.ratio==='9:16'?'1080x1920':P.ratio==='1:1'?'1080x1080':P.ratio==='4:3'?'1440x1080':'1920x1080';
+    const els=[];
+    if(fr&&/^https?:/i.test(fr))els.push({type:'image',src:fr,duration:12});
+    const voice=String(h.dial||h.vo||prompt||'').slice(0,280);
+    if(voice)els.push({type:'voice',text:voice});
+    if(!els.length)throw new Error('JSON2Video : aucun contenu (image ou texte) pour ce plan');
+    const jb=await fetch((o.base||'https://api.json2video.com').replace(/\/+$/,'')+'/v2/movies',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':o.k},body:JSON.stringify({resolution:res,scenes:[{comment:String(h.title||s.title||'plan').slice(0,80),elements:els}]})});
+    const jd=await checked(jb);
+    if(!jd.project)throw new Error('JSON2Video : projet non créé');
+    h.task={provider,k:o.k,id:jd.project,base:o.base};save();await pollExternalVideo(h);return;
+  }
+  if(provider==='rewind'){
+    // Rewind.ai : POST /v1/videos/generate-async (renvoie un job id) + GET /v1/jobs/:id. Clé liée à un compte connecté requise.
+    const base=(o.base||'https://api.rewind.ai/v1').replace(/\/+$/,'');
+    const m=model||'bytedance/seedance-1-5-pro';
+    const d=await checked(await fetch(base+'/videos/generate-async',{method:'POST',headers,body:JSON.stringify({prompt,duration:'5s',aspectRatio:P.ratio==='9:16'?'9:16':'16:9',model:m})}));
+    const id=d.id||d.job_id||(d.job&&d.job.id)||(d.data&&d.data.id);
+    if(!id)throw new Error('Rewind : identifiant de job absent');
+    h.task={provider,k:o.k,id,base,model:m};save();await pollExternalVideo(h);return;
+  }
+  if(provider==='genrelay'){
+    // GenRelay : crédits gratuits sans carte. POST /v1/videos/generations (renvoie {id}) + GET /v1/videos/generations/{id} (status succeeded, data[0].url).
+    const base=(o.base||'https://genrelay.ai').replace(/\/+$/,'');
+    const m=model||'grok-imagine-1.0';
+    const d=await checked(await fetch(base+'/v1/videos/generations',{method:'POST',headers,body:JSON.stringify({model:m,prompt,duration:5})}));
+    const id=d.id||d.job_id||d.task_id;
+    if(!id)throw new Error('GenRelay : identifiant de job absent');
+    h.task={provider,k:o.k,id,base,model:m};save();await pollExternalVideo(h);return;
+  }
+    if(provider==='arkroute'){
+    // ArkRoute : POST /v1/video/generations (task_id, 402 = sans crédits) + GET /v1/video/status/{id}. Fallback pluriel /v1/videos/... si 404.
+    const base=(o.base||'https://api.ark-route.com/v1').replace(/\/+$/,'');
+    const m=model||'seedance-1.5-pro';
+    const body={model:m,prompt,duration:5,aspect_ratio:P.ratio||'16:9'};
+    if(fr&&/^https?:/i.test(fr))body.image=fr;
+    let d;
+    try{d=await checked(await fetch(base+'/video/generations',{method:'POST',headers,body:JSON.stringify(body)}));}
+    catch(e){if(!/^HTTP 404/.test(e.message))throw e;
+      d=await checked(await fetch(base+'/videos/generations',{method:'POST',headers,body:JSON.stringify(body)}));}
+    const id=d.task_id||(d.data&&d.data.task_id)||d.id;
+    if(!id)throw new Error('ArkRoute : task_id absent');
+    h.task={provider,k:o.k,id,base,model:m};save();await pollExternalVideo(h);return;
+  }
   throw new Error('Aucun adaptateur vidéo direct pour ce fournisseur. Configurez son API spécifique côté serveur; ne collez pas une clé secrète dans un site public.');
 }
 function extractVideoUrl(d){
@@ -1676,6 +1766,50 @@ async function pollExternalVideo(h){
       const st=String(d.status||'').toLowerCase();
       if(st==='completed'){const u=extractVideoUrl(d);if(!u)throw new Error('Higgsfield a terminé sans URL vidéo');h.video=u;h.vst='ok';h.seen=false;h.msg='vidéo prête';log('ok','vidéo Higgsfield prête');toast('🎬 Vidéo prête');save();refresh(h.id);return;}
       if(['failed','nsfw','canceled','cancelled'].includes(st))throw new Error('Higgsfield : '+st);
+      h.msg=st||'en cours';refresh(h.id);
+    } else if(t.provider==='novai'){
+      const vroot=base.replace(/\/v1$/,'');
+      const r=await fetch(vroot+'/v1/video/generations/'+encodeURIComponent(t.id)+'?model='+encodeURIComponent(t.model||'cogvideox-flash'),{headers:{Authorization:'Bearer '+t.k}});
+      if(!r.ok)throw new Error('NovAI suivi HTTP '+r.status);
+      d=await r.json();
+      const st=String(d.status||'').toLowerCase();
+      const u=d.video_url||(d.video_result&&d.video_result[0]&&d.video_result[0].url);
+      if(st==='succeeded'){if(!u)throw new Error('NovAI a terminé sans URL vidéo');h.video=u;h.vst='ok';h.seen=false;h.msg='vidéo prête';log('ok','vidéo NovAI prête');toast('🎬 Vidéo prête');save();refresh(h.id);return;}
+      if(['failed','error','canceled','cancelled'].includes(st))throw new Error('NovAI : '+st);
+      h.msg=st||'en cours';refresh(h.id);
+    } else if(t.provider==='json2video'){
+      const r=await fetch(base+'/v2/movies?limit=50',{headers:{'x-api-key':t.k}});
+      if(!r.ok)throw new Error('JSON2Video suivi HTTP '+r.status);
+      d=await r.json();
+      const m=(d.movies||[]).find(x=>x.project===t.id);
+      if(!m)throw new Error('JSON2Video : projet introuvable (encore en file ?)');
+      if(m.status==='done'){if(!m.url)throw new Error('JSON2Video terminé sans URL');h.video=m.url;h.vst='ok';h.seen=false;h.msg='vidéo prête';log('ok','vidéo JSON2Video prête');toast('🎬 Vidéo prête');save();refresh(h.id);return;}
+      if(['error','failed'].includes(m.status))throw new Error('JSON2Video : '+(m.message||'échec du rendu'));
+      h.msg='rendu '+m.status;refresh(h.id);
+    } else if(t.provider==='genrelay'){
+      const r=await fetch(base+'/v1/videos/generations/'+encodeURIComponent(t.id),{headers:{Authorization:'Bearer '+t.k}});
+      if(!r.ok)throw new Error('GenRelay suivi HTTP '+r.status);d=await r.json();
+      const st=String(d.status||d.state||'').toLowerCase();
+      const u=(Array.isArray(d.data)&&d.data[0]&&d.data[0].url)||extractVideoUrl(d);
+      if(st==='succeeded'){if(!u)throw new Error('GenRelay a terminé sans URL vidéo');h.video=u;h.vst='ok';h.seen=false;h.msg='vidéo prête';log('ok','vidéo GenRelay prête');toast('🎬 Vidéo prête');save();refresh(h.id);return;}
+      if(['failed','error','canceled','cancelled'].includes(st))throw new Error(d.error||('GenRelay : '+st));
+      h.msg=st||'en cours';refresh(h.id);
+    } else if(t.provider==='rewind'){
+      const r=await fetch(base+'/jobs/'+encodeURIComponent(t.id),{headers:{Authorization:'Bearer '+t.k}});
+      if(!r.ok)throw new Error('Rewind suivi HTTP '+r.status);d=await r.json();
+      const st=String(d.status||d.state||'').toLowerCase();
+      const u=extractVideoUrl(d);
+      if(['completed','succeeded','success','done'].includes(st)){if(!u)throw new Error('Rewind a terminé sans URL vidéo');h.video=u;h.vst='ok';h.seen=false;h.msg='vidéo prête';log('ok','vidéo Rewind prête');toast('🎬 Vidéo prête');save();refresh(h.id);return;}
+      if(['failed','error','canceled','cancelled'].includes(st))throw new Error(d.error||d.failMsg||('Rewind : '+st));
+      h.msg=st||'en cours';refresh(h.id);
+    } else if(t.provider==='arkroute'){
+      let r=await fetch(base+'/video/status/'+encodeURIComponent(t.id),{headers:{Authorization:'Bearer '+t.k}});
+      if(r.status===404)r=await fetch(base+'/videos/generations/'+encodeURIComponent(t.id),{headers:{Authorization:'Bearer '+t.k}});
+      if(!r.ok)throw new Error('ArkRoute suivi HTTP '+r.status);d=await r.json();
+      const st=String(d.status||d.state||'').toLowerCase();
+      const u=d.video_url||extractVideoUrl(d);
+      if(st==='completed'){if(!u)throw new Error('ArkRoute a terminé sans URL vidéo');h.video=u;h.vst='ok';h.seen=false;h.msg='vidéo prête';log('ok','vidéo ArkRoute prête');toast('🎬 Vidéo prête');save();refresh(h.id);return;}
+      if(['failed','error','canceled','cancelled'].includes(st))throw new Error(d.error||('ArkRoute : '+st));
       h.msg=st||'en cours';refresh(h.id);
     }
   }
@@ -2207,4 +2341,4 @@ function resume(){
   if(KEYS.list.length)onEnter();
 })();
 </script>
-<div class="site-foot">HIGGSFREE v12 — HIGGSFIELD EDITION · Noir obsidienne · Lime électrique · MIT · <a href="https://github.com/kisuke667/higgsfree">GitHub</a> · Inspiré par <a href="https://github.com/laurentvoanhofficiel-jpg/Agnes-ai-film-maker-Universal-one-page-HTML-4-all">CINÉ-GENESIS</a> de Laurent Voan Ho · Hommage Higgsfield Soul Cinema</div></body></html>
+<div class="site-foot">HIGGSFREE v13 — HIGGSFIELD EDITION · Noir obsidienne · Lime électrique · MIT · <a href="https://github.com/kisuke667/higgsfree">GitHub</a> · Inspiré par <a href="https://github.com/laurentvoanhofficiel-jpg/Agnes-ai-film-maker-Universal-one-page-HTML-4-all">CINÉ-GENESIS</a> de Laurent Voan Ho · Hommage Higgsfield Soul Cinema</div></body></html>
