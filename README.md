@@ -56,6 +56,10 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 ### PACK VIDÉO GRATUITE (v13)
 - **NovAI** (`https://aiapi-pro.com/v1`) : vidéo `cogvideox-flash` gratuite (async + retry saturation), image `cogview-3-flash`, texte `glm-4.6v-flash`
 - **JSON2Video** (`https://api.json2video.com`, `x-api-key`, ~600s offertes) : rend un MP4 par plan (image du plan + voix off FR des dialogues) en ~10s
+- **Rewind** (`https://api.rewind.ai/v1`) : relais 400+ modèles — chat `qwen/qwen3.5-9b`, image `flux.2-klein-4b`, vidéo async `bytedance/seedance-1-5-pro` + poll `/v1/jobs/:id` (clé testée : compte ANONYMOUS, connexion requise côté dashboard)
+- **ArkRoute** (`https://api.ark-route.com/v1`) : chat + image `seedream-4.0` + vidéo async `seedance-1.5-pro` (`/v1/video/generations` + poll `/v1/video/status`, fallback pluriel) — clé listée OK mais 402 sans crédits
+- Fournisseurs déclarés (preset base, en attente de clé valide) : **Replicate**, **Kling AI** (`api-singapore.klingai.com`), **Kivest AI**, **GeneratorVideo**
+- Non câblés (bloquants) : LeiaPix (exige URL presignée S3 perso), inferenceport (sans crédits), Replicate (versions de modèles requises par prédiction)
 - **Free.ai** (`https://api.free.ai`, 30k tokens/jour) : texte `/v1/chat/` modèle `qwen7b`
 - **LinkModel** (`https://api.linkmodel.ai/v1`, $1 offert) : relais texte `kimi-k3.1-pro` (navigateur : CORS à vérifier)
 - **Pollinations sans clé** : plus d'`Authorization` factice sur le palier public + URL texte corrigée (`text.pollinations.ai/openai`)
@@ -85,7 +89,7 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 - **Texte** : `agnes-3.0-flash`/`2.5-flash` (fallback), `chat_template_kwargs: {enable_thinking:false}`
 - **Images** : `agnes-image-2.5-flash`, `size:1K`, `ratio`, `response_format:url`, refs `dataURI` via `ensureRef` + `toData` canvas 1024px
 - **Images multi-fournisseurs** (backport FREE HIGGS AUTO) : requêtes dédiées OpenAI/OpenRouter (`modalities` image)/Together/custom, extraction `imgFrom` universelle, `slot()` filtré par compatibilité + refs Agnès/OpenRouter, bascule auto sur échec, modes auto/manuel + fournisseur préféré (étape 1)
-- **Vidéos** : Agnès natif (`num_frames:97`, `720P`) + **9 adaptateurs directs** : Pollinations, Runware, KIE AI, WaveSpeed, Magic Hour, Higgsfield, Glif, NovAI (gratuit), JSON2Video (600s + voix FR) — + proxy générique
+- **Vidéos** : Agnès natif (`num_frames:97`, `720P`) + **11 adaptateurs directs** : Pollinations, Runware, KIE AI, WaveSpeed, Magic Hour, Higgsfield, Glif, NovAI (gratuit), JSON2Video (600s + voix FR), Rewind, ArkRoute — + proxy générique
 
 ### Higgsfield-grade UI (v9)
 - **Thème obsidienne** `#060608` / `#111113`, hairlines `7%`, grain cinéma, halos lime/violet

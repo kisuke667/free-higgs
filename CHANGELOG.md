@@ -5,9 +5,9 @@
 - Fix Pollinations palier public : pas d'`Authorization` factice + URL texte corrigée (`text.pollinations.ai/openai`)
 - Navigation débloquée : `1. Clés API` + étape en cours accessibles pendant une tâche (ajout de clé à chaud)
 - Sauvegarde anti-perte : version allégée (sans `data:`) si quota `localStorage` dépassé
-- Adaptateurs vérifiés : `node --check` + harnais mock 10/10 (novai) et 11/11 (json2video)
+- Adaptateurs vérifiés : `node --check` + harnais mock 10/10 (novai), 11/11 (json2video) et 10/10 (rewind + arkroute, dont fallback `/v1/videos/`)
 - Archive `versions/v12.html`, dossier `DRAGON_IVOIRE_DOSSIER.md` commité
-- Testé KO (non intégrés) : Replicate 401, ArkRoute 402 sans crédits, GeneratorVideo 401, Rewind, inferenceport sans crédits, LeiaPix (presigned URL requise)
+- Testé KO (non intégrés comme adaptateurs) : Replicate 401 (déclaré, versions requises), GeneratorVideo 401 (déclaré), inferenceport sans crédits, LeiaPix (presigned URL S3 requise), Kling/Kivest (déclarés, sans clé)
 
 ## v12 — MULTI-PROVIDER (2026-10-28)
 - Consolide v11.1 (bouton ⬇ IMG unitaire sur chaque carte perso/scène/plan) et v11.2 (moteur image multi-fournisseurs backport FREE HIGGS AUTO)

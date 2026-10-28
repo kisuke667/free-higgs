@@ -675,14 +675,20 @@ const PROVIDERS={
  json2video:{label:'JSON2Video · 600s offertes (voix + images)',base:'https://api.json2video.com',text:'',image:'',video:'default'},
  freeai:{label:'Free.ai · 30k tokens/jour',base:'https://api.free.ai',text:'qwen7b',image:'',video:''},
  linkmodel:{label:'LinkModel · relais multi-modèles ($1 offert)',base:'https://api.linkmodel.ai/v1',text:'kimi-k3.1-pro',image:'',video:''},
+ rewind:{label:'Rewind · relais 400+ modèles (compte connecté requis)',base:'https://api.rewind.ai/v1',text:'qwen/qwen3.5-9b',image:'black-forest-labs/flux.2-klein-4b',video:'bytedance/seedance-1-5-pro'},
+ arkroute:{label:'ArkRoute · Kling/Seedance (sans crédits — à recharger)',base:'https://api.ark-route.com/v1',text:'gpt-5.6-sol',image:'seedream-4.0',video:'seedance-1.5-pro'},
+ replicate:{label:'Replicate · prédictions (clé 401 — à renouveler)',base:'https://api.replicate.com/v1',text:'',image:'',video:''},
+ kling:{label:'Kling AI · vidéo (clé requise)',base:'https://api-singapore.klingai.com',text:'',image:'',video:'kling-v3'},
+ kivest:{label:'Kivest AI · unifié (clé requise)',base:'https://ai.ezif.in',text:'',image:'',video:''},
+ generatorvideo:{label:'GeneratorVideo · (clé 401 — à renouveler)',base:'https://generatorvideo.ai',text:'',image:'',video:''},
  apipass:{label:'APIPass · endpoint requis',base:'',text:'',image:'',video:''},
  kaggle:{label:'Kaggle · notebook/endpoint requis',base:'',text:'',image:'',video:''},
  custom:{label:'Autre fournisseur / endpoint personnalisé',base:'',text:'',image:'',video:''}
 };
-const VIDEO_DIRECT=new Set(['agnes','pollinations','runware','kieai','wavespeed','magichour','higgsfield','glif','novai','json2video']);
+const VIDEO_DIRECT=new Set(['agnes','pollinations','runware','kieai','wavespeed','magichour','higgsfield','glif','novai','json2video','rewind','arkroute']);
 // Fournisseurs image pris en charge par l'adaptateur /images/generations compatible OpenAI.
 // Les fournisseurs ayant une API image propriétaire ne sont pas sélectionnés tant qu'un adaptateur dédié n'est pas implémenté.
-const IMAGE_API_COMPAT=new Set(['agnes','openai','openrouter','together','custom','novai']);
+const IMAGE_API_COMPAT=new Set(['agnes','openai','openrouter','together','custom','novai','rewind','arkroute']);
 // Fournisseurs image qui acceptent des images de référence (cohérence des personnages).
 const IMAGE_REF_COMPAT=new Set(['agnes','openrouter']);
 const imgDims=r=>r==='1:1'?[1024,1024]:r==='9:16'?[576,1024]:[1024,576];
@@ -1431,7 +1437,7 @@ V[0].cfg=()=>{
  '<label class="f"><span class="lab">Modèle de texte / scénario</span><input type="text" id="textModel" placeholder="Nom exact du modèle" value="'+esc(first.textModel||PROVIDERS[provider].text)+'"></label>'+
  '<label class="f"><span class="lab">Modèle d’image</span><input type="text" id="imageModel" placeholder="Laisser vide si non pris en charge" value="'+esc(first.imageModel||PROVIDERS[provider].image)+'"></label>'+
  '<label class="f"><span class="lab">Modèle / identifiant vidéo (selon fournisseur)</span><input type="text" id="videoModel" placeholder="Modèle exact fourni par le service" value="'+esc(first.videoModel||PROVIDERS[provider].video)+'"></label>'+
- '<p class="sub">Vidéo : adaptateurs directs disponibles pour Agnès, NovAI (gratuit), JSON2Video (600s offertes, voix FR), Pollinations, Runware, KIE AI et WaveSpeed. Pour Glif, Hugging Face, Magic Hour, Higgsfield, APIPass ou Kaggle, il faut un endpoint/modèle spécifique ou un adaptateur dédié.</p>'+
+ '<p class="sub">Vidéo : adaptateurs directs disponibles pour Agnès, NovAI (gratuit), JSON2Video (600s offertes, voix FR), Rewind (compte requis), ArkRoute (crédits requis), Pollinations, Runware, KIE AI et WaveSpeed. Pour Glif, Hugging Face, Magic Hour, Higgsfield, Kling, Kivest, Replicate, GeneratorVideo, APIPass ou Kaggle, il faut un endpoint/modèle spécifique ou un adaptateur dédié.</p>'+
  '<h3>Clés API</h3><p class="sub">Collez une clé par ligne. En enregistrant, les clés de ce fournisseur seront remplacées ; les autres fournisseurs seront conservés.</p>'+
  '<textarea id="keys" rows="4" spellcheck="false" placeholder="sk-…">'+esc(KEYS.list.filter(k=>k.provider===provider).map(k=>k.k).join('\\n'))+'</textarea>'+
  '<label class="f"><span class="lab">Mode vidéo Agnès</span><select id="plan"><option value="free" '+(KEYS.plan==='free'?'selected':'')+'>Gratuit — modèle vidéo standard</option><option value="plan" '+(KEYS.plan==='plan'?'selected':'')+'>Token Plan — modèle vidéo avancé</option></select></label>'+
@@ -1671,6 +1677,29 @@ async function launchExternalVideo(h,s,o,fr,D){
     if(!jd.project)throw new Error('JSON2Video : projet non créé');
     h.task={provider,k:o.k,id:jd.project,base:o.base};save();await pollExternalVideo(h);return;
   }
+  if(provider==='rewind'){
+    // Rewind.ai : POST /v1/videos/generate-async (renvoie un job id) + GET /v1/jobs/:id. Clé liée à un compte connecté requise.
+    const base=(o.base||'https://api.rewind.ai/v1').replace(/\/+$/,'');
+    const m=model||'bytedance/seedance-1-5-pro';
+    const d=await checked(await fetch(base+'/videos/generate-async',{method:'POST',headers,body:JSON.stringify({prompt,duration:'5s',aspectRatio:P.ratio==='9:16'?'9:16':'16:9',model:m})}));
+    const id=d.id||d.job_id||(d.job&&d.job.id)||(d.data&&d.data.id);
+    if(!id)throw new Error('Rewind : identifiant de job absent');
+    h.task={provider,k:o.k,id,base,model:m};save();await pollExternalVideo(h);return;
+  }
+  if(provider==='arkroute'){
+    // ArkRoute : POST /v1/video/generations (task_id, 402 = sans crédits) + GET /v1/video/status/{id}. Fallback pluriel /v1/videos/... si 404.
+    const base=(o.base||'https://api.ark-route.com/v1').replace(/\/+$/,'');
+    const m=model||'seedance-1.5-pro';
+    const body={model:m,prompt,duration:5,aspect_ratio:P.ratio||'16:9'};
+    if(fr&&/^https?:/i.test(fr))body.image=fr;
+    let d;
+    try{d=await checked(await fetch(base+'/video/generations',{method:'POST',headers,body:JSON.stringify(body)}));}
+    catch(e){if(!/^HTTP 404/.test(e.message))throw e;
+      d=await checked(await fetch(base+'/videos/generations',{method:'POST',headers,body:JSON.stringify(body)}));}
+    const id=d.task_id||(d.data&&d.data.task_id)||d.id;
+    if(!id)throw new Error('ArkRoute : task_id absent');
+    h.task={provider,k:o.k,id,base,model:m};save();await pollExternalVideo(h);return;
+  }
   throw new Error('Aucun adaptateur vidéo direct pour ce fournisseur. Configurez son API spécifique côté serveur; ne collez pas une clé secrète dans un site public.');
 }
 function extractVideoUrl(d){
@@ -1736,6 +1765,23 @@ async function pollExternalVideo(h){
       if(m.status==='done'){if(!m.url)throw new Error('JSON2Video terminé sans URL');h.video=m.url;h.vst='ok';h.seen=false;h.msg='vidéo prête';log('ok','vidéo JSON2Video prête');toast('🎬 Vidéo prête');save();refresh(h.id);return;}
       if(['error','failed'].includes(m.status))throw new Error('JSON2Video : '+(m.message||'échec du rendu'));
       h.msg='rendu '+m.status;refresh(h.id);
+    } else if(t.provider==='rewind'){
+      const r=await fetch(base+'/jobs/'+encodeURIComponent(t.id),{headers:{Authorization:'Bearer '+t.k}});
+      if(!r.ok)throw new Error('Rewind suivi HTTP '+r.status);d=await r.json();
+      const st=String(d.status||d.state||'').toLowerCase();
+      const u=extractVideoUrl(d);
+      if(['completed','succeeded','success','done'].includes(st)){if(!u)throw new Error('Rewind a terminé sans URL vidéo');h.video=u;h.vst='ok';h.seen=false;h.msg='vidéo prête';log('ok','vidéo Rewind prête');toast('🎬 Vidéo prête');save();refresh(h.id);return;}
+      if(['failed','error','canceled','cancelled'].includes(st))throw new Error(d.error||d.failMsg||('Rewind : '+st));
+      h.msg=st||'en cours';refresh(h.id);
+    } else if(t.provider==='arkroute'){
+      let r=await fetch(base+'/video/status/'+encodeURIComponent(t.id),{headers:{Authorization:'Bearer '+t.k}});
+      if(r.status===404)r=await fetch(base+'/videos/generations/'+encodeURIComponent(t.id),{headers:{Authorization:'Bearer '+t.k}});
+      if(!r.ok)throw new Error('ArkRoute suivi HTTP '+r.status);d=await r.json();
+      const st=String(d.status||d.state||'').toLowerCase();
+      const u=d.video_url||extractVideoUrl(d);
+      if(st==='completed'){if(!u)throw new Error('ArkRoute a terminé sans URL vidéo');h.video=u;h.vst='ok';h.seen=false;h.msg='vidéo prête';log('ok','vidéo ArkRoute prête');toast('🎬 Vidéo prête');save();refresh(h.id);return;}
+      if(['failed','error','canceled','cancelled'].includes(st))throw new Error(d.error||('ArkRoute : '+st));
+      h.msg=st||'en cours';refresh(h.id);
     }
   }
   throw new Error('Délai de suivi dépassé (20 min)');
