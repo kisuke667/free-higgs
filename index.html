@@ -671,14 +671,15 @@ const PROVIDERS={
  magichour:{label:'Magic Hour · vidéo',base:'https://api.magichour.ai',text:'',image:'',video:'default'},
  higgsfield:{label:'Higgsfield · vidéo (clé = ID:SECRET)',base:'https://api.higgsfield.ai',text:'',image:'',video:'kling-video/v2.6/pro/text-to-video'},
  glif:{label:'Glif · vidéo (ID du workflow requis)',base:'https://simple-api.glif.app',text:'',image:'',video:''},
+ novai:{label:'NovAI · vidéo gratuite',base:'https://aiapi-pro.com/v1',text:'glm-4.6v-flash',image:'cogview-3-flash',video:'cogvideox-flash'},
  apipass:{label:'APIPass · endpoint requis',base:'',text:'',image:'',video:''},
  kaggle:{label:'Kaggle · notebook/endpoint requis',base:'',text:'',image:'',video:''},
  custom:{label:'Autre fournisseur / endpoint personnalisé',base:'',text:'',image:'',video:''}
 };
-const VIDEO_DIRECT=new Set(['agnes','pollinations','runware','kieai','wavespeed','magichour','higgsfield','glif']);
+const VIDEO_DIRECT=new Set(['agnes','pollinations','runware','kieai','wavespeed','magichour','higgsfield','glif','novai']);
 // Fournisseurs image pris en charge par l'adaptateur /images/generations compatible OpenAI.
 // Les fournisseurs ayant une API image propriétaire ne sont pas sélectionnés tant qu'un adaptateur dédié n'est pas implémenté.
-const IMAGE_API_COMPAT=new Set(['agnes','openai','openrouter','together','custom']);
+const IMAGE_API_COMPAT=new Set(['agnes','openai','openrouter','together','custom','novai']);
 // Fournisseurs image qui acceptent des images de référence (cohérence des personnages).
 const IMAGE_REF_COMPAT=new Set(['agnes','openrouter']);
 const imgDims=r=>r==='1:1'?[1024,1024]:r==='9:16'?[576,1024]:[1024,576];
@@ -1422,7 +1423,7 @@ V[0].cfg=()=>{
  '<label class="f"><span class="lab">Modèle de texte / scénario</span><input type="text" id="textModel" placeholder="Nom exact du modèle" value="'+esc(first.textModel||PROVIDERS[provider].text)+'"></label>'+
  '<label class="f"><span class="lab">Modèle d’image</span><input type="text" id="imageModel" placeholder="Laisser vide si non pris en charge" value="'+esc(first.imageModel||PROVIDERS[provider].image)+'"></label>'+
  '<label class="f"><span class="lab">Modèle / identifiant vidéo (selon fournisseur)</span><input type="text" id="videoModel" placeholder="Modèle exact fourni par le service" value="'+esc(first.videoModel||PROVIDERS[provider].video)+'"></label>'+
- '<p class="sub">Vidéo : adaptateurs directs disponibles pour Agnès, Pollinations, Runware, KIE AI et WaveSpeed. Pour Glif, Hugging Face, Magic Hour, Higgsfield, APIPass ou Kaggle, il faut un endpoint/modèle spécifique ou un adaptateur dédié.</p>'+
+ '<p class="sub">Vidéo : adaptateurs directs disponibles pour Agnès, NovAI (gratuit), Pollinations, Runware, KIE AI et WaveSpeed. Pour Glif, Hugging Face, Magic Hour, Higgsfield, APIPass ou Kaggle, il faut un endpoint/modèle spécifique ou un adaptateur dédié.</p>'+
  '<h3>Clés API</h3><p class="sub">Collez une clé par ligne. En enregistrant, les clés de ce fournisseur seront remplacées ; les autres fournisseurs seront conservés.</p>'+
  '<textarea id="keys" rows="4" spellcheck="false" placeholder="sk-…">'+esc(KEYS.list.filter(k=>k.provider===provider).map(k=>k.k).join('\\n'))+'</textarea>'+
  '<label class="f"><span class="lab">Mode vidéo Agnès</span><select id="plan"><option value="free" '+(KEYS.plan==='free'?'selected':'')+'>Gratuit — modèle vidéo standard</option><option value="plan" '+(KEYS.plan==='plan'?'selected':'')+'>Token Plan — modèle vidéo avancé</option></select></label>'+
@@ -1631,6 +1632,24 @@ async function launchExternalVideo(h,s,o,fr,D){
     if(!u)throw new Error('Glif : le workflow n’a pas renvoyé d’URL vidéo');
     h.video=u;h.vst='ok';h.seen=false;h.msg='vidéo prête';log('ok','vidéo Glif prête');toast('🎬 Vidéo prête');save();refresh(h.id);return;
   }
+  if(provider==='novai'){
+    // NovAI : POST /v1/video/generations (async) + GET /v1/video/generations/{id}. Le modèle gratuit cogvideox-flash est souvent saturé : réessais patients.
+    const base=(o.base||'https://aiapi-pro.com/v1').replace(/\/+$/,'');
+    const vroot=base.replace(/\/v1$/,'');
+    const m=model||'cogvideox-flash';
+    const body={model:m,prompt,ratio:P.ratio,duration:5,resolution:'720p'};
+    if(fr&&/^https?:/i.test(fr))body.image=fr;
+    let d=null,lastErr='NovAI : soumission impossible';
+    for(let a=0;a<4;a++){
+      try{
+        const r=await fetch(vroot+'/v1/video/generations',{method:'POST',headers,body:JSON.stringify(body)});
+        if(r.status==429){lastErr='NovAI saturé (essai '+(a+1)+'/4, nouvel essai dans 45s)';h.msg=lastErr;refresh(h.id);await sleep(45000);continue;}
+        d=await checked(r);break;
+      }catch(e){lastErr=e.message;h.msg=String(lastErr).slice(0,120);refresh(h.id);await sleep(20000);}
+    }
+    if(!d||!d.id)throw new Error(lastErr);
+    h.task={provider,k:o.k,id:d.id,base:o.base,model:m};save();await pollExternalVideo(h);return;
+  }
   throw new Error('Aucun adaptateur vidéo direct pour ce fournisseur. Configurez son API spécifique côté serveur; ne collez pas une clé secrète dans un site public.');
 }
 function extractVideoUrl(d){
@@ -1676,6 +1695,16 @@ async function pollExternalVideo(h){
       const st=String(d.status||'').toLowerCase();
       if(st==='completed'){const u=extractVideoUrl(d);if(!u)throw new Error('Higgsfield a terminé sans URL vidéo');h.video=u;h.vst='ok';h.seen=false;h.msg='vidéo prête';log('ok','vidéo Higgsfield prête');toast('🎬 Vidéo prête');save();refresh(h.id);return;}
       if(['failed','nsfw','canceled','cancelled'].includes(st))throw new Error('Higgsfield : '+st);
+      h.msg=st||'en cours';refresh(h.id);
+    } else if(t.provider==='novai'){
+      const vroot=base.replace(/\/v1$/,'');
+      const r=await fetch(vroot+'/v1/video/generations/'+encodeURIComponent(t.id)+'?model='+encodeURIComponent(t.model||'cogvideox-flash'),{headers:{Authorization:'Bearer '+t.k}});
+      if(!r.ok)throw new Error('NovAI suivi HTTP '+r.status);
+      d=await r.json();
+      const st=String(d.status||'').toLowerCase();
+      const u=d.video_url||(d.video_result&&d.video_result[0]&&d.video_result[0].url);
+      if(st==='succeeded'){if(!u)throw new Error('NovAI a terminé sans URL vidéo');h.video=u;h.vst='ok';h.seen=false;h.msg='vidéo prête';log('ok','vidéo NovAI prête');toast('🎬 Vidéo prête');save();refresh(h.id);return;}
+      if(['failed','error','canceled','cancelled'].includes(st))throw new Error('NovAI : '+st);
       h.msg=st||'en cours';refresh(h.id);
     }
   }
