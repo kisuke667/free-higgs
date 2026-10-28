@@ -67,6 +67,7 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 ### Génération
 - **Texte** : `agnes-3.0-flash`/`2.5-flash` (fallback), `chat_template_kwargs: {enable_thinking:false}`
 - **Images** : `agnes-image-2.5-flash`, `size:1K`, `ratio`, `response_format:url`, refs `dataURI` via `ensureRef` + `toData` canvas 1024px
+- **Images multi-fournisseurs** (backport FREE HIGGS AUTO) : requêtes dédiées OpenAI/OpenRouter (`modalities` image)/Together/custom, extraction `imgFrom` universelle, `slot()` filtré par compatibilité + refs Agnès/OpenRouter, bascule auto sur échec, modes auto/manuel + fournisseur préféré (étape 1)
 - **Vidéos** : Agnès natif (`num_frames:97`, `720P`) + **7 adaptateurs directs** : Pollinations, Runware, KIE AI, WaveSpeed, Magic Hour, Higgsfield, Glif — + proxy générique
 
 ### Higgsfield-grade UI (v9)

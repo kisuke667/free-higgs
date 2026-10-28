@@ -1,5 +1,12 @@
 # Changelog
 
+## v11.2 — Moteur image multi-fournisseurs (2026-10-28)
+- Backport de FREE HIGGS AUTO : requêtes image par fournisseur (`imgRequest`) — Agnès, OpenAI (`oaSize`, dall-e), OpenRouter (`chat/completions` + `modalities`, refs en `image_url`), Together (`width/height`, `steps=4` pour schnell), endpoints personnalisés
+- Extraction universelle (`imgFrom`) : `data[].url`, `b64_json`, `choices[].message.images[]`
+- `slot()` : filtre par compatibilité image (`IMAGE_API_COMPAT`), refs limitées à Agnès/OpenRouter (`IMAGE_REF_COMPAT`), modes auto/manuel + fournisseur préféré, score d'échecs (`fimg`) et alternance fournisseurs
+- `call()` : bascule automatique vers un autre fournisseur compatible en cas d'échec image (au lieu d'erreur fatale)
+- Étape 1 : sélecteurs mode auto/manuel + fournisseur préféré, persistance en config
+
 ## v11.1 — IMG unitaire (2026-10-28)
 - Bouton `⬇ IMG` sur chaque carte image : personnages (étape 4, IA + import), scènes (étape 5), plans (étape 6)
 - Handler `dlimg` : `fetch` → `blob` → téléchargement, nom `titre-kind-id.ext` (extension selon MIME source), fallback lien direct si CORS
