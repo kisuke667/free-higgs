@@ -801,7 +801,10 @@ async function call(kind,url,body,tries,opts){
         if(o.provider!=='agnes')delete payload.chat_template_kwargs;
       }
       if(kind==='vid')payload.model=(KEYS.plan==='free'?'agnes-video-v2.0':'agnes-video-2.5-flash');
-      const r=await fetch(target,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+o.k},body:JSON.stringify(payload)});
+      const hh={'Content-Type':'application/json'};
+      // Pollinations : le palier public n'a pas besoin de clé ; une clé courte (= placeholder de saisie) ne doit pas être envoyée.
+      if(!(o.provider==='pollinations'&&String(o.k||'').length<20))hh.Authorization='Bearer '+o.k;
+      const r=await fetch(target,{method:'POST',headers:hh,body:JSON.stringify(payload)});
       if(r.ok){
         if(kind==='img'){
           const dd=await r.clone().json().catch(()=>null);
