@@ -42,9 +42,9 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 | **1** | Clés API | Multi-fournisseurs, multi-clés (Agnès, OpenAI, Higgsfield…) | — |
 | **2** | Genre & Ratio | Choix editorial (`16:9`, `9:16`, `1:1`, `4:3`) | `P.genre`, `P.ratio` |
 | **3** | Synopsis | Réécriture + 10 alternatives + fusion | `P.final` |
-| **4** | Personnages | Casting + costumes + portraits (référence) | Portraits |
-| **5** | Scènes | `n` scènes (3/5/8/12) + dialogues + images de scène | **Traitement exportable** |
-| **6** | Plans | Découpage 3-5 plans/scène + images de plan | **Découpage exportable** |
+| **4** | Personnages | Casting + costumes + portraits (référence) | Portraits + `⬇ IMG` unitaire |
+| **5** | Scènes | `n` scènes (3/5/8/12) + dialogues + images de scène | **Traitement exportable** + `⬇ IMG` unitaire |
+| **6** | Plans | Découpage 3-5 plans/scène + images de plan | **Découpage exportable** + `⬇ IMG` unitaire |
 | **7** | Vidéos | File vidéo (Agnès, Kling, Veo, Runware, KIE…) + animatic | Vidéos + SRT |
 
 > **Livrables extractibles dès l'étape 4** — pas besoin d'attendre les vidéos.
@@ -99,6 +99,7 @@ Pipeline **7 étapes** verrouillées, 100% autonome :
 | **HTML** | Dossier livrable autonome (grilles + images `data:`) | `⬇ HTML` |
 | **SRT** | Sous-titres `00:00:00,000 --> 00:00:09,000` par réplique (9s/plan) | `⬇ SRT` |
 | **Copy** | Dialogues / Prompts / Synopsis dans le presse-papiers | `📋` |
+| **IMG** | Image unitaire de chaque carte (perso / scène / plan), nom `titre-kind-id.ext` (png/jpg/webp selon source) | `⬇ IMG` |
 
 ---
 
@@ -126,7 +127,7 @@ Détails : voir [CHANGELOG.md](CHANGELOG.md).
 2. **Étape 1** — choisis ton fournisseur, colle ta clé (ex: `https://apihub.agnes-ai.com` + `agnes-3.0-flash`), `Enregistrer`
 3. **Étape 2** — choisis genre + ratio
 4. **Étape 3** — écris ton idée (2 lignes suffisent) → `✦ Analyser avec l'IA` → coche les alternatives → `Valider`
-5. **Étapes 4-6** — laisse l'IA générer, retouche si besoin, **exporte dès l'étape 4** via le dock livrables
+5. **Étapes 4-6** — laisse l'IA générer, retouche si besoin, **exporte dès l'étape 4** via le dock livrables ou télécharge chaque image via `⬇ IMG` sur sa carte
 6. **Étape 7** — `▶ Lancer la production` → vidéos arrivent seules (file Agnès gérée : `3,6,12,24…min`), `🎬 Voir le film`
 
 Tout est stocké dans **ce navigateur** (`Mes films` → ouvrir / dupliquer / renommer / supprimer).

@@ -1,5 +1,11 @@
 # Changelog
 
+## v11.1 — IMG unitaire (2026-10-28)
+- Bouton `⬇ IMG` sur chaque carte image : personnages (étape 4, IA + import), scènes (étape 5), plans (étape 6)
+- Handler `dlimg` : `fetch` → `blob` → téléchargement, nom `titre-kind-id.ext` (extension selon MIME source), fallback lien direct si CORS
+- Bouton grisé si aucune image sur la carte
+- README à jour (table pipeline, livrables, utilisation)
+
 ## v11 — CINEMA STUDIO (2026-10-27)
 - Remplace les effets décoratifs v10 par une vraie direction artistique de studio cinéma
 - Hero éditorial plein cadre : slogan « Une idée. Un film. En grand. », CTA vers la configuration et affiche originale SVG (éclipse, paysage, silhouette)
