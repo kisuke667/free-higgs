@@ -672,12 +672,14 @@ const PROVIDERS={
  higgsfield:{label:'Higgsfield · vidéo (clé = ID:SECRET)',base:'https://api.higgsfield.ai',text:'',image:'',video:'kling-video/v2.6/pro/text-to-video'},
  glif:{label:'Glif · vidéo (ID du workflow requis)',base:'https://simple-api.glif.app',text:'',image:'',video:''},
  novai:{label:'NovAI · vidéo gratuite',base:'https://aiapi-pro.com/v1',text:'glm-4.6v-flash',image:'cogview-3-flash',video:'cogvideox-flash'},
+ json2video:{label:'JSON2Video · 600s offertes (voix + images)',base:'https://api.json2video.com',text:'',image:'',video:'default'},
+ freeai:{label:'Free.ai · 30k tokens/jour',base:'https://api.free.ai',text:'qwen7b',image:'',video:''},
  linkmodel:{label:'LinkModel · relais multi-modèles ($1 offert)',base:'https://api.linkmodel.ai/v1',text:'kimi-k3.1-pro',image:'',video:''},
  apipass:{label:'APIPass · endpoint requis',base:'',text:'',image:'',video:''},
  kaggle:{label:'Kaggle · notebook/endpoint requis',base:'',text:'',image:'',video:''},
  custom:{label:'Autre fournisseur / endpoint personnalisé',base:'',text:'',image:'',video:''}
 };
-const VIDEO_DIRECT=new Set(['agnes','pollinations','runware','kieai','wavespeed','magichour','higgsfield','glif','novai']);
+const VIDEO_DIRECT=new Set(['agnes','pollinations','runware','kieai','wavespeed','magichour','higgsfield','glif','novai','json2video']);
 // Fournisseurs image pris en charge par l'adaptateur /images/generations compatible OpenAI.
 // Les fournisseurs ayant une API image propriétaire ne sont pas sélectionnés tant qu'un adaptateur dédié n'est pas implémenté.
 const IMAGE_API_COMPAT=new Set(['agnes','openai','openrouter','together','custom','novai']);
@@ -721,6 +723,8 @@ function providerURL(o,kind,url){
  if(kind==='vid')throw Object.assign(new Error('Utilisez le pipeline vidéo dédié au fournisseur choisi.'),{fatal:true});
  const base=(o.base||'').replace(/\/+$/,'');
  if(!base)throw Object.assign(new Error('URL API manquante pour '+o.provider),{fatal:true});
+ if(o.provider==='freeai'&&kind==='txt')return base.replace(/\/v1$/,'')+'/v1/chat/';
+ if(o.provider==='pollinations'&&kind==='txt')return 'https://text.pollinations.ai/openai/chat/completions';
  const route=kind==='txt'?'/chat/completions':kind==='img'?'/images/generations':'';
  if(!route) return url;
  return base+route;
@@ -1427,7 +1431,7 @@ V[0].cfg=()=>{
  '<label class="f"><span class="lab">Modèle de texte / scénario</span><input type="text" id="textModel" placeholder="Nom exact du modèle" value="'+esc(first.textModel||PROVIDERS[provider].text)+'"></label>'+
  '<label class="f"><span class="lab">Modèle d’image</span><input type="text" id="imageModel" placeholder="Laisser vide si non pris en charge" value="'+esc(first.imageModel||PROVIDERS[provider].image)+'"></label>'+
  '<label class="f"><span class="lab">Modèle / identifiant vidéo (selon fournisseur)</span><input type="text" id="videoModel" placeholder="Modèle exact fourni par le service" value="'+esc(first.videoModel||PROVIDERS[provider].video)+'"></label>'+
- '<p class="sub">Vidéo : adaptateurs directs disponibles pour Agnès, NovAI (gratuit), Pollinations, Runware, KIE AI et WaveSpeed. Pour Glif, Hugging Face, Magic Hour, Higgsfield, APIPass ou Kaggle, il faut un endpoint/modèle spécifique ou un adaptateur dédié.</p>'+
+ '<p class="sub">Vidéo : adaptateurs directs disponibles pour Agnès, NovAI (gratuit), JSON2Video (600s offertes, voix FR), Pollinations, Runware, KIE AI et WaveSpeed. Pour Glif, Hugging Face, Magic Hour, Higgsfield, APIPass ou Kaggle, il faut un endpoint/modèle spécifique ou un adaptateur dédié.</p>'+
  '<h3>Clés API</h3><p class="sub">Collez une clé par ligne. En enregistrant, les clés de ce fournisseur seront remplacées ; les autres fournisseurs seront conservés.</p>'+
  '<textarea id="keys" rows="4" spellcheck="false" placeholder="sk-…">'+esc(KEYS.list.filter(k=>k.provider===provider).map(k=>k.k).join('\\n'))+'</textarea>'+
  '<label class="f"><span class="lab">Mode vidéo Agnès</span><select id="plan"><option value="free" '+(KEYS.plan==='free'?'selected':'')+'>Gratuit — modèle vidéo standard</option><option value="plan" '+(KEYS.plan==='plan'?'selected':'')+'>Token Plan — modèle vidéo avancé</option></select></label>'+
@@ -1654,6 +1658,19 @@ async function launchExternalVideo(h,s,o,fr,D){
     if(!d||!d.id)throw new Error(lastErr);
     h.task={provider,k:o.k,id:d.id,base:o.base,model:m};save();await pollExternalVideo(h);return;
   }
+  if(provider==='json2video'){
+    // JSON2Video : POST /v2/movies (x-api-key) avec image du plan + voix off des dialogues -> MP4 rendu en ~10s. Quota gratuit 600s.
+    const res=P.ratio==='9:16'?'1080x1920':P.ratio==='1:1'?'1080x1080':P.ratio==='4:3'?'1440x1080':'1920x1080';
+    const els=[];
+    if(fr&&/^https?:/i.test(fr))els.push({type:'image',src:fr,duration:12});
+    const voice=String(h.dial||h.vo||prompt||'').slice(0,280);
+    if(voice)els.push({type:'voice',text:voice});
+    if(!els.length)throw new Error('JSON2Video : aucun contenu (image ou texte) pour ce plan');
+    const jb=await fetch((o.base||'https://api.json2video.com').replace(/\/+$/,'')+'/v2/movies',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':o.k},body:JSON.stringify({resolution:res,scenes:[{comment:String(h.title||s.title||'plan').slice(0,80),elements:els}]})});
+    const jd=await checked(jb);
+    if(!jd.project)throw new Error('JSON2Video : projet non créé');
+    h.task={provider,k:o.k,id:jd.project,base:o.base};save();await pollExternalVideo(h);return;
+  }
   throw new Error('Aucun adaptateur vidéo direct pour ce fournisseur. Configurez son API spécifique côté serveur; ne collez pas une clé secrète dans un site public.');
 }
 function extractVideoUrl(d){
@@ -1710,6 +1727,15 @@ async function pollExternalVideo(h){
       if(st==='succeeded'){if(!u)throw new Error('NovAI a terminé sans URL vidéo');h.video=u;h.vst='ok';h.seen=false;h.msg='vidéo prête';log('ok','vidéo NovAI prête');toast('🎬 Vidéo prête');save();refresh(h.id);return;}
       if(['failed','error','canceled','cancelled'].includes(st))throw new Error('NovAI : '+st);
       h.msg=st||'en cours';refresh(h.id);
+    } else if(t.provider==='json2video'){
+      const r=await fetch(base+'/v2/movies?limit=50',{headers:{'x-api-key':t.k}});
+      if(!r.ok)throw new Error('JSON2Video suivi HTTP '+r.status);
+      d=await r.json();
+      const m=(d.movies||[]).find(x=>x.project===t.id);
+      if(!m)throw new Error('JSON2Video : projet introuvable (encore en file ?)');
+      if(m.status==='done'){if(!m.url)throw new Error('JSON2Video terminé sans URL');h.video=m.url;h.vst='ok';h.seen=false;h.msg='vidéo prête';log('ok','vidéo JSON2Video prête');toast('🎬 Vidéo prête');save();refresh(h.id);return;}
+      if(['error','failed'].includes(m.status))throw new Error('JSON2Video : '+(m.message||'échec du rendu'));
+      h.msg='rendu '+m.status;refresh(h.id);
     }
   }
   throw new Error('Délai de suivi dépassé (20 min)');
